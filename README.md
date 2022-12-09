@@ -1,46 +1,33 @@
 # Create T3 App
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+- [x] add .nvmrc
 
-## What's next? How do I make an app with this?
-
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
-
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
-
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
-
-## Learn More
-
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
-
-- [x] add .npmrc `node -v > .npmrc`
+  ```shell
+  node -v > .npmrc
+  ```
 - [x] add .npmrc
+- [ ] add + configure: jest + testing library + cypress
 - [ ] add + configure prettier
 
-- [ ] add + configure next-sitemap
-- [ ] add + configure next-seo 
-- [ ] configure next-auth
-  - [ ] (*<u>optional</u>*) add nodemailer
-- [ ] (<u>*optional*</u>)add + configure next-share
+- [ ] add + configure [next-sitemap](https://github.com/iamvishnusankar/next-sitemap)
+- [ ] add + configure [next-seo](https://github.com/garmeeh/next-seo) 
+- [ ] configure [next-auth](https://next-auth.js.org/getting-started/example)
+  - [ ] (*<u>optional</u>*) add [nodemailer](https://next-auth.js.org/getting-started/upgrade-v4#nodemailer)
+- [ ] (<u>*optional*</u>)add + configure [next-share](https://github.com/Bunlong/next-share)
 
-- [x] implement chakra-ui
+- [x] [implement chakra-ui](https://chakra-ui.com/getting-started/nextjs-guide)
 
-  - [ ] add fonts
-  - [x] configure chakra theme
+  > ```shell
+  > yarn add @chakra-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^6 @chakra-ui/icons @chakra-ui/theme-tools
+  > ```
+
+  - [ ] [add fonts](https://chakra-ui.com/community/recipes/using-fonts)
+
+    ```shell
+    yarn add @fontsource/open-sans @fontsource/raleway
+    ```
+
+  - [x] [configure chakra theme](https://chakra-ui.com/docs/styled-system/customize-theme)
 
     - [x] add base components
 
@@ -51,12 +38,8 @@ Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
     - [ ] add chakra-skip-nav
 
 - [ ] implement custom event-bus
-- [ ] add analytics handling
-- [ ] add consent handling
-
-- [ ] add analytics
-- [ ] configure consent handling
-
-- [ ] add policies
-
+- [ ] add [analytics](https://github.com/DavidWells/analytics) handling
+     - [ ] add consent handling
+     - [ ] configure consent handling
 - [ ] add react-hook-form + @hook-form/resolvers
+- [ ] add policies
