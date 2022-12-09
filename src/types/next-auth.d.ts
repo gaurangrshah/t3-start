@@ -1,12 +1,17 @@
-import { type DefaultSession } from "next-auth";
+import NextAuth, { type DefaultSession } from "next-auth";
 
-declare module "next-auth" {
-  /**
-   * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
-   */
+// @link: https://next-auth.js.org/getting-started/typescript
+
+// using "module augmentation"
+declare module 'next-auth' {
+  // Extend the build-in session types
   interface Session {
+    accessToken?: string | unknown;
     user?: {
-      id: string;
-    } & DefaultSession["user"];
+      id: string | unknown;
+      email?: string;
+      picture?: string;
+      image?: string;
+    } & DefaultSession['user'];
   }
 }
