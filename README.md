@@ -38,8 +38,12 @@
     - [ ] add chakra-skip-nav
 
 - [ ] implement custom event-bus
+
 - [ ] add [analytics](https://github.com/DavidWells/analytics) handling
+
      - [ ] add consent handling
      - [ ] configure consent handling
+
+     
+
 - [ ] add react-hook-form + @hook-form/resolvers
-- [ ] add policies
