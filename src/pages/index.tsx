@@ -4,8 +4,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-import { trpc } from "../utils/trpc";
-import { Bar } from "../components";
+import { trpc } from "@/utils/trpc";
+import { Bar } from "@/components";
 import { chakra } from "@chakra-ui/react";
 
 const Home: NextPage = () => {

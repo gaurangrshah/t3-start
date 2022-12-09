@@ -1,11 +1,11 @@
 import { type NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import EmailProvider from 'next-auth/providers/email';
 import CredentialsProvider from "next-auth/providers/credentials";
-import { prisma } from "../../server/db/client";
-import { env } from "../../env/server.mjs";
+import { prisma } from "@/server/db/client";
+import { env } from "@/env/server.mjs";
+// import EmailProvider from 'next-auth/providers/email';
+// import { ONE_DAY } from '@/utils';
 
-const ONE_DAY = 24 * 60 * 60;
 
 const google = GoogleProvider({
   clientId: env.GOOGLE_CLIENT_ID,
