@@ -6,3 +6,4 @@ export * from './icons';
 export * from './loaders';
 export * from './modal';
 export * from './mode-toggle';
+export * from "./utils"
