@@ -959,13 +959,6 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@gshah.dev/theme@^0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@gshah.dev/theme/-/theme-0.0.14.tgz#d91988b6424834ebfc7134084c8b6f5893b11944"
-  integrity sha512-I+CGMeBWs4TSN3U2/6G15BRAaRwLukmFiDD8QyR5DTdXJEJwXKb0T2SvrAG2uFJlOvQINjGyfItcfMledZE5DQ==
-  dependencies:
-    "@chakra-ui/theme-tools" "2.0.14"
-
 "@humanwhocodes/config-array@^0.11.6":
   version "0.11.7"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.7.tgz#38aec044c6c828f6ed51d5d7ae3d9b9faf6dbb0f"

@@ -10,4 +10,11 @@ const baseStyle = {
   border: '1px solid',
 };
 
-export const Bar = { baseStyle };
+const variants = {
+  thin: {
+    maxH: 12,
+    py: 8,
+  }
+}
+
+export const Bar = { baseStyle, variants };
