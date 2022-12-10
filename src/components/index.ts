@@ -1,3 +1,4 @@
+export * from './auth';
 export * from './bar';
 export * from './drawer';
 export * from './framer';

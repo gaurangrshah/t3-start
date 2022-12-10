@@ -1,20 +1,40 @@
 import { type AppType } from 'next/app';
-import { type Session } from 'next-auth';
+import type { SessionWithUser, NextComponentTypeWithAuth } from '@/types';
+import Head from 'next/head';
 import { SessionProvider } from 'next-auth/react';
 import { ChakraProvider } from '@chakra-ui/react';
-import { trpc } from '@/utils/trpc';
 import { theme } from '@/theme';
+import { Auth, ErrorBoundary } from '@/components';
+import { trpc } from '@/utils/trpc';
 
-const MyApp: AppType<{ session: Session | null }> = ({
+const MyApp: AppType<{ session: SessionWithUser | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
+  router,
 }) => {
+  const { auth } = Component as NextComponentTypeWithAuth;
   return (
-    <SessionProvider session={session}>
-      <ChakraProvider theme={theme}>
-        <Component {...pageProps} />
-      </ChakraProvider>
-    </SessionProvider>
+    <>
+      <Head>
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
+        />
+      </Head>
+      <SessionProvider session={session}>
+        <ErrorBoundary>
+          <ChakraProvider theme={theme}>
+            {auth ? (
+              <Auth>
+                <Component {...pageProps} />
+              </Auth>
+            ) : (
+              <Component {...pageProps} />
+            )}
+          </ChakraProvider>
+        </ErrorBoundary>
+      </SessionProvider>
+    </>
   );
 };
 

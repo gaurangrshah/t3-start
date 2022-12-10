@@ -1,0 +1,14 @@
+import { useSession } from 'next-auth/react';
+import { FullScreenLoader } from './loaders';
+
+export function Auth({ children }: { children: React.ReactNode }) {
+  // @link: https://next-auth.js.org/getting-started/client#custom-client-session-handling
+  // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
+  const { status } = useSession({ required: true });
+
+  if (status === 'loading') {
+    return <FullScreenLoader />;
+  }
+
+  return <>{children}</>;
+}
