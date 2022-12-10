@@ -26,12 +26,7 @@
   "rules": {
     "@typescript-eslint/consistent-type-imports": "warn",
     "simple-import-sort/exports": "error",
-    "simple-import-sort/imports": [
-      "warn",
-      {
-        "groups": [["^\\u0000"], ["^@?\\w"], ["^"], ["^\\."]]
-      }
-    ],
+    "simple-import-sort/imports": "error",
     "prettier/prettier": [
       "warn",
       {
