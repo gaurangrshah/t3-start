@@ -8,6 +8,7 @@ import { Button, chakra, Flex } from '@chakra-ui/react';
 import { SEOConfig } from '@/utils';
 import { randomColor } from '@chakra-ui/theme-tools';
 import { AvatarMenu } from '@/components/avatar-menu';
+import { SkipNavLink, SkipNavContent } from '@chakra-ui/skip-nav';
 
 const Home: NextPage = () => {
   const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
@@ -26,12 +27,14 @@ const Home: NextPage = () => {
           'Fully type-safe development'
         )}
       />
+      <SkipNavLink zIndex="dropdown">Skip to content</SkipNavLink>
       <Bar />
       <chakra.div
         layerStyle="flex-center"
         minH="100vh"
         bgGradient="linear(to-b, #2e026d, #15162c)"
       >
+        <SkipNavContent />
         <chakra.div textAlign="center">
           <chakra.h1 as="h1" color={randomColor()}>
             Create <chakra.span color={randomColor()}>T3</chakra.span> App
