@@ -8,7 +8,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "jest", "@typescript-eslint", "simple-import-sort"],
+  "plugins": ["react", "jest", "@typescript-eslint", "prettier"],
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
@@ -25,17 +25,6 @@
   },
   "rules": {
     "@typescript-eslint/consistent-type-imports": "warn",
-    "simple-import-sort/exports": "error",
-    "simple-import-sort/imports": "error",
-    "prettier/prettier": [
-      "warn",
-      {
-        "printWidth": 80,
-        "singleQuote": true,
-        "tabWidth": 2,
-        "semi": true,
-        "endOfLine": "auto"
-      }
-    ]
+    "prettier/prettier": "warn"
   }
 }

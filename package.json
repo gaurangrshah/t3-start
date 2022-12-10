@@ -8,7 +8,11 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
-    "postbuild": "next-sitemap"
+    "postbuild": "next-sitemap",
+    "studio": "npx prisma studio",
+    "db:migrate": "npx prisma migrate dev --name $NAME --create-only && yarn prisma generate",
+    "db:push": "npx prisma db push",
+    "gen:theme-typings": "chakra-cli tokens ./chakra.ui/theme/index.ts"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.13",
@@ -44,7 +48,9 @@
     "eslint-config-next": "13.0.2",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-recommended": "^4.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^8.0.0",
+    "prettier-plugin-organize-imports": "^3.2.1",
     "prisma": "^4.5.0",
     "typescript": "^4.8.4",
     "typescript-eslint": "^0.0.1-alpha.0"

@@ -44,13 +44,16 @@
 
     - [ ] add layout
 
-    - [ ] add chakra-skip-nav
+    - [x] add chakra-skip-nav
     - [ ] (<u>*optional*</u>) add color2k
 
 - [ ] implement custom event-bus
 
 - [ ] add [analytics](https://github.com/DavidWells/analytics) handling
 
+     - [ ] @analytics/cookie-utils
+     - [ ] @analytics/mixpanel
+     - [ ] @vercel/analytics
      - [ ] add consent handling
      - [ ] configure consent handling
 
