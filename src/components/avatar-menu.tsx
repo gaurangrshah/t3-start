@@ -1,5 +1,3 @@
-import { authEventChannel } from '@/utils/event-bus';
-import { onPromise } from '@/utils/fns';
 import {
   Avatar,
   Box,
@@ -12,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { onPromise } from '@/utils/fns';
 
 const defaultLinks = [{ label: 'home', href: '/' }];
 
@@ -23,28 +21,12 @@ export function AvatarMenu() {
   const handleSignOut = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     await signOut();
-    authEventChannel.emit('on-sign-out');
   };
 
   const handleSignIn = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     await signIn('google');
-    authEventChannel.emit('on-sign-in');
   };
-
-  useEffect(() => {
-    const signInSubscription = authEventChannel.on('on-sign-in', () => {
-      console.log('user signed in');
-    });
-    const signOutSubscription = authEventChannel.on('on-sign-out', () => {
-      console.log('user signed out');
-    });
-
-    return () => {
-      signInSubscription();
-      signOutSubscription();
-    };
-  }, []);
 
   return (
     <Box pos="fixed" top={6} right={6} zIndex="dropdown">
@@ -62,7 +44,7 @@ export function AvatarMenu() {
         ) : (
           <Spinner />
         )}
-        <MenuList border="lg">
+        <MenuList border="lg" fontSize="sm">
           {!session ? (
             <>
               <MenuItem onClick={onPromise(handleSignIn)}>Sign in</MenuItem>
