@@ -42,11 +42,10 @@
 
     - [x] add base components
 
-    - [ ] add color2k
-
     - [ ] add layout
 
     - [ ] add chakra-skip-nav
+    - [ ] (<u>*optional*</u>) add color2k
 
 - [ ] implement custom event-bus
 
