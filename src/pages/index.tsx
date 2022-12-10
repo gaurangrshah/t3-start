@@ -7,6 +7,7 @@ import { Bar } from '@/components';
 import { Button, chakra, Flex } from '@chakra-ui/react';
 import { SEOConfig } from '@/utils';
 import { randomColor } from '@chakra-ui/theme-tools';
+import { AvatarMenu } from '@/components/avatar-menu';
 
 const Home: NextPage = () => {
   const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
@@ -25,11 +26,9 @@ const Home: NextPage = () => {
           'Fully type-safe development'
         )}
       />
-      <Bar variant="thin" />
-      <Flex
-        direction="column"
-        justify="center"
-        align="center"
+      <Bar />
+      <chakra.div
+        layerStyle="flex-center"
         minH="100vh"
         bgGradient="linear(to-b, #2e026d, #15162c)"
       >
@@ -38,18 +37,13 @@ const Home: NextPage = () => {
             Create <chakra.span color={randomColor()}>T3</chakra.span> App
           </chakra.h1>
           <Flex direction="column" align="center" gap="0.5rem">
-            <chakra.p
-              color="white"
-              textAlign="center"
-              fontSize="1.5rem"
-              lineHeight="2rem"
-            >
+            <chakra.p color="white" fontSize="2xl">
               {hello.data ? hello.data.greeting : 'Loading tRPC query...'}
             </chakra.p>
             <AuthShowcase />
           </Flex>
         </chakra.div>
-      </Flex>
+      </chakra.div>
     </>
   );
 };
@@ -65,28 +59,26 @@ const AuthShowcase: React.FC = () => {
   );
 
   return (
-    <Flex direction="column" align="center" justify="center" gap="1rem">
-      <chakra.p
-        color="white"
-        textAlign="center"
-        fontSize="1.5rem"
-        lineHeight="2rem"
-      >
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-        {secretMessage && <span> - {secretMessage}</span>}
-      </chakra.p>
-      <Button
-        variant="pill"
-        bg="rgba(255, 255, 255, 0.1)"
-        p="0.75rem 2.5rem"
-        color="white"
-        onClick={sessionData ? () => signOut() : () => signIn()}
-        _hover={{
-          backgroundColor: 'rgba(255, 255, 255, 0.2)',
-        }}
-      >
-        {sessionData ? 'Sign out' : 'Sign in'}
-      </Button>
-    </Flex>
+    <>
+      <AvatarMenu />
+      <chakra.div layerStyle="flex-center" flexDirection="column" gap={4}>
+        <chakra.p color="white" fontSize="2xl">
+          {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
+          {secretMessage && <span> - {secretMessage}</span>}
+        </chakra.p>
+        <Button
+          variant="pill"
+          bg="rgba(255, 255, 255, 0.1)"
+          p="0.75rem 2.5rem"
+          color="white"
+          onClick={sessionData ? () => signOut() : () => signIn()}
+          _hover={{
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+          }}
+        >
+          {sessionData ? 'Sign out' : 'Sign in'}
+        </Button>
+      </chakra.div>
+    </>
   );
 };
