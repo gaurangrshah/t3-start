@@ -1,9 +1,6 @@
 import type { StyleFunctionProps } from '@chakra-ui/theme-tools';
-import {
-  darken,
-  mode,
-  transparentize,
-} from '@chakra-ui/theme-tools';
+import { mode, darken, transparentize } from '@chakra-ui/theme-tools';
+
 
 const baseStyle = {
   textTransform: 'normal',
@@ -35,7 +32,7 @@ const variants = {
   subtle: (props: StyleFunctionProps) => ({
     bg: mode(
       darken(`${props.colorScheme}.50`, 2)(props.theme),
-      transparentize(`${props.colorScheme}.200`, 0.16)(props.theme),
+      transparentize(`${props.colorScheme}.200`, 0.16)(props.theme)
     )(props),
   }),
 };
@@ -50,4 +47,4 @@ export const Badge = {
   defaultProps,
   variants,
   sizes,
-}
+};

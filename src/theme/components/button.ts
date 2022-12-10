@@ -2,11 +2,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 import type {
   StyleFunctionProps} from '@chakra-ui/theme-tools';
-import {
-  darken,
-  mode,
-  transparentize,
-} from '@chakra-ui/theme-tools';
+import { mode, darken, transparentize } from '@chakra-ui/theme-tools';
 
 const baseStyle = {
   ':focus:not(:focus-visible)': {

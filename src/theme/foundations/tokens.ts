@@ -12,6 +12,10 @@ const tokens = {
       default: 'gray.50',
       _dark: 'gray.700',
     },
+    'bg-subtle-inverted': {
+      default: 'gray.50',
+      _dark: 'gray.700',
+    },
     'bg-muted': {
       default: 'gray.100',
       _dark: 'gray.600',

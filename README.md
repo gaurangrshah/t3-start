@@ -14,9 +14,9 @@
 
 - [x] add types for react, node and typescript
 
-- [ ] add + configure [next-sitemap](https://github.com/iamvishnusankar/next-sitemap)
+- [x] add + configure [next-sitemap](https://github.com/iamvishnusankar/next-sitemap)
 
-- [ ] add + configure [next-seo](https://github.com/garmeeh/next-seo) 
+- [x] add + configure [next-seo](https://github.com/garmeeh/next-seo) 
 
 - [x] configure [next-auth](https://next-auth.js.org/getting-started/example)
 
