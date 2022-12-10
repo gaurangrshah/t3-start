@@ -5,15 +5,26 @@
   ```shell
   node -v > .npmrc
   ```
+
 - [x] add .npmrc
+
 - [ ] add + configure: jest + testing library + cypress
-- [ ] add + configure prettier
+
+- [x] add + configure prettier
+
+- [x] add types for react, node and typescript
 
 - [ ] add + configure [next-sitemap](https://github.com/iamvishnusankar/next-sitemap)
+
 - [ ] add + configure [next-seo](https://github.com/garmeeh/next-seo) 
-- [ ] configure [next-auth](https://next-auth.js.org/getting-started/example)
+
+- [x] configure [next-auth](https://next-auth.js.org/getting-started/example)
+
+  - [x] setup protected routes (pages + api)
+  - [x] setup auth-middleware
   - [ ] (*<u>optional</u>*) add [nodemailer](https://next-auth.js.org/getting-started/upgrade-v4#nodemailer)
-- [ ] (<u>*optional*</u>)add + configure [next-share](https://github.com/Bunlong/next-share)
+
+- [ ] (<u>*optional*</u>) add + configure [next-share](https://github.com/Bunlong/next-share)
 
 - [x] [implement chakra-ui](https://chakra-ui.com/getting-started/nextjs-guide)
 
