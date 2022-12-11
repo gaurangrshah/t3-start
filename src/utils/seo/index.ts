@@ -1,30 +1,30 @@
 const config = {
-  "projectType": "website",
-  "projectName": "Rupi Beauty Studio",
-  "url": "http://localhost:3000",
-  "subtitle": "✨",
-  "description": "eyebrows, brows, facial, laser, hair-removal, waxing, bikini-wax, brazilian-wax, men’s facials, face-waxing, microneedling, dermaplaning, acne facials (for kids), organic facials",
-  "twitterHandle": "@",
-  "locale": "en-US",
-  "images": [
+  projectType: 'website',
+  projectName: 'T3 Boiler',
+  url: 'http://localhost:3000',
+  subtitle: '✨',
+  description: 'End-to-End type-safe development',
+  twitterHandle: '@twitterHandle',
+  locale: 'en-US',
+  images: [
     {
-      "url": "https://cdn.jsdelivr.net/gh/rupistudio/assets@main/brand/rupi-new-logo-md.png",
-      "width": 300,
-      "height": 258,
-      "alt": "Rupi Beauty Studio Logo",
-      "type": "image/png"
-    }
+      url: 'https://cdn.jsdelivr.net/gh/rupistudio/assets@main/brand/rupi-new-logo-md.png',
+      width: 300,
+      height: 258,
+      alt: 'Company Logo',
+      type: 'image/png',
+    },
   ],
-  "additionalLinkTags": [
+  additionalLinkTags: [
     {
-      "rel": "icon",
-      "href": "https://cdn.jsdelivr.net/gh/rupistudio/assets@main/brand/rupi-new-logo-md.png"
-    }
-  ]
-}
+      rel: 'icon',
+      href: 'https://cdn.jsdelivr.net/gh/rupistudio/assets@main/brand/rupi-new-logo-md.png',
+    },
+  ],
+};
 
 export function SEOConfig(
-  title: string,
+  title?: string,
   subtitle?: string,
   description?: string
 ) {
