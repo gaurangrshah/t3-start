@@ -60,3 +60,102 @@
      
 
 - [ ] add react-hook-form + @hook-form/resolvers
+
+
+
+eslint extend:
+```shell
+yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser
+```
+
+```json
+{
+  "extends": [
+		"eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
+  root: true,
+}
+```
+
+
+
+eslint plugins:
+
+```shell
+yarn add -D eslint-plugin-jsx-a11y
+```
+
+```json
+// eslintrc.json
+
+{
+  "plugins": ["jsx-a11y"].
+}
+
+```
+
+
+
+Add rules individually: 
+
+```json
+// eslintrc.json
+
+{
+    {
+      "rules": {
+        "jsx-a11y/rule-name": 2
+        // add more rules here...
+      }
+    }
+}
+```
+
+Or add all recommended rules
+
+```json
+// eslintrc.json
+
+{
+  "extends": ["plugin:jsx-a11y/recommended"]
+}
+```
+
+
+
+```shell
+yarn add -D eslint-plugin-react-hooks
+```
+
+```json
+// eslintrc.json
+
+// EXTEND
+{
+  "extends": [
+    // ...
+    "plugin:react-hooks/recommended"
+  ]
+}
+
+// OR CONFIGURE MANUALLY:
+{
+  "plugins": [
+    // ...
+    "react-hooks"
+  ],
+  "rules": {
+    // ...
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  }
+}
+```
+
+
+
+**@typescript-eslint**??
+
