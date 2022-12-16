@@ -1,3 +1,4 @@
+import { onPromise } from '@/utils/fns';
 import {
   Avatar,
   Box,
@@ -10,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { onPromise } from '@/utils/fns';
+import type { SyntheticEvent } from 'react';
 
 const defaultLinks = [{ label: 'home', href: '/' }];
 
@@ -18,12 +19,12 @@ const ChNextLink = chakra(Link);
 
 export function AvatarMenu() {
   const { data: session, status } = useSession();
-  const handleSignOut = async (e: React.SyntheticEvent) => {
+  const handleSignOut = async (e: SyntheticEvent) => {
     e.preventDefault();
     await signOut();
   };
 
-  const handleSignIn = async (e: React.SyntheticEvent) => {
+  const handleSignIn = async (e: SyntheticEvent) => {
     e.preventDefault();
     await signIn('google');
   };

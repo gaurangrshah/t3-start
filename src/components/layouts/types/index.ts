@@ -1,1 +1,1 @@
-export * from "./layout-props"
+export * from './layout-props';

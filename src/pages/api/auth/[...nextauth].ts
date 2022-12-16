@@ -1,9 +1,9 @@
-import NextAuth, { type NextAuthOptions } from "next-auth";
+import NextAuth, { type NextAuthOptions } from 'next-auth';
 // Prisma adapter for NextAuth, optional and can be removed
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
-import { prisma } from "../../../server/db/client";
-import { session, providers } from "../../../lib/next-auth"
+import { providers, session } from '@/lib/next-auth';
+import { prisma } from '@/server/db/client';
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session

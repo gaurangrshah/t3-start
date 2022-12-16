@@ -1,4 +1,5 @@
 import { useSession } from 'next-auth/react';
+import React from 'react';
 import { FullScreenLoader } from './loaders';
 
 export function Auth({ children }: { children: React.ReactNode }) {

@@ -1,2 +1,2 @@
-export * from "./responsive-debugger"
-export * from "./ui-debugger"
+export * from './responsive-debugger';
+export * from './ui-debugger';

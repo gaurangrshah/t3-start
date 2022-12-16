@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import {
   Drawer as ChDrawer,
   DrawerBody,
@@ -9,10 +8,12 @@ import {
   DrawerOverlay,
   type DrawerProps,
 } from '@chakra-ui/react';
+import type { ElementType } from 'react';
+import { useRef } from 'react';
 
 type CustomDrawerProps = {
-  Footer?: React.ElementType; // throws an error with ReactNode
-  Header?: React.ElementType; // throws an error with ReactNode
+  Footer?: ElementType; // throws an error with ReactNode
+  Header?: ElementType; // throws an error with ReactNode
   type?: 'default' | 'consent';
 } & DrawerProps;
 

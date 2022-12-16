@@ -1,15 +1,16 @@
-import { type AppType } from 'next/app';
-import type { SessionWithUser, NextComponentTypeWithAuth } from '@/types';
-import Head from 'next/head';
-import { SessionProvider } from 'next-auth/react';
-import { ChakraProvider } from '@chakra-ui/react';
-import { theme } from '@/theme';
 import { Auth, ErrorBoundary } from '@/components';
+import { theme } from '@/theme';
+import type { NextComponentTypeWithAuth, SessionWithUser } from '@/types';
 import { trpc } from '@/utils/trpc';
+import { ChakraProvider } from '@chakra-ui/react';
+import { SessionProvider } from 'next-auth/react';
+import { type AppType } from 'next/app';
+import Head from 'next/head';
 
 const MyApp: AppType<{ session: SessionWithUser | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
+  // eslint-disable-next-line no-unused-vars
   router,
 }) => {
   const { auth } = Component as NextComponentTypeWithAuth;

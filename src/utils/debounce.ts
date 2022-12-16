@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // @link: https://tinyurl.com/24l3omee
 
 interface FunctionWithArguments {

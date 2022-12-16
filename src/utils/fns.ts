@@ -1,3 +1,4 @@
+import type { SyntheticEvent } from 'react';
 import { isClient } from './constants';
 
 export const getBaseUrl = () => {
@@ -11,15 +12,16 @@ export const getBaseUrl = () => {
  *
  * @export
  * @template T
- * @param {(event: React.SyntheticEvent) => Promise<T>} promise
+ * @param {(event: SyntheticEvent) => Promise<T>} promise
  * @return {*}
  */
 export function onPromise<T>(
   // used to wrap react-hook-forms's submit handler
   // https://github.com/react-hook-form/react-hook-form/discussions/8020#discussioncomment-3429261
-  promise: (event: React.SyntheticEvent) => Promise<T>
+  // eslint-disable-next-line no-unused-vars
+  promise: (event: SyntheticEvent) => Promise<T>
 ) {
-  return (event: React.SyntheticEvent) => {
+  return (event: SyntheticEvent) => {
     if (promise) {
       promise(event).catch((error) => {
         console.error('Unexpected error', error);

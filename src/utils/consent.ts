@@ -1,5 +1,6 @@
-import { eventbus } from './event-bus';
+/* eslint-disable no-unused-vars */
 import { isClient } from './constants';
+import { eventbus } from './event-bus';
 
 // @TODO: add granular control for each cookie type
 export function cookieConsent() {

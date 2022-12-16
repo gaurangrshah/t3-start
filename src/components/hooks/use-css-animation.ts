@@ -23,16 +23,18 @@ export const cssAnimations: CSSAnim = {
 };
 
 export const animateCSS: (
+  // eslint-disable-next-line no-unused-vars
   prefersMotion: boolean,
-  anim: string,
+  // eslint-disable-next-line no-unused-vars
+  anim: string
 ) => string | undefined = (prefersMotion = false, anim = 'slide-in-top') => {
   const animation = cssAnimations[anim] as CSSAnimation;
 
   return prefersMotion && !!animation
     ? undefined
     : `${animation.keyframes && animation.keyframes} ${
-      animation?.animation && animation?.animation
-    }`;
+        animation?.animation && animation?.animation
+      }`;
 };
 
 export function useCssAnimation(key = 'slideInTop') {

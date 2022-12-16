@@ -3,4 +3,4 @@ const config = {
   useSystemColorMode: false,
 };
 
-export default config
+export default config;

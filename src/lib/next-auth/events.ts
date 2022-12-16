@@ -4,8 +4,6 @@ import { type NextAuthOptions } from 'next-auth';
 
 // NOTE: UNUSED IN THIS PROJECT
 
-
-
 export const events: NextAuthOptions['events'] = {
   // @link: https://next-auth.js.org/configuration/options#events
   async signIn(message) {

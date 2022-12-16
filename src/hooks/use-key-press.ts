@@ -3,6 +3,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 
 interface UseKeyPressProps {
   keys: string[];
+  // eslint-disable-next-line no-unused-vars
   callback: (e: KeyboardEvent) => void;
   node?: Document | null;
 }

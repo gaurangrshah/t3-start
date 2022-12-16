@@ -1,4 +1,5 @@
 import { Box, Tooltip, type ChakraProps } from '@chakra-ui/react';
+import type { FC } from 'react';
 import { paths } from './paths';
 
 type ToolIconProps = {
@@ -8,7 +9,7 @@ type ToolIconProps = {
   tipLabel?: string | null;
 };
 
-const CustomToolIcon: React.FC<ToolIconProps & ChakraProps> = ({
+const CustomToolIcon: FC<ToolIconProps & ChakraProps> = ({
   color,
   icon,
   size,

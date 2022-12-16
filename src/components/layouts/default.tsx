@@ -1,10 +1,10 @@
-import React from 'react';
-import { NextSeo } from 'next-seo';
+/* eslint-disable no-unused-vars */
 import { Bar } from '@/components';
 import { AvatarMenu } from '@/components/avatar-menu';
 import { SEOConfig } from '@/utils';
-import { SkipNavLink, SkipNavContent } from '@chakra-ui/skip-nav';
 import { chakra } from '@chakra-ui/react';
+import { SkipNavLink } from '@chakra-ui/skip-nav';
+import { NextSeo } from 'next-seo';
 import type { LayoutProps } from './types';
 
 export const DefaultLayout = ({

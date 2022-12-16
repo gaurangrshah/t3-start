@@ -1,1 +1,1 @@
-export * from "./nextauth"
+export * from './nextauth';

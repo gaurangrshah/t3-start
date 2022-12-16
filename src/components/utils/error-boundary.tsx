@@ -1,7 +1,5 @@
-import React, { Component, type ErrorInfo, type ReactNode } from 'react';
-import { debug as globalDebug, dev } from '@/utils';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 
-const debug: boolean = globalDebug || true;
 interface Props {
   children?: ReactNode;
 }
@@ -15,14 +13,14 @@ export class ErrorBoundary extends Component<Props, State> {
     hasError: false,
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   public static getDerivedStateFromError(_: Error): State {
     // Update state so the next render will show the fallback UI.
     return { hasError: true };
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    dev.error('Uncaught error:', { error, errorInfo }, debug);
+    console.error('Uncaught error:', { error, errorInfo });
   }
 
   public render() {

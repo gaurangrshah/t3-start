@@ -1,2 +1,2 @@
-export * from "./auth.schema"
-export * from "./prisma.schema"
+export * from './auth.schema';
+export * from './prisma.schema';

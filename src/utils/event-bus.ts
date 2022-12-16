@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // @linkL https://dawchihliou.github.io/articles/event-bus-for-react
 

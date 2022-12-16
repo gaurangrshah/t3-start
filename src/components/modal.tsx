@@ -9,13 +9,15 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react';
+import type { MouseEventHandler, ReactNode } from 'react';
 
 type CustomModalProps = {
   allowClose: boolean;
   bg?: string;
-  footer?: React.ReactNode; // type props as: React.ComponentType<ComponentProps>
+  footer?: ReactNode; // type props as: React.ComponentType<ComponentProps>
   handler?: {
-    action: (event: React.MouseEventHandler<HTMLButtonElement>) => void;
+    // eslint-disable-next-line no-unused-vars
+    action: (event: MouseEventHandler<HTMLButtonElement>) => void;
     label: string;
   };
   hasSubmit: boolean;

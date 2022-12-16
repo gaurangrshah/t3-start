@@ -1,9 +1,11 @@
-import { type NextPage } from 'next';
-import { signIn, signOut, useSession } from 'next-auth/react';
-import { trpc } from '@/utils/trpc';
-import { Button, ButtonProps, chakra, Flex } from '@chakra-ui/react';
-import { randomColor } from '@chakra-ui/theme-tools';
 import { DefaultLayout } from '@/components';
+import { trpc } from '@/utils/trpc';
+import type { ButtonProps } from '@chakra-ui/react';
+import { Button, chakra, Flex } from '@chakra-ui/react';
+import { randomColor } from '@chakra-ui/theme-tools';
+import type { NextPage } from 'next';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import type { FC } from 'react';
 
 const Home: NextPage = () => {
   const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
@@ -31,7 +33,7 @@ const Home: NextPage = () => {
 
 export default Home;
 
-const AuthShowcase: React.FC = () => {
+const AuthShowcase: FC = () => {
   const { data: sessionData } = useSession();
 
   const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(

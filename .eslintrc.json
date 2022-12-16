@@ -8,20 +8,18 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "jest", "@typescript-eslint", "prettier"],
+  "plugins": ["prettier"],
   "extends": [
     "next/core-web-vitals",
+    "plugin:@next/next/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
     "eslint:recommended",
-    "airbnb",
     "prettier"
   ],
   "env": {
     "browser": true,
     "es2021": true,
-    "jest": true,
-    "jest/globals": true
+    "jest": true
   },
   "rules": {
     "@typescript-eslint/consistent-type-imports": "warn",

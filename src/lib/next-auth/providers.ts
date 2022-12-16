@@ -1,7 +1,8 @@
-import { type NextAuthOptions } from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
-import CredentialsProvider from 'next-auth/providers/credentials';
+/* eslint-disable no-unused-vars */
 import { prisma } from '@/server/db/client';
+import { type NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 
 import { env } from '@/env/server.mjs';
 // import EmailProvider from 'next-auth/providers/email';
@@ -64,4 +65,3 @@ const credentials = CredentialsProvider({
 });
 
 export const providers: NextAuthOptions['providers'] = [google];
-// console.log("🚀 | file: providers.ts:58 | providers", providers)

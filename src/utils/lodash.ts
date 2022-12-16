@@ -18,24 +18,25 @@ export function omit(obj: Record<string, any>, ...keys: string[]) {
         error: Boolean,
       });
  */
-      type Descriptor<T> = {
-        [P in keyof T]: (v: any) => T[P];
-      };
-      export function pick<T>(v: any, d: Descriptor<T>): T {
-        const ret: any = {};
-        for (const key in d) {
-          try {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            const val = d[key](v[key]);
-            if (typeof val !== 'undefined') {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-              ret[key] = val;
-            }
-          } catch (err) {
-            const msg = err instanceof Error ? err.message : String(err);
-            throw new Error(`could not pick ${key}: ${msg}`);
-          }
-        }
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-        return ret;
+type Descriptor<T> = {
+  // eslint-disable-next-line no-unused-vars
+  [P in keyof T]: (v: any) => T[P];
+};
+export function pick<T>(v: any, d: Descriptor<T>): T {
+  const ret: any = {};
+  for (const key in d) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      const val = d[key](v[key]);
+      if (typeof val !== 'undefined') {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        ret[key] = val;
       }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      throw new Error(`could not pick ${key}: ${msg}`);
+    }
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return ret;
+}

@@ -1,8 +1,8 @@
-import React from "react"
+import type { ReactNode } from 'react';
 
 export type LayoutProps = {
   title?: string;
   subtitle?: string;
   description?: string;
-  children: React.ReactNode
-}
+  children: ReactNode;
+};

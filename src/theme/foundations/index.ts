@@ -9,7 +9,7 @@ export { default as shadows } from './shadows';
 export { default as sizes } from './sizes';
 export { default as space } from './space';
 export { default as styles } from './styles';
-export { default as semanticTokens } from './tokens';
 export { default as textStyles } from './textStyles';
+export { default as semanticTokens } from './tokens';
 export { default as transition } from './transition';
 export { default as zIndices } from './zIndices';

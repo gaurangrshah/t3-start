@@ -1,4 +1,5 @@
 import { Slide } from '@chakra-ui/react';
+import type { FC, ReactNode } from 'react';
 import {
   useScrollDirection,
   type DirectionEnum,
@@ -7,12 +8,12 @@ import {
 type AllPositionFromEnum = 'top' | 'bottom' | 'left' | 'right';
 
 type ScrollSlideProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   dir: DirectionEnum;
   from: AllPositionFromEnum;
 };
 
-export const ScrollSlide: React.FC<ScrollSlideProps> = ({
+export const ScrollSlide: FC<ScrollSlideProps> = ({
   dir = 'up',
   from = 'top',
   children,

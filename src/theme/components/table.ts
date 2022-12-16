@@ -1,7 +1,5 @@
-import type {
-  StyleFunctionProps} from '@chakra-ui/theme-tools';
-  import { mode, darken, transparentize } from '@chakra-ui/theme-tools';
-
+import type { StyleFunctionProps } from '@chakra-ui/theme-tools';
+import { mode, transparentize } from '@chakra-ui/theme-tools';
 
 const baseStyle = {
   table: {
@@ -51,7 +49,7 @@ const variants = {
           td: {
             bg: mode(
               'gray.50',
-              transparentize('gray.700', 0.4)(props.theme),
+              transparentize('gray.700', 0.4)(props.theme)
             )(props),
           },
         },

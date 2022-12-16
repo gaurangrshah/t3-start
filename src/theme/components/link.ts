@@ -8,4 +8,4 @@ const variants = {
   }),
 };
 
-export const Link =  { variants };
+export const Link = { variants };
