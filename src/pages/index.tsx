@@ -5,9 +5,10 @@ import { Button, chakra, Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import type { FC } from 'react';
+import { trpc } from '@/utils/trpc';
 
 const Home: NextPage = () => {
-  // const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
+  const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
 
   return (
     <DefaultLayout
