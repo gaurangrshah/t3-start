@@ -1,5 +1,19 @@
 {
   "marquee.widgets.npm-stats.packageNames": [
     "t3-start"
-  ]
+  ],
+  "workbench.colorCustomizations": {
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#1d10cf",
+    "statusBar.background": "#160ca0",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#1d10cf",
+    "statusBarItem.remoteBackground": "#160ca0",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#160ca0",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#160ca099",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#160ca0"
 }

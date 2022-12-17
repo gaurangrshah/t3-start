@@ -1,14 +1,13 @@
 import { DefaultLayout } from '@/components';
-import { trpc } from '@/utils/trpc';
+import { AvatarMenu } from '@/components/avatar-menu';
 import type { ButtonProps } from '@chakra-ui/react';
 import { Button, chakra, Flex } from '@chakra-ui/react';
-import { randomColor } from '@chakra-ui/theme-tools';
 import type { NextPage } from 'next';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import type { FC } from 'react';
 
 const Home: NextPage = () => {
-  const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
+  // const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
 
   return (
     <DefaultLayout
@@ -16,14 +15,14 @@ const Home: NextPage = () => {
       subtitle="| The fastest way to develop"
       description="With e2e type-safety"
     >
-      <chakra.div textAlign="center">
-        <chakra.h1 as="h1" color={randomColor()}>
-          Create <chakra.span color={randomColor()}>T3</chakra.span> App
+      <chakra.div textAlign="center" color="white">
+        <chakra.h1 as="h1">
+          Create <chakra.span color="blue.300">T3</chakra.span> App
         </chakra.h1>
         <Flex direction="column" align="center" gap="0.5rem">
-          <chakra.p color="white" fontSize="2xl">
+          {/* <chakra.p color="white" fontSize="2xl">
             {hello.data ? hello.data.greeting : 'Loading tRPC query...'}
-          </chakra.p>
+          </chakra.p> */}
           <AuthShowcase />
         </Flex>
       </chakra.div>
@@ -36,10 +35,10 @@ export default Home;
 const AuthShowcase: FC = () => {
   const { data: sessionData } = useSession();
 
-  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
+  // const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
+  //   undefined, // no input
+  //   { enabled: sessionData?.user !== undefined }
+  // );
 
   const signInBtn: ButtonProps = {
     variant: 'pill',
@@ -51,12 +50,12 @@ const AuthShowcase: FC = () => {
 
   return (
     <>
-      {/* <AvatarMenu /> */}
+      <AvatarMenu />
       <chakra.div layerStyle="flex-center" flexDirection="column" gap={4}>
-        <chakra.p color="white" fontSize="2xl">
+        {/* <chakra.p color="white" fontSize="2xl">
           {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
           {secretMessage && <span> - {secretMessage}</span>}
-        </chakra.p>
+        </chakra.p> */}
         <Button
           {...signInBtn}
           onClick={sessionData ? () => signOut() : () => signIn('google')}

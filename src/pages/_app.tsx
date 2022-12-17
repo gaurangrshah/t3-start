@@ -1,13 +1,14 @@
 import { Auth, ErrorBoundary } from '@/components';
+import { SessionContext } from '@/components/session-context';
 import { theme } from '@/theme';
 import type { NextComponentTypeWithAuth, SessionWithUser } from '@/types';
 import { trpc } from '@/utils/trpc';
 import { ChakraProvider } from '@chakra-ui/react';
 import { SessionProvider } from 'next-auth/react';
-import { type AppType } from 'next/app';
+import { AppProps, type AppType } from 'next/app';
 import Head from 'next/head';
 
-const MyApp: AppType<{ session: SessionWithUser | null }> = ({
+const MyApp: AppType<{ session: SessionWithUser | null } & AppProps> = ({
   Component,
   pageProps: { session, ...pageProps },
   // eslint-disable-next-line no-unused-vars

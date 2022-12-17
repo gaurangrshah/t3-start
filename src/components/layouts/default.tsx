@@ -23,7 +23,7 @@ export const DefaultLayout = ({
         as="main"
         layerStyle="flex-center"
         minH="100vh"
-        bgGradient="linear(to-b, #2e026d, #15162c)"
+        bg="linear-gradient(to bottom, #2e026d , #15162c)"
       >
         {children}
       </chakra.div>
