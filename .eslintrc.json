@@ -8,18 +8,19 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["prettier"],
+  "plugins": ["vitest", "prettier"],
   "extends": [
     "next/core-web-vitals",
     "plugin:@next/next/recommended",
     "plugin:@typescript-eslint/recommended",
     "eslint:recommended",
+    "plugin:vitest-globals/recommended",
     "prettier"
   ],
   "env": {
     "browser": true,
     "es2021": true,
-    "jest": true
+    "vitest-globals/env": true
   },
   "rules": {
     "@typescript-eslint/consistent-type-imports": "warn",

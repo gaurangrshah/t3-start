@@ -8,7 +8,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import type { FC } from 'react';
 
 const Home: NextPage = () => {
-  const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
+  // const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
 
   return (
     <DefaultLayout
@@ -22,9 +22,9 @@ const Home: NextPage = () => {
         </chakra.h1>
         <Flex direction="column" align="center" gap="0.5rem">
           <chakra.p color="white" fontSize="2xl">
-            {hello.data ? hello.data.greeting : 'Loading tRPC query...'}
+            {/* {hello.data ? hello.data.greeting : 'Loading tRPC query...'} */}
           </chakra.p>
-          <AuthShowcase />
+          {/* <AuthShowcase /> */}
         </Flex>
       </chakra.div>
     </DefaultLayout>
