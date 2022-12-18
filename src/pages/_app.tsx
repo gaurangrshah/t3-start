@@ -1,5 +1,4 @@
 import { Auth, ErrorBoundary } from '@/components';
-import { SessionContext } from '@/components/session-context';
 import { theme } from '@/theme';
 import type { NextComponentTypeWithAuth, SessionWithUser } from '@/types';
 import { trpc } from '@/utils/trpc';
@@ -23,9 +22,9 @@ const MyApp: AppType<{ session: SessionWithUser | null } & AppProps> = ({
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
       </Head>
-      <SessionProvider session={session}>
-        <ErrorBoundary>
-          <ChakraProvider theme={theme}>
+      <SessionProvider session={session} refetchInterval={5 * 1000}>
+        <ChakraProvider theme={theme}>
+          <ErrorBoundary>
             {auth ? (
               <Auth>
                 <Component {...pageProps} />
@@ -33,8 +32,8 @@ const MyApp: AppType<{ session: SessionWithUser | null } & AppProps> = ({
             ) : (
               <Component {...pageProps} />
             )}
-          </ChakraProvider>
-        </ErrorBoundary>
+          </ErrorBoundary>
+        </ChakraProvider>
       </SessionProvider>
     </>
   );

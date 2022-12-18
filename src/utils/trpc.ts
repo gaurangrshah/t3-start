@@ -12,7 +12,7 @@ const getBaseUrl = () => {
 };
 
 export const trpc = createTRPCNext<AppRouter>({
-  config() {
+  config({ ctx }) {
     return {
       transformer: superjson,
       links: [
@@ -25,6 +25,24 @@ export const trpc = createTRPCNext<AppRouter>({
           url: `${getBaseUrl()}/api/trpc`,
         }),
       ],
+      url: `${getBaseUrl()}/api/trpc`,
+
+      // queryClientConfig: {
+      //   defaultOptions: { queries: { staleTime: 5 * 1000 } }, // 5secs
+      // },
+
+      // To use SSR properly you need to forward the client's headers to the server
+      // headers: () => {
+      //   if (ctx?.req) {
+      //     const headers = ctx?.req?.headers;
+      //     delete headers?.connection;
+      //     return {
+      //       ...headers,
+      //       'x-ssr': '1',
+      //     };
+      //   }
+      //   return {};
+      // },
     };
   },
   ssr: false,
