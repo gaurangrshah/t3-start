@@ -2,7 +2,6 @@ import { DefaultLayout } from '@/components';
 import { trpc } from '@/utils/trpc';
 import type { ButtonProps } from '@chakra-ui/react';
 import { Button, chakra, Flex } from '@chakra-ui/react';
-import { randomColor } from '@chakra-ui/theme-tools';
 import type { NextPage } from 'next';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import type { FC } from 'react';
@@ -17,8 +16,8 @@ const Home: NextPage = () => {
       description="With e2e type-safety"
     >
       <chakra.div textAlign="center">
-        <chakra.h1 as="h1" color={randomColor()}>
-          Create <chakra.span color={randomColor()}>T3</chakra.span> App
+        <chakra.h1 as="h1" color="white">
+          Create <chakra.span color="white">T3</chakra.span> App
         </chakra.h1>
         <Flex direction="column" align="center" gap="0.5rem">
           <chakra.p color="white" fontSize="2xl">
