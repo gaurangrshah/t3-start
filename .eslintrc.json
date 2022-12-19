@@ -1,4 +1,5 @@
 {
+  "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json",
@@ -8,21 +9,33 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "eslint-plugin-cypress"],
   "extends": [
     "next/core-web-vitals",
     "plugin:@next/next/recommended",
     "plugin:@typescript-eslint/recommended",
     "eslint:recommended",
+    "plugin:cypress/recommended",
     "prettier"
   ],
   "env": {
     "browser": true,
     "es2021": true,
-    "jest": true
+    "jest": true,
+    "cypress/globals": true
   },
   "rules": {
     "@typescript-eslint/consistent-type-imports": "warn",
     "prettier/prettier": "warn"
-  }
+  },
+  "overrides": [
+    // use Cypress lint rules in Cypress test files
+    {
+      "files": ["cypress/**/?(*.)+(spec|test|cy).[jt]s?(x)", "cypress/support/*"],
+      "extends": ["plugin:cypress/recommended"],
+      "env": {
+        "cypress/globals": true
+      }
+    }
+  ]
 }
