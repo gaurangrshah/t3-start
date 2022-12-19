@@ -15,23 +15,22 @@
     "plugin:@next/next/recommended",
     "plugin:@typescript-eslint/recommended",
     "eslint:recommended",
-    "plugin:cypress/recommended",
     "prettier"
   ],
   "env": {
     "browser": true,
-    "es2021": true,
-    "jest": true,
-    "cypress/globals": true
+    "es2021": true
   },
   "rules": {
     "@typescript-eslint/consistent-type-imports": "warn",
     "prettier/prettier": "warn"
   },
   "overrides": [
-    // use Cypress lint rules in Cypress test files
     {
-      "files": ["cypress/**/?(*.)+(spec|test|cy).[jt]s?(x)", "cypress/support/*"],
+      "files": [
+        "cypress/**/?(*.)+(spec|test|cy).[jt]s?(x)",
+        "cypress/support/*"
+      ],
       "extends": ["plugin:cypress/recommended"],
       "env": {
         "cypress/globals": true
