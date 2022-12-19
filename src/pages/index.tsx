@@ -7,7 +7,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import type { FC } from 'react';
 
 const Home: NextPage = () => {
-  // const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
+  const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
 
   return (
     <DefaultLayout
@@ -15,9 +15,9 @@ const Home: NextPage = () => {
       subtitle="| The fastest way to develop"
       description="With e2e type-safety"
     >
-      <chakra.div textAlign="center">
-        <chakra.h1 as="h1" color="white">
-          Create <chakra.span color="white">T3</chakra.span> App
+      <chakra.div textAlign="center" color="gray.600">
+        <chakra.h1 as="h1">
+          Create <chakra.span color="black">T3</chakra.span> App
         </chakra.h1>
         <Flex direction="column" align="center" gap="0.5rem">
           <chakra.p color="white" fontSize="2xl">
