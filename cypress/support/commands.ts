@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 import '@testing-library/cypress/add-commands'; // this import should be at the top of file
+import { signOut } from 'next-auth/react';
 
 // ***********************************************
 // This example commands.ts shows you how to
@@ -39,7 +40,7 @@ import '@testing-library/cypress/add-commands'; // this import should be at the 
 // }
 
 /*
-@SEE: https://tinyurl.com/2ofsczvm
+@SEE: https://github.com/nextauthjs/next-auth/discussions/2053#discussioncomment-1191016
 */
 Cypress.Commands.add('login', () => {
   cy.intercept('/api/auth/session', { fixture: 'session.json' }).as('session');
@@ -63,10 +64,16 @@ Cypress.Commands.add('login', () => {
   );
 });
 
+Cypress.Commands.add('logout', (): Cypress.Chainable => {
+  cy.log('logout');
+  return cy.wrap(signOut({ redirect: false }));
+});
+
 declare global {
   namespace Cypress {
     interface Chainable<Subject> {
-      login(): void;
+      login(): Chainable<void>;
+      logout(): Chainable<Element>;
     }
   }
 }

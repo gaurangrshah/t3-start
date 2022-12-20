@@ -1,9 +1,9 @@
 {
   "user": {
-    "name": "Gaurang Shah",
-    "email": "gaurang.r.shah@gmail.com",
+    "name": "e2e",
+    "email": "e2etest@oauthmail.com",
     "image": "https://lh3.googleusercontent.com/a/AEdFTp7b1H5UgOeiJi2TdvJ5JVJOs2_HZDcWvV-R6eqConk=s96-c",
-    "id": "clbgr4psi000074rrc8l4i8zm"
+    "id": "SOME-RANDOM-ID"
   },
   "expires": "2023-01-19T03:03:44.516Z",
   "accessToken": "abcdefghijklmnopqrstuvqxyz"
