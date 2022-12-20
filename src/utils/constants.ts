@@ -3,6 +3,7 @@ export const ONE_SECOND = 1000;
 export const ONE_MIN = 60 * ONE_SECOND;
 export const ONE_HOUR = 60 * ONE_MIN;
 export const ONE_DAY = 24 * ONE_HOUR;
+export const THIRTY_DAYS = 30 * ONE_DAY;
 // config settings
 export const PORT = 3000;
 export const ACCESS_TOKEN_EXPIRES_IN = 15;
@@ -23,7 +24,7 @@ export const isClient = !!(
 
 export const debug = isDev && false;
 
-export const NEXT_AUTH_SESSION_TOKEN_KEY = 'next-auth.session-token';
+export const NEXT_AUTH_SESSION_TOKEN_KEY = process.env.SESSION_COOKIE_NAME;
 
 // image cdn link components
 export const CDN_URL = 'https://cdn.jsdelivr.net/gh/rupistudio/assets@main';

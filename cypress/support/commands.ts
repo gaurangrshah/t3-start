@@ -64,10 +64,10 @@ Cypress.Commands.add('login', () => {
   );
 });
 
-Cypress.Commands.add('logout', (): Cypress.Chainable => {
-  cy.log('logout');
-  return cy.wrap(signOut({ redirect: false }));
-});
+// Cypress.Commands.add('logout', () => {
+//   cy.log('logout');
+//   return cy.wrap(signOut({ redirect: false }));
+// });
 
 declare global {
   namespace Cypress {

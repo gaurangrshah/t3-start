@@ -1,13 +1,13 @@
 import { defineConfig } from 'cypress';
+import { getBaseUrl } from './src/utils/fns';
+
+
+const baseUrl = getBaseUrl();
 
 export default defineConfig({
   e2e: {
-    // setupNodeEvents(on, config) {},
-    baseUrl: 'http://localhost:3000',
+    baseUrl,
     specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
-    setupNodeEvents(on, config) {
-      on('task', {});
-    },
     retries: {
       runMode: 3,
     },
@@ -16,5 +16,12 @@ export default defineConfig({
     video: false,
     screenshotOnRunFailure: false,
     chromeWebSecurity: false,
+    setupNodeEvents(on, config) {
+      on('task', {});
+    },
   },
+  env: {
+    baseUrl,
+
+  }
 });

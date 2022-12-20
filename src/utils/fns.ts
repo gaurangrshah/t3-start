@@ -11,6 +11,21 @@ export const getBaseUrl = () => {
  *
  *
  * @export
+ * @param {Date} date
+ * @param {number} days
+ * @return {*}  {Date}
+ */
+export function addDays(date: Date, days: number): Date {
+  // https://stackoverflow.com/questions/563406/how-to-add-days-to-date
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
+/**
+ *
+ *
+ * @export
  * @template T
  * @param {(event: SyntheticEvent) => Promise<T>} promise
  * @return {*}
