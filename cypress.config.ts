@@ -5,6 +5,9 @@ export default defineConfig({
     // setupNodeEvents(on, config) {},
     baseUrl: 'http://localhost:3000',
     specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
+    setupNodeEvents(on, config) {
+      on('task', {});
+    },
     retries: {
       runMode: 3,
     },
@@ -12,5 +15,6 @@ export default defineConfig({
     viewportWidth: 1920,
     video: false,
     screenshotOnRunFailure: false,
+    chromeWebSecurity: false,
   },
 });

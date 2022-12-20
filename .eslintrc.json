@@ -25,6 +25,7 @@
     "@typescript-eslint/consistent-type-imports": "warn",
     "prettier/prettier": "warn"
   },
+  "exclude": ["cypress/plugins/*"],
   "overrides": [
     {
       "files": [

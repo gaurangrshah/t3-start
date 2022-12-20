@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 import '@testing-library/cypress/add-commands'; // this import should be at the top of file
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -36,3 +37,37 @@ import '@testing-library/cypress/add-commands'; // this import should be at the 
 //     }
 //   }
 // }
+
+/*
+@SEE: https://tinyurl.com/2ofsczvm
+*/
+Cypress.Commands.add('login', () => {
+  cy.intercept('/api/auth/session', { fixture: 'session.json' }).as('session');
+
+  // Set the cookie for cypress.
+  // It has to be a valid cookie so next-auth can decrypt it and confirm its validity.
+  // This step can probably/hopefully be improved.
+  // We are currently unsure about this part.
+  // We need to refresh this cookie once in a while.
+  // We are unsure if this is true and if true, when it needs to be refreshed.
+  cy.setCookie('next-auth.session-token', `${Cypress.env('SESSION_TOKEN')}`);
+  cy.setCookie(
+    '__Secure-next-auth.session-token',
+    `${Cypress.env('SESSION_TOKEN')}`,
+    {
+      httpOnly: true,
+      sameSite: 'lax',
+      path: '/',
+      secure: true,
+    }
+  );
+});
+
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      login(): void;
+    }
+  }
+}
+export {};
