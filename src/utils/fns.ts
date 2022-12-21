@@ -62,3 +62,14 @@ export function getAnonId() {
   if (!isClient) return undefined;
   return localStorage.getItem('__anon_id');
 }
+
+/**
+ * * @SEE: https://stackoverflow.com/a/20728864
+ *
+ * @export
+ * @param {number} [end=12]
+ * @return {*}
+ */
+export function generateRandomString(end = 12) {
+  return Math.random().toString(36).substring(3, end);
+}
