@@ -35,4 +35,4 @@ export const PLACEHOLDER_DIR = '/images/placeholder';
 export const SERVICES_DIR = '/images/services';
 
 // testing
-export const testEnv = process.env.APP_ENV === 'test';
+export const testEnv = process.env.NODE_ENV === 'test';

@@ -63,6 +63,6 @@ const credentials = CredentialsProvider({
 
 export const providers: NextAuthOptions['providers'] = [];
 
-process.env.APP_ENV === 'test'
+process.env.NODE_ENV === 'test'
   ? providers.push(credentials)
   : providers.push(google);
