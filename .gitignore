@@ -41,6 +41,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
+####################### testing ##########################
+
 #cypress
 cypress/video
 cypress/screenshots
+
+#prisma
+prisma/seed.ts

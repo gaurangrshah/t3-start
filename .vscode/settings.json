@@ -1,5 +1,11 @@
 {
   "marquee.widgets.npm-stats.packageNames": [
     "t3-start"
+  ],
+  "cSpell.words": [
+    "postbuild",
+    "superjson",
+    "tanstack",
+    "trpc"
   ]
 }
