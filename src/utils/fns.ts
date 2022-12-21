@@ -17,7 +17,7 @@ export const getBaseUrl = () => {
  */
 export function addDays(date: Date, days: number): Date {
   // https://stackoverflow.com/questions/563406/how-to-add-days-to-date
-  var result = new Date(date);
+  const result = new Date(date);
   result.setDate(result.getDate() + days);
   return result;
 }

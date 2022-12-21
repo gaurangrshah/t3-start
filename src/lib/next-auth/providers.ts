@@ -7,6 +7,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import { env } from '@/env/server.mjs';
 // import EmailProvider from 'next-auth/providers/email';
 // import { ONE_DAY } from '@/utils';
+import { authenticateUserInputSchema } from '@/server/schema/auth.schema';
 
 const google = GoogleProvider({
   clientId: env.GOOGLE_CLIENT_ID,
@@ -50,18 +51,18 @@ const credentials = CredentialsProvider({
     },
   },
   async authorize(credentials, req) {
-    if (!credentials || !credentials?.email || credentials?.password) {
-      const user = await prisma.user.findUnique({
+    if (authenticateUserInputSchema.safeParse(credentials)) {
+      const user = await prisma.user.findFirstOrThrow({
         where: { email: credentials?.email },
       });
-      // if(!user || !user?.password) {
-      //   return null
-      // };
-
       return user;
     }
     return null;
   },
 });
 
-export const providers: NextAuthOptions['providers'] = [google];
+export const providers: NextAuthOptions['providers'] = [];
+
+process.env.APP_ENV === 'test'
+  ? providers.push(credentials)
+  : providers.push(google);

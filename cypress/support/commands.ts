@@ -42,7 +42,7 @@ import { signOut } from 'next-auth/react';
 /*
 @SEE: https://github.com/nextauthjs/next-auth/discussions/2053#discussioncomment-1191016
 */
-Cypress.Commands.add('login', () => {
+Cypress.Commands.add('googleLogin', () => {
   cy.intercept('/api/auth/session', { fixture: 'session.json' }).as('session');
 
   // Set the cookie for cypress.
@@ -72,9 +72,9 @@ Cypress.Commands.add('login', () => {
 declare global {
   namespace Cypress {
     interface Chainable<Subject> {
-      login(): Chainable<void>;
-      logout(): Chainable<Element>;
+      googleLogin(): Chainable<void>;
+      googleLogout(): Chainable<Element>;
     }
   }
 }
-export {};
+export { };

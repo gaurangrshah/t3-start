@@ -1,4 +1,4 @@
-import { createHash, randomBytes } from 'crypto';
+import { randomBytes } from 'crypto';
 
 import type { Session, User } from 'next-auth';
 
@@ -33,7 +33,7 @@ export async function createSession(user: User) {
   }
 }
 
-async function updateSession(session: Session, force: boolean) {
+export async function updateSession(session: Session, force: boolean) {
   console.log('UPDATE_SESSION', session);
   try {
     if (
