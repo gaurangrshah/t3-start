@@ -49,3 +49,4 @@ cypress/screenshots
 
 #prisma
 prisma/seed.ts
+prisma/test.db.sqlite

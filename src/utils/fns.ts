@@ -8,18 +8,40 @@ export const getBaseUrl = () => {
 };
 
 /**
- *
+ *@SEE: https://stackoverflow.com/questions/563406/how-to-add-days-to-date
  *
  * @export
  * @param {Date} date
  * @param {number} days
  * @return {*}  {Date}
  */
-export function addDays(date: Date, days: number): Date {
-  // https://stackoverflow.com/questions/563406/how-to-add-days-to-date
-  const result = new Date(date);
+export function addDays(datestamp: Date, days: number): Date {
+  const result = new Date(datestamp);
   result.setDate(result.getDate() + days);
   return result;
+}
+
+/**
+ *
+ *
+ * @export
+ * @param {Date} datestamp
+ * @return {*}  {number}
+ */
+export function dateToSeconds(datestamp: Date): number {
+  const dateSecondsAsFloat = new Date(datestamp).getTime() / 1000;
+  return Math.floor(dateSecondsAsFloat);
+}
+
+/**
+ *
+ *
+ * @export
+ * @param {number} seconds
+ * @return {*}
+ */
+export function secondsToDate(seconds: number) {
+  return new Date(seconds * 1000);
 }
 
 /**

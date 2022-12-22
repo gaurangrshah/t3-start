@@ -1,14 +1,16 @@
 /* eslint-disable no-unused-vars */
-import { prisma } from '@/server/db/client';
-import { type NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
+import type { User } from '@prisma/client';
+import type { NextAuthOptions } from 'next-auth';
+
 import { env } from '@/env/server.mjs';
+import { prisma } from '@/server/db/client';
+import { authenticateUserInputSchema } from '@/server/schema/auth.schema';
 // import EmailProvider from 'next-auth/providers/email';
 // import { ONE_DAY } from '@/utils';
-import { authenticateUserInputSchema } from '@/server/schema/auth.schema';
-
+import { TEST_ENV } from '@/utils';
 const google = GoogleProvider({
   clientId: env.GOOGLE_CLIENT_ID,
   clientSecret: env.GOOGLE_CLIENT_SECRET,
@@ -41,7 +43,7 @@ const credentials = CredentialsProvider({
       label: 'Username',
       type: 'text',
       placeholder: 'you@youremail.com',
-      value: 'test@test.com',
+      value: 'gaurang.r.shah@gmail.com',
     },
     password: {
       label: 'Password',
@@ -52,7 +54,8 @@ const credentials = CredentialsProvider({
   },
   async authorize(credentials, req) {
     if (authenticateUserInputSchema.safeParse(credentials)) {
-      const user = await prisma.user.findFirstOrThrow({
+      // FIXME: findUnique invalid invocation issue
+      const user: User = await prisma.user.findUniqueOrThrow({
         where: { email: credentials?.email },
       });
       return user;
@@ -63,6 +66,4 @@ const credentials = CredentialsProvider({
 
 export const providers: NextAuthOptions['providers'] = [];
 
-process.env.NODE_ENV === 'test'
-  ? providers.push(credentials)
-  : providers.push(google);
+TEST_ENV ? providers.push(credentials) : providers.push(google);

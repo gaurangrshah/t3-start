@@ -1,7 +1,6 @@
 import { defineConfig } from 'cypress';
 import { getBaseUrl } from './src/utils/fns';
 
-
 const baseUrl = getBaseUrl();
 
 export default defineConfig({
@@ -16,12 +15,12 @@ export default defineConfig({
     video: false,
     screenshotOnRunFailure: false,
     chromeWebSecurity: false,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
     setupNodeEvents(on, config) {
       on('task', {});
     },
   },
   env: {
     baseUrl,
-
-  }
+  },
 });

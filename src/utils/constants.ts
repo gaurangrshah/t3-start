@@ -34,5 +34,7 @@ export const PEOPLE_DIR = '/images/people';
 export const PLACEHOLDER_DIR = '/images/placeholder';
 export const SERVICES_DIR = '/images/services';
 
+export const EPOCH_STAMP = new Date('1/1/1970');
+
 // testing
-export const testEnv = process.env.NODE_ENV === 'test';
+export const TEST_ENV = process.env.APP_ENV === 'test';

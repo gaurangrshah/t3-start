@@ -20,7 +20,6 @@
 describe('login with test credentials', () => {
   before(() => {
     cy.visit('/');
-    if (process.env.NODE_ENV) cy.log(process.env.NODE_ENV);
   });
   it('login flow', () => {
     cy.get('main').within(() => {
