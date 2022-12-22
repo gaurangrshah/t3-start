@@ -14,6 +14,14 @@ import { TEST_ENV } from '@/utils';
 const google = GoogleProvider({
   clientId: env.GOOGLE_CLIENT_ID,
   clientSecret: env.GOOGLE_CLIENT_SECRET,
+  // @SEE: https://tinyurl.com/2hyurpsm
+  // authorization:
+  //   'https://accounts.google.com/o/oauth2/v2/auth?' +
+  //   new URLSearchParams({
+  //     prompt: 'consent',
+  //     access_type: 'offline',
+  //     response_type: 'code',
+  //   }),
 });
 
 // /**
