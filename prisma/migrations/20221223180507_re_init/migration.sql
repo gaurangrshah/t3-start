@@ -37,6 +37,7 @@ CREATE TABLE "User" (
     "name" TEXT,
     "email" TEXT,
     "emailVerified" DATETIME,
+    "password" TEXT,
     "image" TEXT
 );
 
