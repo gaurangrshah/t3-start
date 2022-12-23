@@ -13,7 +13,13 @@ import { prisma } from '../../server/db/client';
 const defaultSessionMaxAge = 30 * 24 * 60 * 60 * 1000;
 const sessionMaxAge = defaultSessionMaxAge;
 const sessionUpdateAge = 24 * 60 * 60 * 1000;
-
+/**
+ *
+ *
+ * @export
+ * @param {User} user
+ * @return {*}
+ */
 export async function createSession(user: User) {
   try {
     let expires = null;
@@ -39,6 +45,14 @@ export async function createSession(user: User) {
   }
 }
 
+/**
+ *
+ *
+ * @export
+ * @param {Session} session
+ * @param {boolean} force
+ * @return {*}
+ */
 export async function updateSession(session: Session, force: boolean) {
   console.log('UPDATE_SESSION', session);
   try {
@@ -88,6 +102,13 @@ export async function updateSession(session: Session, force: boolean) {
   }
 }
 
+/**
+ *
+ *
+ * @export
+ * @param {*} sessionToken
+ * @return {*}
+ */
 export async function deleteSession(sessionToken: any) {
   console.log('DELETE_SESSION', sessionToken);
   try {

@@ -1,6 +1,12 @@
 import type { CallbacksOptions } from 'next-auth';
 import { refreshAccessToken } from './token-utils';
 
+/**
+ *
+ *
+ * @param {*} { token, user, account, profile }
+ * @return {*}
+ */
 export const jwt: CallbacksOptions['jwt'] = ({
   token,
   user,
@@ -25,6 +31,12 @@ export const jwt: CallbacksOptions['jwt'] = ({
   return token;
 };
 
+/**
+ *
+ *
+ * @param {*} { session,user,token }
+ * @return {*}
+ */
 export const session: CallbacksOptions['session'] = ({
   session,
   user,
