@@ -10,7 +10,7 @@ export const jwt: CallbacksOptions['jwt'] = ({
   if (user && account) {
     token.accessToken = account.access_token;
     token.refresh_token = account.refresh_token;
-    token.id = profile?.sub ?? 'DEFAULT_ID';
+    token.id = profile?.sub;
     if (account.provider) {
       token.provider = account.provider;
       token.expires_at = account.expires_at;
