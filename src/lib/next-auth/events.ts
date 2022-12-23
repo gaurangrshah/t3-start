@@ -8,14 +8,14 @@ export const events: NextAuthOptions['events'] = {
   // @link: https://next-auth.js.org/configuration/options#events
   async signIn(message) {
     // await wait(50);
-    console.log('event:signIn | message', message);
+    console.log('event:signIn | 🔥', message);
   },
   async signOut(message) {
     // await wait(50);
-    console.log('event:signOut | message', message);
+    console.log('event:signOut | 🔥', message);
   },
   async createUser(message) {
-    console.log('event:createUser | message', message);
+    console.log('event:createUser | 🔥', message);
     // await onCreateuser({
     //   id: message?.user?.id,
     //   name: String(message?.user?.name),
@@ -24,10 +24,10 @@ export const events: NextAuthOptions['events'] = {
   },
   async updateUser(message) {
     // await wait(50);
-    console.log('event:updateUser | message', message);
+    console.log('event:updateUser | 🔥', message);
   },
   async linkAccount(message) {
-    console.log('event:linkAccount| message', message);
+    console.log('event:linkAccount| 🔥', message);
 
     if (!message.account && !message.user.name) {
       // await wait(50);
@@ -35,7 +35,7 @@ export const events: NextAuthOptions['events'] = {
     }
   },
   async session(message) {
-    console.log('event:session | message', message);
+    console.log('event:session | 🔥', message);
     // await wait(50);
     console.log('event:session - active');
   },

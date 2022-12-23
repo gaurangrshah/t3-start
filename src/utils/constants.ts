@@ -10,7 +10,6 @@ export const ACCESS_TOKEN_EXPIRES_IN = 15;
 export const REFRESH_TOKEN_EXPIRES_IN = 60;
 export const REDIS_CACHE_EXPIRES_INT = 60;
 // export const MAX_BATCH_SIZE = 10;
-
 export const DEFAULT_STALE_TIME: number = 5 * ONE_SECOND; // 5secs
 
 export const isBrowser = typeof window !== 'undefined';
@@ -26,15 +25,7 @@ export const debug = isDev && false;
 
 export const NEXT_AUTH_SESSION_TOKEN_KEY = process.env.SESSION_COOKIE_NAME;
 
-// image cdn link components
-export const CDN_URL = 'https://cdn.jsdelivr.net/gh/rupistudio/assets@main';
-export const LOCATIONS_DIR = '/images/locations';
-export const BRAND_DIR = '/brand';
-export const PEOPLE_DIR = '/images/people';
-export const PLACEHOLDER_DIR = '/images/placeholder';
-export const SERVICES_DIR = '/images/services';
-
 export const EPOCH_STAMP = new Date('1/1/1970');
 
 // testing
-export const TEST_ENV = process.env.APP_ENV === 'test';
+export const TEST_ENV = process.env.NEXT_PUBLIC_APP_ENV === 'test';

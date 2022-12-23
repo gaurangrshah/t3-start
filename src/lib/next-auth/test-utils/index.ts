@@ -4,6 +4,10 @@ import type { Session, User } from 'next-auth';
 
 import { prisma } from '../../../server/db/client';
 
+/**
+ ** @SEE: https://tinyurl.com/2hmcdg8u
+ */
+
 const defaultSessionMaxAge = 30 * 24 * 60 * 60 * 1000;
 const sessionMaxAge = defaultSessionMaxAge;
 const sessionUpdateAge = 24 * 60 * 60 * 1000;
@@ -93,7 +97,3 @@ export async function deleteSession(sessionToken: any) {
     );
   }
 }
-
-/**
- ** @SEE: https://tinyurl.com/2hmcdg8u
- */
