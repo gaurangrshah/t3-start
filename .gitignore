@@ -48,5 +48,6 @@ cypress/video
 cypress/screenshots
 
 #prisma
-prisma/seed.ts
+prisma/e2e.db.sqlite
 prisma/test.db.sqlite
+prisma/seed.ts
