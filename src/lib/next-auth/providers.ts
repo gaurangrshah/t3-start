@@ -8,20 +8,19 @@ import type { NextAuthOptions } from 'next-auth';
 import { env } from '@/env/server.mjs';
 import { prisma } from '@/server/db/client';
 import { authenticateUserInputSchema } from '@/server/schema/auth.schema';
-// import EmailProvider from 'next-auth/providers/email';
-// import { ONE_DAY } from '@/utils';
+
 import { TEST_ENV } from '@/utils';
 const google = GoogleProvider({
   clientId: env.GOOGLE_CLIENT_ID,
   clientSecret: env.GOOGLE_CLIENT_SECRET,
   // @SEE: https://tinyurl.com/2hyurpsm
-  // authorization:
-  //   'https://accounts.google.com/o/oauth2/v2/auth?' +
-  //   new URLSearchParams({
-  //     prompt: 'consent',
-  //     access_type: 'offline',
-  //     response_type: 'code',
-  //   }),
+  authorization:
+    'https://accounts.google.com/o/oauth2/v2/auth?' +
+    new URLSearchParams({
+      prompt: 'consent',
+      access_type: 'offline',
+      response_type: 'code',
+    }),
 });
 
 // /**
@@ -45,13 +44,14 @@ const google = GoogleProvider({
  * + must also add password field to db
  */
 const credentials = CredentialsProvider({
-  name: 'Credentials',
+  id: 'fallback',
+  name: 'sign-in',
   credentials: {
     email: {
       label: 'Username',
       type: 'text',
-      placeholder: 'you@youremail.com',
-      value: 'gaurang.r.shah@gmail.com',
+      placeholder: 'e2e@e2e.test',
+      value: 'e2e@e2e.test',
     },
     password: {
       label: 'Password',
@@ -61,14 +61,25 @@ const credentials = CredentialsProvider({
     },
   },
   async authorize(credentials, req) {
-    if (authenticateUserInputSchema.safeParse(credentials)) {
-      // FIXME: findUnique invalid invocation issue
-      const user: User = await prisma.user.findUniqueOrThrow({
-        where: { email: credentials?.email },
-      });
-      return user;
+    try {
+      if (authenticateUserInputSchema.safeParse(credentials).success) {
+        // credentials are valid
+        const userExist: User | null = await prisma.user.findUniqueOrThrow({
+          where: { email: credentials?.email.trim() },
+        });
+
+        // @TODO: handle with toast via error? url
+        if (!userExist?.password) throw { message: 'Try social auth' };
+
+        if (userExist?.password?.trim() === credentials?.password.trim()) {
+          // @TODO: encrypt password
+          return userExist;
+        }
+      }
+      return null;
+    } catch (error) {
+      throw new Error('Invalid Credentials');
     }
-    return null;
   },
 });
 
