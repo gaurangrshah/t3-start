@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { createSession } from '../../src/lib/next-auth/test-utils';
+import { createSession } from '../../src/lib/next-auth/session-utils';
 import { addDays, dateToSeconds } from '../../src/utils';
 
 const prisma = new PrismaClient();
