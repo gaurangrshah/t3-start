@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 import '@testing-library/cypress/add-commands'; // this import should be at the top of file
-import { signOut } from 'next-auth/react';
 
 // ***********************************************
 // This example commands.ts shows you how to
@@ -77,4 +76,4 @@ declare global {
     }
   }
 }
-export { };
+export {};
