@@ -5,9 +5,11 @@ describe('page loads', () => {
     cy.visit('http://localhost:3000');
     cy.url().should('eq', `${Cypress.env('baseUrl')}/`);
   });
+
   it('baseUrl loads as expected', () => {
     cy.visit('/');
     cy.url().should('eq', `${Cypress.env('baseUrl')}/`);
+    cy.get('main').should('exist');
   });
 });
 

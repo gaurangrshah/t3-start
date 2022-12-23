@@ -1,32 +1,22 @@
 /// <reference types="cypress"/>
 
-// describe('login with google', () => {
-//   before(() => {
-//     // cy.logout();
-//     cy.visit('/');
-//     cy.googleLogin();
-//     cy.wait('@session');
-//   });
-
-//   it('login with dummy session', () => {
-//     cy.contains('Logged in as Gaurang Shah').should('be.visible');
-//     // cy.get('button').contains('Sign out').click();
-//     // cy.clearAllSessionStorage()
-//     cy.clearAllCookies();
-//     cy.reload();
-//   });
-// });
-
 describe('login with test credentials', () => {
   before(() => {
     cy.visit('/');
   });
-  it('login flow', () => {
-    cy.get('main').within(() => {
-      cy.get('button')
-        .contains(/sign in/i)
-        .click();
-    });
+  it('credentials auth flow', () => {
+    cy.get('#authBtn').should('be.visible').click();
+    // signIn page
+    cy.get('input[name=email]')
+      .should('be.visible')
+      .clear()
+      .type('e2e@e2e.test'); // @TODO: env var
+    cy.get('input[name=password]').should('be.visible').clear().type('test'); // @TODO: env var
+    cy.get('button[type=submit]').click();
+    cy.contains('Logged in as E2E').should('be.visible');
+    // signout
+    cy.get('#authBtn').should('be.visible').click();
+    cy.contains('Logged in as e2e').should('not.exist');
   });
 });
 

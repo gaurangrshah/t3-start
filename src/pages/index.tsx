@@ -58,6 +58,7 @@ const AuthShowcase: FC = () => {
           {secretMessage && <span> - {secretMessage}</span>}
         </chakra.p>
         <Button
+          id="authBtn"
           role="button"
           {...signInBtn}
           onClick={sessionData ? () => signOut() : () => signIn('google')}
