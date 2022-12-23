@@ -22,5 +22,7 @@ export default defineConfig({
   },
   env: {
     baseUrl,
+    testEmail: process.env.TEST_USER,
+    password: process.env.TEST_PW,
   },
 });
