@@ -1,5 +1,5 @@
 import type { CallbacksOptions } from 'next-auth';
-import { refreshAccessToken } from './utils';
+import { refreshAccessToken } from './token-utils';
 
 export const jwt: CallbacksOptions['jwt'] = ({
   token,

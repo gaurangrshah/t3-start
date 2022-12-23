@@ -1,9 +1,10 @@
 import * as jwt from 'jsonwebtoken';
+import { type NextAuthOptions } from 'next-auth';
 import type { JWT } from 'next-auth/jwt';
 
 import { composeUrl } from '@/utils/fns';
 
-/** THIS FILE IS CURRENTLY NOT IMPLEMENTED-- SAVED AS A REFERENCE
+/** refreshToken is used to refresh google auth token
  * @SEE: https://tinyurl.com/2gnnzhky
  */
 export const refreshAccessToken = async (token: JWT) => {
@@ -38,7 +39,20 @@ export const refreshAccessToken = async (token: JWT) => {
   }
 };
 
+export const jwtHandlers: NextAuthOptions['jwt'] = {
+  async encode({ token }) {
+    return jwt.sign(token as JWT, String(process.env.NEXTAUTH_SECRET));
+  },
+  async decode({ token }) {
+    return jwt.verify(
+      String(token),
+      String(process.env.NEXTAUTH_SECRET)
+    ) as JWT;
+  },
+};
+
 /**
+ * REST OF THIS FILE IS CURRENTLY NOT IMPLEMENTED-- SAVED AS A REFERENCE
  * @SEE: https://tinyurl.com/2mokc9p6
  *
  * @export
@@ -46,7 +60,7 @@ export const refreshAccessToken = async (token: JWT) => {
  * @return {*}  {string}
  */
 export function generateToken(tokenToSign: JWT): string {
-  const token = jwt.sign(tokenToSign, String(process.env.JWT_SECRET), {
+  const token = jwt.sign(tokenToSign, String(process.env.NEXTAUTH_SECRET), {
     expiresIn: process.env.JWT_EXPIRED_TIME,
   });
   return token;
@@ -59,13 +73,22 @@ export function generateToken(tokenToSign: JWT): string {
  * @param tokenToSign contains user_id
  */
 export function generateAdminToken(tokenToSign: JWT): string {
-  const token = jwt.sign(tokenToSign, String(process.env.JWT_SECRET));
+  const token = jwt.sign(tokenToSign, String(process.env.NEXTAUTH_SECRET));
   return token;
 }
-
+/**
+ *
+ *
+ * @export
+ * @param {string} token
+ * @return {*}  {Promise<JWT>}
+ */
 export async function verify(token: string): Promise<JWT> {
   try {
-    const payload = jwt.verify(token, String(process.env.JWT_SECRET)) as JWT;
+    const payload = jwt.verify(
+      token,
+      String(process.env.NEXTAUTH_SECRET)
+    ) as JWT;
     return { user_id: payload.user_id };
   } catch (e) {
     console.log(e);
