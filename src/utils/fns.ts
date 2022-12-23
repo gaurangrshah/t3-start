@@ -1,6 +1,11 @@
 import type { SyntheticEvent } from 'react';
 import { isClient } from './constants';
 
+export function getAnonId() {
+  if (!isClient) return undefined;
+  return localStorage.getItem('__anon_id');
+}
+
 export const getBaseUrl = () => {
   if (typeof window !== 'undefined') return ''; // browser should use relative url
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`; // SSR should use vercel url
@@ -95,7 +100,38 @@ export function flattenObjects<T, U>(arr: T[], key = 'label') {
   return object as U;
 }
 
-export function getAnonId() {
-  if (!isClient) return undefined;
-  return localStorage.getItem('__anon_id');
-}
+/**
+@USAGE:
+router.push({
+  pathname: '/auth/verify-request',
+  query: getSearchQuery(
+    composeUrl(url, { email: data.email }).searchParams,
+  ),
+});
+ */
+
+export const getSearchQuery = (searchParams: URLSearchParams) => {
+  const query: Record<string, string> = {};
+  const entries = searchParams.entries();
+  for (const [key, value] of entries) query[key] = value;
+  return query;
+};
+
+export const composeUrl = (url: string, params: Record<string, any>) => {
+  const composedUrl = new URL(url);
+  return new URL(
+    `${composedUrl.origin}${composedUrl.pathname}?${new URLSearchParams([
+      ...Array.from(composedUrl.searchParams.entries()),
+      ...Object.entries(params),
+    ])}`
+  );
+};
+
+export const numberFormater = (number: number) =>
+  new Intl.NumberFormat().format(number);
+
+export const currencyFormatter = (value: number, currency = 'NGN') => {
+  return new Intl.NumberFormat('en-NG', { style: 'currency', currency }).format(
+    value
+  );
+};
