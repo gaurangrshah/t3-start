@@ -32,3 +32,6 @@ export const BRAND_DIR = '/brand';
 export const PEOPLE_DIR = '/images/people';
 export const PLACEHOLDER_DIR = '/images/placeholder';
 export const SERVICES_DIR = '/images/services';
+
+// testing
+export const TEST_ENV = process.env.NEXT_PUBLIC_APP_ENV === 'test';

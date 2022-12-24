@@ -73,3 +73,29 @@ export function getAnonId() {
 export function generateRandomString(end = 12) {
   return Math.random().toString(36).substring(3, end);
 }
+
+export const getSearchQuery = (searchParams: URLSearchParams) => {
+  const query: Record<string, string> = {};
+  const entries = searchParams.entries();
+  for (const [key, value] of entries) query[key] = value;
+  return query;
+};
+
+export const composeUrl = (url: string, params: Record<string, any>) => {
+  const composedUrl = new URL(url);
+  return new URL(
+    `${composedUrl.origin}${composedUrl.pathname}?${new URLSearchParams([
+      ...Array.from(composedUrl.searchParams.entries()),
+      ...Object.entries(params),
+    ])}`
+  );
+};
+
+export const numberFormater = (number: number) =>
+  new Intl.NumberFormat().format(number);
+
+export const currencyFormatter = (value: number, currency = 'NGN') => {
+  return new Intl.NumberFormat('en-NG', { style: 'currency', currency }).format(
+    value
+  );
+};

@@ -7,6 +7,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import { env } from '@/env/server.mjs';
 // import EmailProvider from 'next-auth/providers/email';
 // import { ONE_DAY } from '@/utils';
+import { TEST_ENV } from '@/utils';
 
 const google = GoogleProvider({
   clientId: env.GOOGLE_CLIENT_ID,
@@ -40,7 +41,7 @@ const credentials = CredentialsProvider({
       label: 'Username',
       type: 'text',
       placeholder: 'you@youremail.com',
-      value: 'test@test.com',
+      value: 'e2e@e2e.test',
     },
     password: {
       label: 'Password',
@@ -64,4 +65,5 @@ const credentials = CredentialsProvider({
   },
 });
 
-export const providers: NextAuthOptions['providers'] = [google];
+export const providers: NextAuthOptions['providers'] = [];
+!TEST_ENV ? providers.push(credentials) : providers.push(google);
