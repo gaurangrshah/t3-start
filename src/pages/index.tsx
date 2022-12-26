@@ -2,9 +2,9 @@ import { DefaultLayout } from '@/components';
 import { AvatarMenu } from '@/components/avatar-menu';
 import { trpc } from '@/utils/trpc';
 import type { ButtonProps } from '@chakra-ui/react';
-import { Button, chakra, Flex } from '@chakra-ui/react';
+import { Button,chakra,Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn,signOut,useSession } from 'next-auth/react';
 import type { FC } from 'react';
 
 const Home: NextPage = () => {
@@ -33,15 +33,7 @@ const Home: NextPage = () => {
 
 export default Home;
 
-const AuthShowcase: FC = () => {
-  const { data: sessionData } = useSession();
-
-  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
-
-  const signInBtn: ButtonProps = {
+export const authBtn: ButtonProps = {
     variant: 'pill',
     bg: 'rgba(255, 255, 255, 0.1)',
     p: '0.75rem 2.5rem',
@@ -49,26 +41,34 @@ const AuthShowcase: FC = () => {
     _hover: { bg: 'rgba(255, 255, 255, 0.2)' },
   };
 
-  return (
-    <>
-      <AvatarMenu />
-      <Flex
-        color="white"
-        layerStyle="flex-center"
-        flexDirection="column"
-        gap={4}
-      >
-        <chakra.p fontSize="2xl">
-          {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-          {secretMessage && <span> - {secretMessage}</span>}
-        </chakra.p>
-        <Button
-          {...signInBtn}
-          onClick={sessionData ? () => signOut() : () => signIn('google')}
+  const AuthShowcase: FC = () => {
+    const { data: sessionData } = useSession();
+
+    const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
+      undefined, // no input
+      { enabled: sessionData?.user !== undefined }
+    );
+
+    return (
+      <>
+        <AvatarMenu />
+        <Flex
+          color="white"
+          layerStyle="flex-center"
+          flexDirection="column"
+          gap={4}
         >
-          {sessionData ? 'Sign out' : 'Sign in'}
-        </Button>
-      </Flex>
-    </>
-  );
-};
+          <chakra.p fontSize="2xl">
+            {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
+            {secretMessage && <span> - {secretMessage}</span>}
+          </chakra.p>
+          <Button
+            {...authBtn}
+            onClick={sessionData ? () => signOut() : () => signIn('google')}
+          >
+            {sessionData ? 'Sign out' : 'Sign in'}
+          </Button>
+        </Flex>
+      </>
+    );
+  };
