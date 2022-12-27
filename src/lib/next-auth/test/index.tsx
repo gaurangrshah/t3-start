@@ -1,11 +1,14 @@
+import { ChakraProvider } from '@chakra-ui/react';
+import { render } from '@testing-library/react';
+import { SessionProvider } from 'next-auth/react';
+
+import type { NextComponentTypeWithAuth, SessionWithUser } from '@/types';
+import type { RenderOptions } from '@testing-library/react';
+import type { NextComponentType } from 'next';
+import type { AppType } from 'next/app';
+
 import { Auth } from '@/components';
 import { theme } from '@/theme';
-import type { NextComponentTypeWithAuth, SessionWithUser } from '@/types';
-import { ChakraProvider } from '@chakra-ui/react';
-import { render, type RenderOptions } from '@testing-library/react';
-import type { NextComponentType } from 'next';
-import { SessionProvider } from 'next-auth/react';
-import type { AppType } from 'next/app';
 
 export const AllProviders: AppType<{ session: SessionWithUser | null }> = ({
   Component,
