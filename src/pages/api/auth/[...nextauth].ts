@@ -17,7 +17,7 @@ export const authOptions: NextAuthOptions = {
   jwt: {
     ...jwtHandlers,
   },
-  events,
+  // events,
   secret: process.env.NEXTAUTH_URL,
 };
 
