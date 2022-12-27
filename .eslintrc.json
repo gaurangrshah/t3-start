@@ -11,7 +11,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "testing-library", "jest-dom"],
   "extends": [
     "next/core-web-vitals",
     "plugin:@next/next/recommended",
@@ -27,5 +27,14 @@
   "rules": {
     "@typescript-eslint/consistent-type-imports": "warn",
     "prettier/prettier": "warn"
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/__tests__/**/*.[jt]s?(x)",
+        "**/?(*.)+(spec|test).[jt]s?(x)"
+      ],
+      "extends": ["plugin:testing-library/react"]
+    }
+  ]
 }
