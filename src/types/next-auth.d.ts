@@ -6,6 +6,10 @@ import type { DefaultSession } from 'next-auth';
 declare module 'next-auth' {
   // Extend the build-in session types
   interface Session {
+    id: string;
+    email: string;
+    image: string;
+    emailVerified?: string;
     accessToken?: string | unknown;
     user?: {
       id: string | unknown;

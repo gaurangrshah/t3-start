@@ -6,7 +6,6 @@ import type { ButtonProps } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 
 import { DefaultLayout } from '@/components';
-import { SessionWithUser } from '@/types';
 import { trpc } from '@/utils/trpc';
 import { Session } from 'next-auth';
 import type { FC } from 'react';
