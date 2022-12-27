@@ -1,53 +1,58 @@
+import { Button } from '@chakra-ui/react';
+
+import { signIn, signOut } from '@/lib/next-auth';
 import Home, { SignInButton } from '@/pages/index';
-import { render, screen, userEvent, waitFor } from '@/tests/utils';
+import { render, screen, userEvent } from '@/tests/utils';
+import { trpc } from '@/utils/trpc';
+
+// jest.mock('next-auth/react', () => {
+//   const originalModule = jest.requireActual('next-auth/react');
+//   const mockSession = {
+//     accessToken: 'lkasjdfalsdf',
+//     expires: new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString(),
+//     user: {
+//       name: 'John Doe',
+//       email: 'a@gmail.com',
+//       image: 'a',
+//     },
+//   };
+
+//   return {
+//     __esModule: true,
+//     ...originalModule,
+//     useSession: jest.fn(() => {
+//       return { data: mockSession, status: 'authenticated' };
+//     }),
+//     signIn: jest.fn(() => Promise.resolve(true)),
+//   };
+// });
+
+// afterEach(() => {
+//   jest.clearAllMocks();
+// });
 
 describe('homepage', () => {
   test('it renders', async () => {
     render(<Home />);
-    const main = screen.getByRole('main');
-    expect(main).toMatchInlineSnapshot(`
-      <main
-        class="css-46i48"
-      >
-        <div
-          class="css-xi606m"
-        >
-          <h1
-            class="css-1xubpei"
-          >
-            Create 
-            <span
-              class="css-1bss3a8"
-            >
-              T3
-            </span>
-             App
-          </h1>
-          <div
-            class="css-1kwov8l"
-          >
-            <p
-              class="css-1u93a"
-            >
-              Loading tRPC query...
-            </p>
-            <div
-              class="css-1nce4c7"
-            >
-              <p
-                class="css-1u93a"
-              />
-              <button
-                class="chakra-button css-21pmjv"
-                type="button"
-              >
-                Sign in
-              </button>
-            </div>
-          </div>
-        </div>
-      </main>
-    `);
+
+    const heading = await screen.getByRole('heading', {
+      name: /create t3 app/i,
+    });
+    expect(heading).toBeInTheDocument();
+
+    const subtitle = await screen.getByText(/loading trpc query.../i);
+    expect(subtitle).toBeInTheDocument();
+
+    const btn = await screen.getByRole('button', { name: /sign in/i });
+    expect(btn).toBeInTheDocument();
+  });
+
+  test('it clicks', async () => {
+    const user = userEvent.setup();
+    render(<Home />);
+    const btn = await screen.getByRole('button', { name: /sign in/i });
+    expect(btn).toBeInTheDocument();
+    user.click(btn);
   });
 
   test('SignInButton (label="sign out") when (session=null)', async () => {
@@ -65,6 +70,13 @@ describe('homepage', () => {
 
     render(<SignInButton hasSession={false} />);
 
+    const btn = await screen.getByRole('button', { name: /sign in/i });
+    expect(btn).toBeInTheDocument();
+    user.click(btn);
+  });
+  test('should click', async () => {
+    const user = userEvent.setup();
+    render(<Home />);
     const btn = await screen.getByRole('button', { name: /sign in/i });
     expect(btn).toBeInTheDocument();
     user.click(btn);

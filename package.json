@@ -16,7 +16,7 @@
     "gen:theme-typings": "chakra-cli tokens ./chakra.ui/theme/index.ts",
     "test": "jest --watch",
     "test:dev": "concurrently -k \"yarn env:test next dev\" \"yarn env:test jest --watch\"",
-    "test:Ci": "jest --ci"
+    "test:ci": "jest --ci"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.13",
