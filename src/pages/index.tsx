@@ -6,7 +6,9 @@ import type { ButtonProps } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 
 import { DefaultLayout } from '@/components';
+import { SessionWithUser } from '@/types';
 import { trpc } from '@/utils/trpc';
+import { Session } from 'next-auth';
 import type { FC } from 'react';
 
 const Home: NextPage = () => {
@@ -26,6 +28,10 @@ const Home: NextPage = () => {
           <chakra.p color="white" fontSize="2xl">
             {hello.data ? hello.data.greeting : 'Loading tRPC query...'}
           </chakra.p>
+          <chakra.p color="white" fontSize="2xl">
+            {process.env.NEXT_PUBLIC_APP_ENV}
+            {process.env.NODE_ENV}
+          </chakra.p>
           <AuthShowcase />
         </Flex>
       </chakra.div>
@@ -35,14 +41,9 @@ const Home: NextPage = () => {
 
 export default Home;
 
-const AuthShowcase: FC = () => {
-  const { data: sessionData } = useSession();
-
-  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
-
+export const SignInButton: FC<{ hasSession: boolean }> = ({
+  hasSession,
+}) => {
   const signInBtn: ButtonProps = {
     variant: 'pill',
     bg: 'rgba(255, 255, 255, 0.1)',
@@ -52,6 +53,24 @@ const AuthShowcase: FC = () => {
   };
 
   return (
+    <Button
+      {...signInBtn}
+      onClick={hasSession ? () => signOut() : () => signIn()}
+    >
+      {hasSession ? 'Sign out' : 'Sign in'}
+    </Button>
+  );
+};
+
+const AuthShowcase: FC = () => {
+  const { data: sessionData } = useSession();
+
+  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
+    undefined, // no input
+    { enabled: sessionData?.user !== undefined }
+  );
+
+  return (
     <>
       {/* <AvatarMenu /> */}
       <chakra.div layerStyle="flex-center" flexDirection="column" gap={4}>
@@ -59,12 +78,7 @@ const AuthShowcase: FC = () => {
           {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
           {secretMessage && <span> - {secretMessage}</span>}
         </chakra.p>
-        <Button
-          {...signInBtn}
-          onClick={sessionData ? () => signOut() : () => signIn()}
-        >
-          {sessionData ? 'Sign out' : 'Sign in'}
-        </Button>
+        <SignInButton hasSession={!!sessionData} />
       </chakra.div>
     </>
   );
