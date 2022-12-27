@@ -1,4 +1,3 @@
-import { onPromise } from '@/utils/fns';
 import {
   Avatar,
   Box,
@@ -11,7 +10,10 @@ import {
 } from '@chakra-ui/react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
+
 import type { SyntheticEvent } from 'react';
+
+import { onPromise } from '@/utils/fns';
 
 const defaultLinks = [{ label: 'home', href: '/' }];
 

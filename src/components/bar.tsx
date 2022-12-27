@@ -1,5 +1,6 @@
-import type { HTMLChakraProps, ThemingProps } from '@chakra-ui/react';
 import { forwardRef, HStack, useStyleConfig } from '@chakra-ui/react';
+
+import type { HTMLChakraProps, ThemingProps } from '@chakra-ui/react';
 
 export interface CustomBarProps extends HTMLChakraProps<'div'>, ThemingProps {}
 

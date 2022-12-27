@@ -1,4 +1,3 @@
-import type { BoxProps, ModalProps } from '@chakra-ui/react';
 import {
   Button,
   Modal,
@@ -9,6 +8,8 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react';
+
+import type { BoxProps, ModalProps } from '@chakra-ui/react';
 import type { MouseEventHandler, ReactNode } from 'react';
 
 type CustomModalProps = {

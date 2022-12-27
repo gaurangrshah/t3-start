@@ -6,10 +6,11 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  type DrawerProps,
 } from '@chakra-ui/react';
-import type { ElementType } from 'react';
 import { useRef } from 'react';
+
+import type { DrawerProps } from '@chakra-ui/react';
+import type { ElementType } from 'react';
 
 type CustomDrawerProps = {
   Footer?: ElementType; // throws an error with ReactNode
