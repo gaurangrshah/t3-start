@@ -15,7 +15,7 @@ export const session: CallbacksOptions['session'] = ({
   token,
 }) => {
   if (session.user) {
-    session.user.id = user.id;
+    session.user.id = user?.id;
     if (!session?.accessToken) {
       session.accessToken = token?.accessToken;
     }

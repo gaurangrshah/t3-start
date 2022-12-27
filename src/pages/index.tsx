@@ -59,7 +59,7 @@ const AuthShowcase: FC = () => {
         </chakra.p>
         <Button
           {...signInBtn}
-          onClick={sessionData ? () => signOut() : () => signIn('google')}
+          onClick={sessionData ? () => signOut() : () => signIn()}
         >
           {sessionData ? 'Sign out' : 'Sign in'}
         </Button>
