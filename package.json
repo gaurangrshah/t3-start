@@ -9,12 +9,13 @@
     "lint": "next lint",
     "start": "next start",
     "postbuild": "next-sitemap",
+    "env:test": "env-cmd -f .env.test.local",
     "studio": "npx prisma studio",
     "db:migrate": "npx prisma migrate dev --name $NAME --create-only && yarn prisma generate",
     "db:push": "npx prisma db push",
     "gen:theme-typings": "chakra-cli tokens ./chakra.ui/theme/index.ts",
     "test": "jest --watch",
-    "test:dev": "concurrently -k \"next dev\" \"jest --watch\"",
+    "test:dev": "concurrently -k \"yarn env:test next dev\" \"yarn env:test jest --watch\"",
     "test:Ci": "jest --ci"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
     "@trpc/server": "^10.5.0",
     "concurrently": "^7.6.0",
     "cross-fetch": "^3.1.5",
+    "env-cmd": "^10.1.0",
     "framer-motion": "^7.10.0",
     "jsonwebtoken": "^9.0.0",
     "next": "13.0.7",
