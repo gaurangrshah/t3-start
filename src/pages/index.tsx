@@ -28,10 +28,6 @@ const Home: NextPage = () => {
           <chakra.p color="white" fontSize="2xl">
             {hello.data ? hello.data.greeting : 'Loading tRPC query...'}
           </chakra.p>
-          <chakra.p color="white" fontSize="2xl">
-            {process.env.NEXT_PUBLIC_APP_ENV}
-            {process.env.NODE_ENV}
-          </chakra.p>
           <AuthShowcase />
         </Flex>
       </chakra.div>
@@ -72,7 +68,6 @@ const AuthShowcase: FC = () => {
 
   return (
     <>
-      {/* <AvatarMenu /> */}
       <chakra.div layerStyle="flex-center" flexDirection="column" gap={4}>
         <chakra.p color="white" fontSize="2xl">
           {sessionData && <span>Logged in as {sessionData.user?.name}</span>}

@@ -1,47 +1,72 @@
-import { Button } from '@chakra-ui/react';
-import * as nextAuth from 'next-auth/react';
-
-import Home from '@/pages/index';
-import { render, screen, userEvent } from '@/tests/utils';
-
-// jest.mock('next-auth/react');
-const nextAuthMocked = nextAuth as jest.Mocked<typeof nextAuth>;
-const { signIn } = nextAuthMocked;
-
-export const mockSession = {
-  expires: '1',
-  user: { id: '1', email: 'a', name: 'Delta', image: 'c' },
-};
+import Home, { SignInButton } from '@/pages/index';
+import { render, screen, userEvent, waitFor } from '@/tests/utils';
 
 describe('homepage', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
   test('it renders', async () => {
     render(<Home />);
-
-    const heading = await screen.getByRole('heading', {
-      name: /create t3 app/i,
-    });
-    expect(heading).toBeInTheDocument();
-
-    const btn = await screen.getByRole('button', { name: /sign in/i });
-    expect(btn).toBeInTheDocument();
+    const main = screen.getByRole('main');
+    expect(main).toMatchInlineSnapshot(`
+      <main
+        class="css-46i48"
+      >
+        <div
+          class="css-xi606m"
+        >
+          <h1
+            class="css-1xubpei"
+          >
+            Create 
+            <span
+              class="css-1bss3a8"
+            >
+              T3
+            </span>
+             App
+          </h1>
+          <div
+            class="css-1kwov8l"
+          >
+            <p
+              class="css-1u93a"
+            >
+              Loading tRPC query...
+            </p>
+            <div
+              class="css-1nce4c7"
+            >
+              <p
+                class="css-1u93a"
+              />
+              <button
+                class="chakra-button css-21pmjv"
+                type="button"
+              >
+                Sign in
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    `);
   });
 
-  test('it clicks', async () => {
+  test('SignInButton (label="sign out") when (session=null)', async () => {
     const user = userEvent.setup();
-    // const signIn = jest.fn();
-    const spy = jest
-      .spyOn(nextAuthMocked, 'signIn')
-      .mockImplementation(() => mockSession);
-    render(<Button onClick={() => signIn()}>Sign In</Button>);
+
+    render(<SignInButton hasSession={true} />);
+
+    const btn = await screen.getByRole('button', { name: /sign out/i });
+    expect(btn).toBeInTheDocument();
+    user.click(btn);
+  });
+
+  test('SignInButton (label="sign in") when (session=Session)', async () => {
+    const user = userEvent.setup();
+
+    render(<SignInButton hasSession={false} />);
 
     const btn = await screen.getByRole('button', { name: /sign in/i });
     expect(btn).toBeInTheDocument();
     user.click(btn);
-
-    // expect(spy).toHaveBeenCalled();
-    spy.mockRestore();
   });
 });
