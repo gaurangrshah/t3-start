@@ -1,5 +1,6 @@
+import { darken, mode, transparentize } from '@chakra-ui/theme-tools';
+
 import type { StyleFunctionProps } from '@chakra-ui/theme-tools';
-import { mode, transparentize } from '@chakra-ui/theme-tools';
 
 const parts = ['field', 'menu', 'option'];
 
