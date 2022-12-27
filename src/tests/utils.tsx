@@ -2,12 +2,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render as defaultRender } from '@testing-library/react';
 import { createTRPCReact, loggerLink } from '@trpc/react-query';
 import fetch from 'cross-fetch';
+import { RouterContext } from 'next/dist/shared/lib/router-context';
+import { useState } from 'react';
 
 import type { AppRouter } from '@/server/trpc/router/_app';
-
-import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { NextRouter } from 'next/router';
-import { useState } from 'react';
+import type { NextRouter } from 'next/router';
 
 import { theme } from '@/theme';
 import { ChakraProvider } from '@chakra-ui/react';

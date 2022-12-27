@@ -1,5 +1,8 @@
-import { Box, Tooltip, type ChakraProps } from '@chakra-ui/react';
+import { Box, Tooltip } from '@chakra-ui/react';
+
+import type { ChakraProps } from '@chakra-ui/react';
 import type { FC } from 'react';
+
 import { paths } from './paths';
 
 type ToolIconProps = {

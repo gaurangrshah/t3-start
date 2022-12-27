@@ -1,6 +1,8 @@
-import NextAuth, { type NextAuthOptions } from 'next-auth';
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import NextAuth from 'next-auth';
+
+import type { NextAuthOptions } from 'next-auth';
 
 import { events, jwt, jwtHandlers, providers, session } from '@/lib/next-auth';
 import { prisma } from '@/server/db/client';

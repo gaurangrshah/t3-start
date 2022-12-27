@@ -1,5 +1,8 @@
-import { Box, type BoxProps, type ChakraProps } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+
+import type { BoxProps, ChakraProps } from '@chakra-ui/react';
 import type { FC } from 'react';
+
 import { paths } from './paths';
 
 type CustomIconProps = {

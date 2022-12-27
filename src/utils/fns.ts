@@ -1,4 +1,5 @@
 import type { SyntheticEvent } from 'react';
+
 import { isClient } from './constants';
 
 export const getBaseUrl = () => {

@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { prisma } from '@/server/db/client';
-import { type NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
+import { type NextAuthOptions } from 'next-auth';
+
 import { env } from '@/env/server.mjs';
+import { prisma } from '@/server/db/client';
 // import EmailProvider from 'next-auth/providers/email';
 // import { ONE_DAY } from '@/utils';
 import { TEST_ENV } from '@/utils';

@@ -1,10 +1,12 @@
-import { DefaultLayout } from '@/components';
-import { trpc } from '@/utils/trpc';
-import type { ButtonProps } from '@chakra-ui/react';
 import { Button, chakra, Flex } from '@chakra-ui/react';
 import { randomColor } from '@chakra-ui/theme-tools';
-import type { NextPage } from 'next';
 import { signIn, signOut, useSession } from 'next-auth/react';
+
+import type { ButtonProps } from '@chakra-ui/react';
+import type { NextPage } from 'next';
+
+import { DefaultLayout } from '@/components';
+import { trpc } from '@/utils/trpc';
 import type { FC } from 'react';
 
 const Home: NextPage = () => {

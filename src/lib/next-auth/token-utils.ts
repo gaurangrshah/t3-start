@@ -1,5 +1,6 @@
 import * as jwt from 'jsonwebtoken';
-import { type NextAuthOptions } from 'next-auth';
+
+import type { NextAuthOptions } from 'next-auth';
 import type { JWT } from 'next-auth/jwt';
 
 import { composeUrl } from '@/utils/fns';
