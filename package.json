@@ -14,6 +14,7 @@
     "db:push": "npx prisma db push",
     "gen:theme-typings": "chakra-cli tokens ./chakra.ui/theme/index.ts",
     "test": "jest --watch",
+    "test:dev": "concurrently -k \"next dev\" \"jest --watch\"",
     "test:Ci": "jest --ci"
   },
   "dependencies": {
@@ -30,6 +31,7 @@
     "@trpc/next": "^10.5.0",
     "@trpc/react-query": "^10.5.0",
     "@trpc/server": "^10.5.0",
+    "concurrently": "^7.6.0",
     "cross-fetch": "^3.1.5",
     "framer-motion": "^7.10.0",
     "jsonwebtoken": "^9.0.0",
