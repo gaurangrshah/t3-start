@@ -56,15 +56,20 @@ const credentials = CredentialsProvider({
       const user = await prisma.user.findUnique({
         where: { email: credentials?.email },
       });
-      // if(!user || !user?.password) {
-      //   return null
-      // };
+      if (!user || !user?.password) {
+        return null;
+      }
 
-      return user;
+      if (
+        user.password.trim().toLowerCase() ===
+        credentials?.password.trim().toLowerCase()
+      ) {
+        return user;
+      }
     }
     return null;
   },
 });
 
 export const providers: NextAuthOptions['providers'] = [];
-!TEST_ENV ? providers.push(credentials) : providers.push(google);
+TEST_ENV ? providers.push(credentials) : providers.push(google);
