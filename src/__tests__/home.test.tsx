@@ -80,5 +80,7 @@ describe('homepage', () => {
     const btn = await screen.getByRole('button', { name: /sign in/i });
     expect(btn).toBeInTheDocument();
     user.click(btn);
+
+    // expect(signIn).toHaveBeenCalled()
   });
 });
