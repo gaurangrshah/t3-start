@@ -10,7 +10,7 @@ import {
   waitFor,
   waitForElementToBeRemoved,
   wrapper,
-} from '@/tests/utils';
+} from '@/utils/test';
 import { trpc } from '@/utils/trpc';
 
 // jest.mock('next-auth/react', () => {

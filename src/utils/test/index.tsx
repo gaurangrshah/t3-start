@@ -1,6 +1,6 @@
-import { QueryClient,QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render as defaultRender } from '@testing-library/react';
-import { createTRPCReact,loggerLink } from '@trpc/react-query';
+import { createTRPCReact, loggerLink } from '@trpc/react-query';
 import fetch from 'cross-fetch';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { useState } from 'react';
@@ -42,7 +42,13 @@ export function wrapper(options: RenderOptions = {}) {
 
     const [trpcClient] = useState(() =>
       trpc.createClient({
-        links: [loggerLink()],
+        links: [
+          loggerLink({
+            enabled(opts) {
+              return false; // disable auto logging for tests
+            },
+          }),
+        ],
       })
     );
 
