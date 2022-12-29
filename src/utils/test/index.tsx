@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render as defaultRender } from '@testing-library/react';
-import { createTRPCReact, loggerLink } from '@trpc/react-query';
+import { createTRPCReact, httpBatchLink, loggerLink } from '@trpc/react-query';
 import fetch from 'cross-fetch';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { useState } from 'react';
@@ -10,14 +10,15 @@ import type { NextRouter } from 'next/router';
 
 import { theme } from '@/theme';
 import { ChakraProvider } from '@chakra-ui/react';
-import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
+import { mockRouter } from './mocks';
 
 export const trpc = createTRPCReact<AppRouter>();
 
 globalThis.fetch = fetch;
 
 export * from './export-utils';
+export * from './mocks';
 
 const logger = {
   log: process.env.NEXT_PUBLIC_APP_ENV === 'test' ? () => {} : console.log,
@@ -48,6 +49,7 @@ export function wrapper(options: RenderOptions = {}) {
               return false; // disable auto logging for tests
             },
           }),
+          httpBatchLink({ url: `http://localhost:3000/api/trpc`, fetch }),
         ],
       })
     );
@@ -85,52 +87,6 @@ export function render(
     wrapper: wrapper({ router }),
     ...options,
   });
-}
-
-const mockRouter: NextRouter = {
-  basePath: '',
-  pathname: '/',
-  route: '/',
-  asPath: '/',
-  query: {},
-  forward: jest.fn(),
-  push: jest.fn(),
-  replace: jest.fn(),
-  reload: jest.fn(),
-  back: jest.fn(),
-  prefetch: jest.fn(() => Promise.resolve()),
-  beforePopState: jest.fn(),
-  events: {
-    on: jest.fn(),
-    off: jest.fn(),
-    emit: jest.fn(),
-  },
-  isFallback: false,
-  isLocaleDomain: false,
-  isReady: false,
-  isPreview: false,
-};
-
-export function createMockRouter(router: Partial<NextRouter>) {
-  return {
-    ...mockRouter,
-    ...router,
-  };
-}
-
-const mockSession: Session = {
-  id: '',
-  email: '',
-  image: '',
-  expires: '', // new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString()
-  accessToken: '',
-};
-
-export function createSession(session: Partial<Session>) {
-  return {
-    ...mockSession,
-    ...session,
-  };
 }
 
 type DefaultParams = Parameters<typeof defaultRender>;
