@@ -18,7 +18,6 @@ export const trpc = createTRPCReact<AppRouter>();
 globalThis.fetch = fetch;
 
 export * from './export-utils';
-export * from './mocks';
 
 const logger = {
   log: process.env.NEXT_PUBLIC_APP_ENV === 'test' ? () => {} : console.log,

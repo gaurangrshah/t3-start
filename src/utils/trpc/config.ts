@@ -1,7 +1,7 @@
 import { httpBatchLink, loggerLink } from '@trpc/client';
 import fetch from 'cross-fetch';
 import { NextPageContext } from 'next';
-import { DEFAULT_STALE_TIME, PORT } from '../constants';
+import { DEFAULT_STALE_TIME } from '../constants';
 import { getBaseUrl } from '../fns';
 
 export const links = [

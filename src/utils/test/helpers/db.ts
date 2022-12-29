@@ -1,3 +1,9 @@
+/**
+ * Inspired by BisonApp test utils:
+ *
+ * @SEE: https://github.com/echobind/bisonapp/blob/canary/packages/create-bison-app/template/tests/helpers/db.ts
+ */
+
 // import childProcess from 'child_process';
 // import util from 'util';
 

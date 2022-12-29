@@ -1,5 +1,5 @@
 import Home from '@/pages/index';
-import { render, screen } from '@/tests/utils';
+import { render, screen } from '@/utils/test';
 
 describe('it renders', () => {
   test('home', async () => {
