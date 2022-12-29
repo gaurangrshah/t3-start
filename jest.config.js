@@ -11,7 +11,10 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 const customJestConfig = {
   preset: 'ts-jest',
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  setupFilesAfterEnv: [
+    '@testing-library/jest-dom/extend-expect',
+    // '<rootDir>/jest.setup.js',
+  ],
   moduleDirectories: ['node_modules', '<rootDir>/'],
   moduleNameMapper: {
     // Handle module aliases (this will be automatically configured for you soon)
@@ -21,8 +24,14 @@ const customJestConfig = {
   // moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
   //   prefix: '<rootDir>/src/',
   // }),
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: 'jsdom',
   resetMocks: true,
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.json',
+    },
+  },
+  snapshotSerializers: ['@emotion/jest/serializer'],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
