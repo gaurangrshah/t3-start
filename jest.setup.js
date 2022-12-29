@@ -1,8 +1,5 @@
 // Used for __tests__/testing-library.js
 // Learn more: https://github.com/testing-library/jest-dom
-/**
- * NOT USED: currently using a default setup -- this doesnt seem to be required for this project
- */
 
 // import { createSerializer } from '@emotion/jest';
 

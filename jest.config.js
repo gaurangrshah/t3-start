@@ -13,7 +13,7 @@ const customJestConfig = {
   preset: 'ts-jest',
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
-    // '<rootDir>/jest.setup.js',
+    '<rootDir>/jest.setup.js',
   ],
   moduleDirectories: ['node_modules', '<rootDir>/'],
   moduleNameMapper: {
