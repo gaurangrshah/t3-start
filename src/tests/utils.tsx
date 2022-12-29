@@ -18,6 +18,55 @@ globalThis.fetch = fetch;
 
 export * from './export-utils';
 
+const logger = {
+  log: process.env.NEXT_PUBLIC_APP_ENV === 'test' ? () => {} : console.log,
+  warn: process.env.NEXT_PUBLIC_APP_ENV === 'test' ? () => {} : console.warn,
+  // ✅ no more errors on the console for tests
+  error: process.env.NEXT_PUBLIC_APP_ENV === 'test' ? () => {} : console.error,
+};
+
+export function wrapper(options: RenderOptions = {}) {
+  return function Wrapper({ children }: { children: React.ReactNode }) {
+    const [queryClient] = useState(
+      () =>
+        new QueryClient({
+          logger,
+          defaultOptions: {
+            queries: {
+              retry: false,
+            },
+          },
+        })
+    );
+
+    const [trpcClient] = useState(() =>
+      trpc.createClient({
+        links: [loggerLink()],
+      })
+    );
+
+    const ProviderPageProps = {
+      cookies: 'string',
+      session: null,
+    };
+
+    return (
+      <RouterContext.Provider value={{ ...mockRouter, ...options.router }}>
+        <trpc.Provider client={trpcClient} queryClient={queryClient}>
+          <QueryClientProvider client={queryClient}>
+            <SessionProvider
+              session={ProviderPageProps.session}
+              refetchInterval={5 * 1000}
+            >
+              <ChakraProvider theme={theme}>{children}</ChakraProvider>
+            </SessionProvider>
+          </QueryClientProvider>
+        </trpc.Provider>
+      </RouterContext.Provider>
+    );
+  };
+}
+
 /**
  * Overloads RTL's render function with our own. Adds a customizable mock for next/router.
  */
@@ -26,35 +75,7 @@ export function render(
   { router = {}, ...options }: RenderOptions = {}
 ) {
   return defaultRender(ui, {
-    wrapper: function Wrapper({ children }) {
-      const [queryClient] = useState(() => new QueryClient());
-
-      const [trpcClient] = useState(() =>
-        trpc.createClient({
-          links: [loggerLink()],
-        })
-      );
-
-      const ProviderPageProps = {
-        cookies: 'string',
-        session: null,
-      };
-
-      return (
-        <RouterContext.Provider value={{ ...mockRouter, ...router }}>
-          <trpc.Provider client={trpcClient} queryClient={queryClient}>
-            <QueryClientProvider client={queryClient}>
-              <SessionProvider
-                session={ProviderPageProps.session}
-                refetchInterval={5 * 1000}
-              >
-                <ChakraProvider theme={theme}>{children}</ChakraProvider>
-              </SessionProvider>
-            </QueryClientProvider>
-          </trpc.Provider>
-        </RouterContext.Provider>
-      );
-    },
+    wrapper: wrapper({ router }),
     ...options,
   });
 }
