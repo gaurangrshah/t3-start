@@ -1,6 +1,6 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient,QueryClientProvider } from '@tanstack/react-query';
 import { render as defaultRender } from '@testing-library/react';
-import { createTRPCReact, loggerLink } from '@trpc/react-query';
+import { createTRPCReact,loggerLink } from '@trpc/react-query';
 import fetch from 'cross-fetch';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { useState } from 'react';
@@ -10,6 +10,7 @@ import type { NextRouter } from 'next/router';
 
 import { theme } from '@/theme';
 import { ChakraProvider } from '@chakra-ui/react';
+import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 
 export const trpc = createTRPCReact<AppRouter>();
@@ -103,6 +104,28 @@ const mockRouter: NextRouter = {
   isReady: false,
   isPreview: false,
 };
+
+export function createMockRouter(router: Partial<NextRouter>) {
+  return {
+    ...mockRouter,
+    ...router,
+  };
+}
+
+const mockSession: Session = {
+  id: '',
+  email: '',
+  image: '',
+  expires: '', // new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString()
+  accessToken: '',
+};
+
+export function createSession(session: Partial<Session>) {
+  return {
+    ...mockSession,
+    ...session,
+  };
+}
 
 type DefaultParams = Parameters<typeof defaultRender>;
 type RenderUI = DefaultParams[0];
