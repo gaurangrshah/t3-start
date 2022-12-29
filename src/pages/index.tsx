@@ -20,8 +20,8 @@ const Home: NextPage = () => {
       description="With e2e type-safety"
     >
       <chakra.div textAlign="center">
-        <chakra.h1 as="h1" color={randomColor()}>
-          Create <chakra.span color={randomColor()}>T3</chakra.span> App
+        <chakra.h1 as="h1" color={'white'}>
+          Create <chakra.span color={'white'}>T3</chakra.span> App
         </chakra.h1>
         <Flex direction="column" align="center" gap="0.5rem">
           <chakra.p color="white" fontSize="2xl">
@@ -36,9 +36,7 @@ const Home: NextPage = () => {
 
 export default Home;
 
-export const SignInButton: FC<{ hasSession: boolean }> = ({
-  hasSession,
-}) => {
+export const SignInButton: FC<{ hasSession: boolean }> = ({ hasSession }) => {
   const signInBtn: ButtonProps = {
     variant: 'pill',
     bg: 'rgba(255, 255, 255, 0.1)',
