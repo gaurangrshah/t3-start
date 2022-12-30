@@ -2,9 +2,6 @@ import { renderHook, waitFor, wrapper } from '@/utils/test';
 import { trpc } from '@/utils/trpc';
 
 describe('example router suite', () => {
-  afterEach(() => {
-    jest.restoreAllMocks();
-  });
   test('should example.hello returns a greeting', async () => {
     const { result } = await renderHook(
       () => trpc.example.hello.useQuery({ text: 'from test' }),
