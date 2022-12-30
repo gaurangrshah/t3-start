@@ -9,6 +9,7 @@ import { prisma } from '@/server/db/client';
 // import EmailProvider from 'next-auth/providers/email';
 // import { ONE_DAY } from '@/utils';
 import { TEST_ENV } from '@/utils';
+import { comparePasswords } from './services';
 
 const google = GoogleProvider({
   clientId: env.GOOGLE_CLIENT_ID,
@@ -52,20 +53,19 @@ const credentials = CredentialsProvider({
     },
   },
   async authorize(credentials, req) {
-    if (!credentials || !credentials?.email || credentials?.password) {
-      const user = await prisma.user.findUnique({
-        where: { email: credentials?.email },
-      });
-      if (!user || !user?.password) {
-        return null;
-      }
+    if (!credentials || !credentials?.email || !credentials?.password) {
+      console.log('🔴 invalid credentials');
+      return null;
+    }
+    const user = await prisma.user.findUnique({
+      where: { email: credentials?.email },
+    });
 
-      if (
-        user.password.trim().toLowerCase() ===
-        credentials?.password.trim().toLowerCase()
-      ) {
-        return user;
-      }
+    if (!user || !user?.password) return null;
+
+    if (comparePasswords(credentials?.password, user?.password)) {
+      console.log('🔴 password compare fail');
+      return user;
     }
     return null;
   },
