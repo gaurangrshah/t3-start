@@ -38,7 +38,9 @@ CREATE TABLE "User" (
     "email" TEXT,
     "emailVerified" DATETIME,
     "image" TEXT,
-    "password" TEXT
+    "password" TEXT,
+    "roleType" TEXT,
+    CONSTRAINT "User_roleType_fkey" FOREIGN KEY ("roleType") REFERENCES "Role" ("type") ON DELETE SET DEFAULT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -46,6 +48,12 @@ CREATE TABLE "VerificationToken" (
     "identifier" TEXT NOT NULL,
     "token" TEXT NOT NULL,
     "expires" DATETIME NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Role" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "type" TEXT NOT NULL
 );
 
 -- CreateIndex
@@ -62,3 +70,6 @@ CREATE UNIQUE INDEX "VerificationToken_token_key" ON "VerificationToken"("token"
 
 -- CreateIndex
 CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Role_type_key" ON "Role"("type");

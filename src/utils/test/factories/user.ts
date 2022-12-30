@@ -1,28 +1,30 @@
 /**
- * Inspired by BisonApp test utils:
+ * This is an example from BisonApp test utils:
  *
  * @SEE: https://github.com/echobind/bisonapp/blob/canary/packages/create-bison-app/template/tests
  */
 
-import { Prisma, type User } from '@prisma/client';
+import { Prisma } from '@prisma/client';
+
+import type { User } from '@prisma/client';
 
 import { hashPassword } from '@/lib/next-auth/services';
 import { prisma } from '@/server/db/client';
 
-const defaultUserSelect = Prisma.validator<Prisma.UserSelect>()({
+export type FactoryUpsertArgs = {
+  where: Prisma.UserUpsertArgs['where'];
+  createArgs: Partial<Prisma.UserUpsertArgs['create']>;
+  updateArgs: Prisma.UserUpsertArgs['update'];
+  select?: Prisma.UserUpsertArgs['select'];
+};
+
+export const defaultUserSelect = Prisma.validator<Prisma.UserSelect>()({
   id: true,
   name: true,
   email: true,
   emailVerified: true,
   image: true,
 });
-
-type FactoryUpsertArgs = {
-  where: Prisma.UserUpsertArgs['where'];
-  createArgs: Partial<Prisma.UserUpsertArgs['create']>;
-  updateArgs: Prisma.UserUpsertArgs['update'];
-  select?: Prisma.UserUpsertArgs['select'];
-};
 
 export const UserFactory = {
   build: (
