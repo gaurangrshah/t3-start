@@ -4,6 +4,9 @@
   ],
   "cSpell.words": [
     "NEXTAUTH",
+    "postbuild",
+    "superjson",
+    "tanstack",
     "trpc"
   ]
 }
