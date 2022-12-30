@@ -21,15 +21,3 @@ export const prisma =
 if (process.env.NODE_ENV !== 'production') {
   global.prisma = prisma;
 }
-
-export async function disconnect() {
-  await prisma.$disconnect();
-
-  return true;
-}
-
-export async function connect() {
-  await prisma.$connect();
-
-  return true;
-}
