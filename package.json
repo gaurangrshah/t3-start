@@ -17,6 +17,7 @@
     "db:reset": "yarn env:dev npx prisma migrate reset",
     "db:reset-force": "yarn env:dev npx prisma migrate reset --force",
     "db:reset-force:dev": "yarn env:dev yarn db:reset-force && next dev",
+    "db:seed": "yarn env:dev npx prisma db seed",
     "gen:theme-typings": "chakra-cli tokens ./chakra.ui/theme/index.ts",
     "test": "jest --watch",
     "ci": "jest --ci",
@@ -29,7 +30,11 @@
     "test:db:push": "yarn env:test npx prisma db push",
     "test:db:reset": "yarn env:test npx prisma migrate reset",
     "test:db:reset-force": "yarn env:test npx prisma migrate reset --force",
-    "test:db:reset-force:dev": "yarn env:test yarn db:reset-force && next dev"
+    "test:db:reset-force:dev": "yarn env:test yarn db:reset-force && next dev",
+    "test:db:seed": "yarn env:test npx prisma db seed"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.13",
