@@ -1,11 +1,9 @@
 // Used for __tests__/testing-library.js
 // Learn more: https://github.com/testing-library/jest-dom
 
-// import { createSerializer } from '@emotion/jest';
-
+import '@testing-library/jest-dom';
 import util from 'util';
 
-// expect.addSnapshotSerializer(createSerializer());
 global.TextEncoder = util.TextEncoder;
 global.TextDecoder = util.TextDecoder;
 
