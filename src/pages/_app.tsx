@@ -6,7 +6,7 @@ import Head from 'next/head';
 import type { NextComponentTypeWithAuth } from '@/types';
 import type { AppType } from 'next/app';
 
-import { Auth, ErrorBoundary } from '@/components';
+import { AuthGate, ErrorBoundary } from '@/components';
 import { theme } from '@/theme';
 import { trpc } from '@/utils/trpc';
 
@@ -29,9 +29,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <ErrorBoundary>
           <ChakraProvider theme={theme}>
             {auth ? (
-              <Auth>
+              <AuthGate>
                 <Component {...pageProps} />
-              </Auth>
+              </AuthGate>
             ) : (
               <Component {...pageProps} />
             )}
