@@ -19,7 +19,6 @@ describe('homepage', () => {
 
     const subtitle = await screen.queryByText(/loading trpc query.../i);
     expect(subtitle).toBeInTheDocument();
-    // @TODO: need to test the state where this test changes after hydration.
 
     await waitFor(async () =>
       expect(await screen.queryByText(/hello from trpc/i))
