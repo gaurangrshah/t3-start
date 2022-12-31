@@ -1,6 +1,5 @@
 import crypto from 'crypto';
 import { Session } from 'next-auth';
-import * as authModule from 'next-auth/react';
 
 const userId = crypto.randomUUID();
 
