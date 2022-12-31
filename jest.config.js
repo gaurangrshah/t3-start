@@ -16,6 +16,7 @@ const customJestConfig = {
     '<rootDir>/jest.setup.js',
   ],
   moduleDirectories: ['node_modules', '<rootDir>/'],
+  testMatch: ['<rootDir>/src/**/*.test.ts?(x)'],
   moduleNameMapper: {
     // Handle module aliases (this will be automatically configured for you soon)
     '@/(.*)': '<rootDir>/src/$1',
