@@ -1,30 +1,59 @@
 import {
-Box,
-Button,
-ButtonGroup,
-Container,
-Divider,
-Heading,
-HStack,
-Stack,
-Text,
+  Box,
+  Button,
+  ButtonGroup,
+  Container,
+  Divider,
+  HStack,
+  Stack,
+  Text,
 } from '@chakra-ui/react';
-import { getCsrfToken,getProviders,signIn } from 'next-auth/react';
+import { getCsrfToken, getProviders, signIn } from 'next-auth/react';
 
-import type { GetServerSidePropsContext } from 'next';
+import type { GetServerSidePropsContext, NextPage } from 'next';
 
-import { AuthPageHeader,GoogleIcon,Signin } from '@/components';
+import { AuthPageHeader, GoogleIcon, Signin } from '@/components';
 import { DefaultLayout } from '@/components/layouts/default';
 
-export default function SigninPage({
+type Visibility = {
+  show: boolean;
+};
+
+const CredentialsForm: React.FC<{ csrf: string } & Visibility> = ({
+  show,
   csrf,
-  providers,
-}: {
+}) => {
+  return show ? <Signin csrf={csrf} /> : null;
+};
+
+const GoogleOAuth: React.FC<Visibility> = ({ show }) => {
+  const callbackUrl = '/'; // @TODO: redirect to profile?
+  return show ? (
+    <Button w="full" onClick={() => signIn('google', { callbackUrl })}>
+      <HStack w="full" justifyContent="center" gap={3}>
+        <GoogleIcon />
+        <Text>Sign in with Google</Text>
+      </HStack>
+    </Button>
+  ) : null;
+};
+
+const AuthDivider: React.FC<Visibility> = ({ show }) => {
+  return show ? (
+    <HStack>
+      <Divider />
+      <Text fontSize="sm" whiteSpace="nowrap" color="muted">
+        or continue with
+      </Text>
+      <Divider />
+    </HStack>
+  ) : null;
+};
+
+const SigninPage: NextPage<{
   csrf: string;
   providers: any;
-}) {
-  const callbackUrl = '/'; // @TODO: redirect to profile?
-
+}> = ({ csrf, providers }) => {
   return (
     <DefaultLayout
       title="Sign In"
@@ -39,35 +68,19 @@ export default function SigninPage({
         <Stack spacing="8">
           <AuthPageHeader type="signin" />
           <Box layerStyle="panel">
-            {providers?.credentials ? <Signin csrf={csrf} /> : null}
-            {providers?.google && providers?.credentials ? (
-              <HStack>
-                <Divider />
-                <Text fontSize="sm" whiteSpace="nowrap" color="muted">
-                  or continue with
-                </Text>
-                <Divider />
-              </HStack>
-            ) : null}
+            <CredentialsForm show={!!providers.credentials} csrf={csrf} />
+            <AuthDivider show={providers?.google && providers?.credentials} />
             <ButtonGroup variant="outline" spacing="4" width="full" mt={4}>
-              {providers?.google ? (
-                <Button
-                  w="full"
-                  onClick={() => signIn('google', { callbackUrl })}
-                >
-                  <HStack w="full" justifyContent="center" gap={3}>
-                    <GoogleIcon />
-                    <Text>Sign in with Google</Text>
-                  </HStack>
-                </Button>
-              ) : null}
+              <GoogleOAuth show={!!providers.google} />
             </ButtonGroup>
           </Box>
         </Stack>
       </Container>
     </DefaultLayout>
   );
-}
+};
+
+export default SigninPage;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
