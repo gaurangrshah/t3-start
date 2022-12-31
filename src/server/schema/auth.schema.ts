@@ -9,7 +9,8 @@ export const userInputSchema = z.object({
   password: z
     .string()
     .min(1, 'Password is required')
-    .min(8, 'Password must be more than 8 characters')
+    .min(4, 'Password must be more than 4 characters')
+    // .min(8, 'Password must be more than 8 characters')
     .max(32, 'Password must be less than 32 characters'),
 });
 
@@ -36,7 +37,8 @@ export const createUserInputSchema = userInputSchema
       passwordConfirm: z
         .string()
         .min(1, 'Password is required')
-        .min(8, 'Password must be more than 8 characters')
+        .min(4, 'Password must be more than 4 characters')
+        // .min(8, 'Password must be more than 8 characters')
         .max(32, 'Password must be less than 32 characters'),
     })
   )
@@ -44,3 +46,5 @@ export const createUserInputSchema = userInputSchema
     path: ['passwordConfirm'],
     message: 'passwords do not match',
   });
+
+export type UserInput = z.TypeOf<typeof userInputSchema>;

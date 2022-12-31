@@ -24,6 +24,10 @@ const tokens = {
       default: 'gray.900',
       _dark: 'white',
     },
+    link: {
+      default: 'blue.600',
+      _dark: 'blue.300',
+    },
     inverted: {
       default: 'white',
       _dark: 'gray.900',

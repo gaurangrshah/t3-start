@@ -43,13 +43,13 @@ const credentials = CredentialsProvider({
       label: 'Username',
       type: 'text',
       placeholder: 'you@youremail.com',
-      value: 'e2e@e2e.test',
+      value: process.env.TEST_USER,
     },
     password: {
       label: 'Password',
       type: 'password',
-      placeholder: 'password',
-      value: 'test',
+      placeholder: '***********',
+      value: process.env.TEST_PW,
     },
   },
   async authorize(credentials, req) {
@@ -64,12 +64,13 @@ const credentials = CredentialsProvider({
     if (!user || !user?.password) return null;
 
     if (comparePasswords(credentials?.password, user?.password)) {
-      console.log('🔴 password compare fail');
+      console.log('🟢 password compare success');
       return user;
     }
+    console.log('🔴 password compare fail');
     return null;
   },
 });
 
-export const providers: NextAuthOptions['providers'] = [];
+export const providers: NextAuthOptions['providers'] = [credentials];
 TEST_ENV ? providers.push(credentials) : providers.push(google);

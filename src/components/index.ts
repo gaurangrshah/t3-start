@@ -1,6 +1,7 @@
 export * from './auth';
 export * from './bar';
 export * from './drawer';
+export * from './form';
 export * from './framer';
 export * from './hooks';
 export * from './icons';
