@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 import util from 'util';
 
 import { cleanEvents, cleanup } from '@/utils/test';
-import { server } from '@/__tests__/fixtures/server';
+import { server } from '@/__tests__/__fixtures__/server';
 
 global.TextEncoder = util.TextEncoder;
 global.TextDecoder = util.TextDecoder;

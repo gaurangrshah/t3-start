@@ -6,6 +6,7 @@ import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { useState } from 'react';
 
 import type { AppRouter } from '@/server/trpc/router/_app';
+import type { Session } from 'next-auth';
 import type { NextRouter } from 'next/router';
 
 import { theme } from '@/theme';
@@ -63,7 +64,7 @@ export function wrapper(options: RenderOptions = {}) {
         <trpc.Provider client={trpcClient} queryClient={queryClient}>
           <QueryClientProvider client={queryClient}>
             <SessionProvider
-              session={ProviderPageProps.session}
+              session={options?.session ?? ProviderPageProps.session}
               refetchInterval={5 * 1000}
             >
               <ChakraProvider theme={theme}>{children}</ChakraProvider>
@@ -80,14 +81,17 @@ export function wrapper(options: RenderOptions = {}) {
  */
 export function render(
   ui: RenderUI,
-  { router = {}, ...options }: RenderOptions = {}
+  { router = {}, session = null, ...options }: RenderOptions = {}
 ) {
   return defaultRender(ui, {
-    wrapper: wrapper({ router }),
+    wrapper: wrapper({ router, session }),
     ...options,
   });
 }
 
 type DefaultParams = Parameters<typeof defaultRender>;
 type RenderUI = DefaultParams[0];
-type RenderOptions = DefaultParams[1] & { router?: Partial<NextRouter> };
+type RenderOptions = DefaultParams[1] & {
+  router?: Partial<NextRouter>;
+  session?: Session | null;
+};
