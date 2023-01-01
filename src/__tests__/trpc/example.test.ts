@@ -1,4 +1,4 @@
-import { trpcRequest } from '@/utils/test/helpers';
+import { trpcRequest } from '@/utils/test';
 
 describe('example router suite', () => {
   test('🟢', async () => {
