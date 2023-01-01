@@ -1,7 +1,9 @@
+import { ChakraProvider } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render as defaultRender } from '@testing-library/react';
 import { createTRPCReact, httpBatchLink, loggerLink } from '@trpc/react-query';
 import fetch from 'cross-fetch';
+import { SessionProvider } from 'next-auth/react';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { useState } from 'react';
 
@@ -10,9 +12,7 @@ import type { Session } from 'next-auth';
 import type { NextRouter } from 'next/router';
 
 import { theme } from '@/theme';
-import { ChakraProvider } from '@chakra-ui/react';
-import { SessionProvider } from 'next-auth/react';
-import { mockRouter } from './mocks';
+import { mockRouter } from '@/__tests__/fixtures/mocks';
 
 export const trpc = createTRPCReact<AppRouter>();
 

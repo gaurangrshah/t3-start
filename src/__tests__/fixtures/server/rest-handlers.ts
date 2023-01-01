@@ -2,7 +2,9 @@
  * @ SEE: https://tinyurl.com/2j29z5mb
  */
 import { rest } from 'msw';
-import { mockSession } from '../../../utils/test/mocks/session';
+
+import { mockSession } from '@/utils/test';
+
 export const MOCK_CACHE = 'mock cache';
 export const MOCK_PAGE_ID = 'mock-page-id';
 

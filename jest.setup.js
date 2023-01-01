@@ -1,12 +1,11 @@
 // Used for __tests__/testing-library.js
 // Learn more: https://github.com/testing-library/jest-dom
-import '@/utils/test/mocks/session';
+
 import '@testing-library/jest-dom';
 
 import util from 'util';
 
-import { cleanEvents, cleanup } from '@/utils/test';
-import { server } from '@/__tests__/__fixtures__/server';
+import { cleanEvents, cleanup, server } from '@/utils/test';
 
 global.TextEncoder = util.TextEncoder;
 global.TextDecoder = util.TextDecoder;
