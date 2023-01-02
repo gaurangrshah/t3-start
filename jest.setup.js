@@ -16,17 +16,21 @@ global.TextDecoder = util.TextDecoder;
  ** example of separating test database and see jest.teardown.js
  */
 
-beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
-afterAll(() => {
-  server.close();
-  cleanEvents();
+beforeAll(() => {
+  server.listen({ onUnhandledRequest: 'warn' });
 });
 
 beforeEach(() => {
   jest.clearAllMocks();
 });
+
 afterEach(() => {
   server.resetHandlers();
   jest.clearAllMocks();
   return cleanup();
+});
+
+afterAll(() => {
+  server.close();
+  cleanEvents();
 });
