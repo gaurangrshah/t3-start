@@ -9,7 +9,7 @@ describe('SignInButton', () => {
     user = userEvent.setup();
   });
 
-  test('SignInButton (label="sign out") when (session=Session)', async () => {
+  test('authenticated', async () => {
     render(<SignInButton hasSession={true} />);
 
     const btn = await screen.getByRole('button', { name: /sign out/i });
@@ -17,7 +17,7 @@ describe('SignInButton', () => {
     user.click(btn);
   });
 
-  test('SignInButton (label="sign in") when (session=null)', async () => {
+  test('unauthenticated', async () => {
     render(<SignInButton hasSession={false} />);
 
     const btn = await screen.getByRole('button', { name: /sign in/i });
