@@ -72,5 +72,5 @@ const credentials = CredentialsProvider({
   },
 });
 
-export const providers: NextAuthOptions['providers'] = [credentials];
-TEST_ENV ? providers.push(credentials) : providers.push(google);
+export const providers: NextAuthOptions['providers'] = [credentials, google];
+// TEST_ENV ? providers.push(credentials) : providers.push(google);
