@@ -1,16 +1,17 @@
 import {
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Stack,
-  VisuallyHiddenInput,
+Button,
+FormControl,
+FormLabel,
+Input,
+Stack,
+VisuallyHidden,
+VisuallyHiddenInput
 } from '@chakra-ui/react';
 
 import type { UserInput } from '@/server/schema';
 
-import { userInputSchema, zParse } from '@/server/schema';
-import { convertFormToObject, isBrowser } from '@/utils';
+import { userInputSchema,zParse } from '@/server/schema';
+import { convertFormToObject,isBrowser } from '@/utils';
 import { trpc } from '@/utils/trpc';
 import { PasswordField } from '../form';
 
@@ -48,7 +49,10 @@ export function Signup({ csrf }: { csrf: string }) {
   return (
     <Stack spacing="6" as="form" onSubmit={handleSubmit}>
       <Stack spacing="5">
-        <VisuallyHiddenInput name="csrfToken" defaultValue={csrf} />
+        <VisuallyHidden>
+          <FormLabel htmlFor="csrfToken">csrfToken</FormLabel>
+          <VisuallyHiddenInput name="csrfToken" defaultValue={csrf} />
+        </VisuallyHidden>
         <FormControl>
           <FormLabel htmlFor="name">Name</FormLabel>
           <Input id="name" type="text" name="name" placeholder="Your name" />

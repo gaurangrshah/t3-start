@@ -6,6 +6,7 @@ import {
   HStack,
   Input,
   Stack,
+  VisuallyHidden,
   VisuallyHiddenInput,
 } from '@chakra-ui/react';
 import { signIn } from 'next-auth/react';
@@ -32,9 +33,12 @@ export function Signin({ csrf }: { csrf: string }) {
   }
 
   return (
-    <Stack spacing="6" as="form" onSubmit={handleSubmit}>
+    <Stack as="form" spacing="6" onSubmit={handleSubmit}>
       <Stack spacing="5">
-        <VisuallyHiddenInput name="csrfToken" defaultValue={csrf} />
+        <VisuallyHidden>
+          <FormLabel htmlFor="csrfToken">csrfToken</FormLabel>
+          <VisuallyHiddenInput name="csrfToken" defaultValue={csrf} />
+        </VisuallyHidden>
         <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>
           <Input
@@ -55,7 +59,7 @@ export function Signin({ csrf }: { csrf: string }) {
       </HStack>
       <Stack spacing="6">
         <Button type="submit" variant="primary">
-          Sign in
+          Sign in Now
         </Button>
       </Stack>
     </Stack>
