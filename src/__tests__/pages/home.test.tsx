@@ -1,7 +1,14 @@
 import Home from '@/pages/index';
-import { render, screen, userEvent, waitFor } from '@/utils/test';
+import {
+  mockSession,
+  render,
+  screen,
+  userEvent,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '@/utils/test';
 
-describe('homepage', () => {
+describe('homepage unauthenticated', () => {
   test('renders with no errors', async () => {
     expect(async () => {
       await render(<Home />);
@@ -9,7 +16,40 @@ describe('homepage', () => {
   });
 
   test('initial loading state', async () => {
+    const { debug } = render(<Home />);
+
+    const heading = screen.getByRole('heading', {
+      level: 1,
+      name: /create t3 app/i,
+    });
+    expect(heading).toBeInTheDocument();
+
+    const subtitle = screen.queryByText(/loading trpc query.../i);
+    expect(subtitle).toBeInTheDocument();
+
+    const btn = screen.getByRole('button', { name: /sign in/i });
+    expect(btn).toBeInTheDocument();
+  });
+
+  test('signin clicks', async () => {
+    const user = userEvent.setup();
     render(<Home />);
+
+    const btn = await screen.getByRole('button', { name: /sign in/i });
+    expect(btn).toBeInTheDocument();
+    user.click(btn);
+  });
+});
+
+describe('homepage authenticated', () => {
+  test('renders with no errors', async () => {
+    expect(async () => {
+      await render(<Home />, { session: mockSession });
+    }).not.toThrowError();
+  });
+
+  test('initial loading state', async () => {
+    await render(<Home />, { session: mockSession });
 
     const heading = await screen.getByRole('heading', {
       level: 1,
@@ -20,19 +60,20 @@ describe('homepage', () => {
     const subtitle = await screen.queryByText(/loading trpc query.../i);
     expect(subtitle).toBeInTheDocument();
 
-    await waitFor(async () =>
-      expect(await screen.queryByText(/hello from trpc/i))
-    );
+    expect(screen.queryByText(/hello from trpc/i));
 
-    const btn = await screen.getByRole('button', { name: /sign in/i });
+    expect(screen.queryByText(/logged in as e2e/i));
+    expect(screen.queryByText(/you can now see this secret message!/i));
+
+    const btn = await screen.getByRole('button', { name: /sign out/i });
     expect(btn).toBeInTheDocument();
   });
 
-  test('it clicks', async () => {
+  test('signout it clicks', async () => {
     const user = userEvent.setup();
-    render(<Home />);
+    render(<Home />, { session: mockSession });
 
-    const btn = await screen.getByRole('button', { name: /sign in/i });
+    const btn = await screen.getByRole('button', { name: /sign out/i });
     expect(btn).toBeInTheDocument();
     user.click(btn);
   });
