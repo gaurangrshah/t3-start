@@ -229,11 +229,6 @@ describe('it renders', () => {
       }
 
       .emotion-13 {
-        width: 100%;
-        position: relative;
-      }
-
-      .emotion-14 {
         display: block;
         text-align: start;
         font-size: var(--chakra-fontSizes-sm);
@@ -247,21 +242,26 @@ describe('it renders', () => {
         color: var(--chakra-colors-emphasized);
       }
 
-      .emotion-14:disabled,
-      .emotion-14[disabled],
-      .emotion-14[aria-disabled=true],
-      .emotion-14[data-disabled] {
+      .emotion-13:disabled,
+      .emotion-13[disabled],
+      .emotion-13[aria-disabled=true],
+      .emotion-13[data-disabled] {
         opacity: 0.4;
       }
 
-      [data-peer]:placeholder-shown~.emotion-14,
-      .peer:placeholder-shown~.emotion-14 {
+      [data-peer]:placeholder-shown~.emotion-13,
+      .peer:placeholder-shown~.emotion-13 {
         font-size: var(--chakra-fontSizes-md);
         top: var(--chakra-space-2);
         left: var(--chakra-space-4);
       }
 
       .emotion-15 {
+        width: 100%;
+        position: relative;
+      }
+
+      .emotion-17 {
         width: 100%;
         min-width: 0px;
         outline: 2px solid transparent;
@@ -285,22 +285,22 @@ describe('it renders', () => {
         background: var(--chakra-colors-white);
       }
 
-      .emotion-15:disabled,
-      .emotion-15[disabled],
-      .emotion-15[aria-disabled=true],
-      .emotion-15[data-disabled] {
+      .emotion-17:disabled,
+      .emotion-17[disabled],
+      .emotion-17[aria-disabled=true],
+      .emotion-17[data-disabled] {
         opacity: 0.4;
         cursor: not-allowed;
       }
 
-      .emotion-15:hover,
-      .emotion-15[data-hover] {
+      .emotion-17:hover,
+      .emotion-17[data-hover] {
         border-color: var(--chakra-colors-gray-300);
       }
 
-      .emotion-15[aria-readonly=true],
-      .emotion-15[readonly],
-      .emotion-15[data-readonly] {
+      .emotion-17[aria-readonly=true],
+      .emotion-17[readonly],
+      .emotion-17[data-readonly] {
         box-shadow: var(--chakra-shadows-none)!important;
         -webkit-user-select: all;
         -moz-user-select: all;
@@ -308,26 +308,26 @@ describe('it renders', () => {
         user-select: all;
       }
 
-      .emotion-15[aria-invalid=true],
-      .emotion-15[data-invalid] {
+      .emotion-17[aria-invalid=true],
+      .emotion-17[data-invalid] {
         border-color: #E53E3E;
         box-shadow: 0 0 0 1px #E53E3E;
       }
 
-      .emotion-15:focus-visible,
-      .emotion-15[data-focus-visible] {
+      .emotion-17:focus-visible,
+      .emotion-17[data-focus-visible] {
         z-index: 1;
         border-color: #3182ce;
         box-shadow: 0 0 0 1px #3182ce;
       }
 
-      .emotion-15:focus,
-      .emotion-15[data-focus] {
+      .emotion-17:focus,
+      .emotion-17[data-focus] {
         border-color: var(--chakra-colors-brand-500);
         box-shadow: 0px 0px 0px 1px rgba(49, 130, 206, 1);
       }
 
-      .emotion-21 {
+      .emotion-23 {
         width: 100%;
         display: -webkit-box;
         display: -webkit-flex;
@@ -336,7 +336,7 @@ describe('it renders', () => {
         position: relative;
       }
 
-      .emotion-22 {
+      .emotion-24 {
         right: 0;
         width: var(--chakra-sizes-10);
         height: var(--chakra-sizes-10);
@@ -358,7 +358,7 @@ describe('it renders', () => {
         z-index: 2;
       }
 
-      .emotion-23 {
+      .emotion-25 {
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
@@ -400,50 +400,50 @@ describe('it renders', () => {
         color: var(--chakra-colors-muted);
       }
 
-      .emotion-23:focus-visible,
-      .emotion-23[data-focus-visible] {
+      .emotion-25:focus-visible,
+      .emotion-25[data-focus-visible] {
         box-shadow: var(--chakra-shadows-outline);
       }
 
-      .emotion-23:disabled,
-      .emotion-23[disabled],
-      .emotion-23[aria-disabled=true],
-      .emotion-23[data-disabled] {
+      .emotion-25:disabled,
+      .emotion-25[disabled],
+      .emotion-25[aria-disabled=true],
+      .emotion-25[data-disabled] {
         opacity: 0.4;
         cursor: not-allowed;
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .emotion-23:hover,
-      .emotion-23[data-hover] {
+      .emotion-25:hover,
+      .emotion-25[data-hover] {
         -webkit-text-decoration: none;
         text-decoration: none;
         color: var(--chakra-colors-default);
       }
 
-      .emotion-23:hover:disabled,
-      .emotion-23[data-hover]:disabled,
-      .emotion-23:hover[disabled],
-      .emotion-23[data-hover][disabled],
-      .emotion-23:hover[aria-disabled=true],
-      .emotion-23[data-hover][aria-disabled=true],
-      .emotion-23:hover[data-disabled],
-      .emotion-23[data-hover][data-disabled] {
+      .emotion-25:hover:disabled,
+      .emotion-25[data-hover]:disabled,
+      .emotion-25:hover[disabled],
+      .emotion-25[data-hover][disabled],
+      .emotion-25:hover[aria-disabled=true],
+      .emotion-25[data-hover][aria-disabled=true],
+      .emotion-25:hover[data-disabled],
+      .emotion-25[data-hover][data-disabled] {
         background: initial;
         -webkit-text-decoration: none;
         text-decoration: none;
       }
 
-      .emotion-23:focus:not(:focus-visible) {
+      .emotion-25:focus:not(:focus-visible) {
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .emotion-23:active,
-      .emotion-23[data-active] {
+      .emotion-25:active,
+      .emotion-25[data-active] {
         color: var(--chakra-colors-default);
       }
 
-      .emotion-24 {
+      .emotion-26 {
         width: 100%;
         min-width: 0px;
         outline: 2px solid transparent;
@@ -467,22 +467,22 @@ describe('it renders', () => {
         background: var(--chakra-colors-white);
       }
 
-      .emotion-24:disabled,
-      .emotion-24[disabled],
-      .emotion-24[aria-disabled=true],
-      .emotion-24[data-disabled] {
+      .emotion-26:disabled,
+      .emotion-26[disabled],
+      .emotion-26[aria-disabled=true],
+      .emotion-26[data-disabled] {
         opacity: 0.4;
         cursor: not-allowed;
       }
 
-      .emotion-24:hover,
-      .emotion-24[data-hover] {
+      .emotion-26:hover,
+      .emotion-26[data-hover] {
         border-color: var(--chakra-colors-gray-300);
       }
 
-      .emotion-24[aria-readonly=true],
-      .emotion-24[readonly],
-      .emotion-24[data-readonly] {
+      .emotion-26[aria-readonly=true],
+      .emotion-26[readonly],
+      .emotion-26[data-readonly] {
         box-shadow: var(--chakra-shadows-none)!important;
         -webkit-user-select: all;
         -moz-user-select: all;
@@ -490,26 +490,26 @@ describe('it renders', () => {
         user-select: all;
       }
 
-      .emotion-24[aria-invalid=true],
-      .emotion-24[data-invalid] {
+      .emotion-26[aria-invalid=true],
+      .emotion-26[data-invalid] {
         border-color: #E53E3E;
         box-shadow: 0 0 0 1px #E53E3E;
       }
 
-      .emotion-24:focus-visible,
-      .emotion-24[data-focus-visible] {
+      .emotion-26:focus-visible,
+      .emotion-26[data-focus-visible] {
         z-index: 1;
         border-color: #3182ce;
         box-shadow: 0 0 0 1px #3182ce;
       }
 
-      .emotion-24:focus,
-      .emotion-24[data-focus] {
+      .emotion-26:focus,
+      .emotion-26[data-focus] {
         border-color: var(--chakra-colors-brand-500);
         box-shadow: 0px 0px 0px 1px rgba(49, 130, 206, 1);
       }
 
-      .emotion-32 {
+      .emotion-34 {
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
@@ -551,42 +551,42 @@ describe('it renders', () => {
         color: var(--chakra-colors-white);
       }
 
-      .emotion-32:focus-visible,
-      .emotion-32[data-focus-visible] {
+      .emotion-34:focus-visible,
+      .emotion-34[data-focus-visible] {
         box-shadow: var(--chakra-shadows-outline);
       }
 
-      .emotion-32:disabled,
-      .emotion-32[disabled],
-      .emotion-32[aria-disabled=true],
-      .emotion-32[data-disabled] {
+      .emotion-34:disabled,
+      .emotion-34[disabled],
+      .emotion-34[aria-disabled=true],
+      .emotion-34[data-disabled] {
         opacity: 0.4;
         cursor: not-allowed;
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .emotion-32:hover,
-      .emotion-32[data-hover] {
+      .emotion-34:hover,
+      .emotion-34[data-hover] {
         background: var(--chakra-colors-brand-600);
       }
 
-      .emotion-32:hover:disabled,
-      .emotion-32[data-hover]:disabled,
-      .emotion-32:hover[disabled],
-      .emotion-32[data-hover][disabled],
-      .emotion-32:hover[aria-disabled=true],
-      .emotion-32[data-hover][aria-disabled=true],
-      .emotion-32:hover[data-disabled],
-      .emotion-32[data-hover][data-disabled] {
+      .emotion-34:hover:disabled,
+      .emotion-34[data-hover]:disabled,
+      .emotion-34:hover[disabled],
+      .emotion-34[data-hover][disabled],
+      .emotion-34:hover[aria-disabled=true],
+      .emotion-34[data-hover][aria-disabled=true],
+      .emotion-34:hover[data-disabled],
+      .emotion-34[data-hover][data-disabled] {
         background: var(--chakra-colors-brand-500);
       }
 
-      .emotion-32:focus:not(:focus-visible) {
+      .emotion-34:focus:not(:focus-visible) {
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .emotion-32:active,
-      .emotion-32[data-active] {
+      .emotion-34:active,
+      .emotion-34[data-active] {
         background: var(--chakra-colors-brand-700);
       }
 
@@ -636,24 +636,34 @@ describe('it renders', () => {
                 <div
                   class="chakra-stack emotion-11"
                 >
-                  <input
+                  <span
                     class="emotion-12"
-                    name="csrfToken"
-                    value="bd7939faf92607b83464e234a233121011659849469dd6c5c314f326511fca8e"
-                  />
+                  >
+                    <label
+                      class="chakra-form__label emotion-13"
+                      for="csrfToken"
+                    >
+                      csrfToken
+                    </label>
+                    <input
+                      class="emotion-12"
+                      name="csrfToken"
+                      value="bd7939faf92607b83464e234a233121011659849469dd6c5c314f326511fca8e"
+                    />
+                  </span>
                   <div
-                    class="chakra-form-control emotion-13"
+                    class="chakra-form-control emotion-15"
                     role="group"
                   >
                     <label
-                      class="chakra-form__label emotion-14"
+                      class="chakra-form__label emotion-13"
                       for="name"
                       id="field-:r5:-label"
                     >
                       Name
                     </label>
                     <input
-                      class="chakra-input emotion-15"
+                      class="chakra-input emotion-17"
                       id="name"
                       name="name"
                       placeholder="Your name"
@@ -661,18 +671,18 @@ describe('it renders', () => {
                     />
                   </div>
                   <div
-                    class="chakra-form-control emotion-13"
+                    class="chakra-form-control emotion-15"
                     role="group"
                   >
                     <label
-                      class="chakra-form__label emotion-14"
+                      class="chakra-form__label emotion-13"
                       for="email"
                       id="field-:r6:-label"
                     >
                       Email
                     </label>
                     <input
-                      class="chakra-input emotion-15"
+                      class="chakra-input emotion-17"
                       id="email"
                       name="email"
                       placeholder="you@youremail.com"
@@ -680,25 +690,25 @@ describe('it renders', () => {
                     />
                   </div>
                   <div
-                    class="chakra-form-control emotion-13"
+                    class="chakra-form-control emotion-15"
                     role="group"
                   >
                     <label
-                      class="chakra-form__label emotion-14"
+                      class="chakra-form__label emotion-13"
                       for="password"
                       id="field-:r8:-label"
                     >
                       Password
                     </label>
                     <div
-                      class="chakra-input__group emotion-21"
+                      class="chakra-input__group emotion-23"
                     >
                       <div
-                        class="chakra-input__right-element emotion-22"
+                        class="chakra-input__right-element emotion-24"
                       >
                         <button
                           aria-label="Reveal password"
-                          class="chakra-button emotion-23"
+                          class="chakra-button emotion-25"
                           type="button"
                         >
                           🟢
@@ -706,7 +716,7 @@ describe('it renders', () => {
                       </div>
                       <input
                         aria-required="true"
-                        class="chakra-input emotion-24"
+                        class="chakra-input emotion-26"
                         id="password"
                         name="password"
                         placeholder="***********"
@@ -716,25 +726,25 @@ describe('it renders', () => {
                     </div>
                   </div>
                   <div
-                    class="chakra-form-control emotion-13"
+                    class="chakra-form-control emotion-15"
                     role="group"
                   >
                     <label
-                      class="chakra-form__label emotion-14"
+                      class="chakra-form__label emotion-13"
                       for="passwordConfirm"
                       id="field-:ra:-label"
                     >
                       Password
                     </label>
                     <div
-                      class="chakra-input__group emotion-21"
+                      class="chakra-input__group emotion-23"
                     >
                       <div
-                        class="chakra-input__right-element emotion-22"
+                        class="chakra-input__right-element emotion-24"
                       >
                         <button
                           aria-label="Reveal password"
-                          class="chakra-button emotion-23"
+                          class="chakra-button emotion-25"
                           type="button"
                         >
                           🟢
@@ -742,7 +752,7 @@ describe('it renders', () => {
                       </div>
                       <input
                         aria-required="true"
-                        class="chakra-input emotion-24"
+                        class="chakra-input emotion-26"
                         id="password-confirm"
                         name="passwordConfirm"
                         placeholder="***********"
@@ -756,7 +766,7 @@ describe('it renders', () => {
                   class="chakra-stack emotion-3"
                 >
                   <button
-                    class="chakra-button emotion-32"
+                    class="chakra-button emotion-34"
                     type="submit"
                   >
                     Sign up
