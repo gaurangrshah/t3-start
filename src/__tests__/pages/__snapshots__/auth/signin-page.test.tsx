@@ -249,11 +249,6 @@ describe('it renders', () => {
       }
 
       .emotion-13 {
-        width: 100%;
-        position: relative;
-      }
-
-      .emotion-14 {
         display: block;
         text-align: start;
         font-size: var(--chakra-fontSizes-sm);
@@ -267,21 +262,26 @@ describe('it renders', () => {
         color: var(--chakra-colors-emphasized);
       }
 
-      .emotion-14:disabled,
-      .emotion-14[disabled],
-      .emotion-14[aria-disabled=true],
-      .emotion-14[data-disabled] {
+      .emotion-13:disabled,
+      .emotion-13[disabled],
+      .emotion-13[aria-disabled=true],
+      .emotion-13[data-disabled] {
         opacity: 0.4;
       }
 
-      [data-peer]:placeholder-shown~.emotion-14,
-      .peer:placeholder-shown~.emotion-14 {
+      [data-peer]:placeholder-shown~.emotion-13,
+      .peer:placeholder-shown~.emotion-13 {
         font-size: var(--chakra-fontSizes-md);
         top: var(--chakra-space-2);
         left: var(--chakra-space-4);
       }
 
       .emotion-15 {
+        width: 100%;
+        position: relative;
+      }
+
+      .emotion-17 {
         width: 100%;
         min-width: 0px;
         outline: 2px solid transparent;
@@ -305,22 +305,22 @@ describe('it renders', () => {
         background: var(--chakra-colors-white);
       }
 
-      .emotion-15:disabled,
-      .emotion-15[disabled],
-      .emotion-15[aria-disabled=true],
-      .emotion-15[data-disabled] {
+      .emotion-17:disabled,
+      .emotion-17[disabled],
+      .emotion-17[aria-disabled=true],
+      .emotion-17[data-disabled] {
         opacity: 0.4;
         cursor: not-allowed;
       }
 
-      .emotion-15:hover,
-      .emotion-15[data-hover] {
+      .emotion-17:hover,
+      .emotion-17[data-hover] {
         border-color: var(--chakra-colors-gray-300);
       }
 
-      .emotion-15[aria-readonly=true],
-      .emotion-15[readonly],
-      .emotion-15[data-readonly] {
+      .emotion-17[aria-readonly=true],
+      .emotion-17[readonly],
+      .emotion-17[data-readonly] {
         box-shadow: var(--chakra-shadows-none)!important;
         -webkit-user-select: all;
         -moz-user-select: all;
@@ -328,26 +328,26 @@ describe('it renders', () => {
         user-select: all;
       }
 
-      .emotion-15[aria-invalid=true],
-      .emotion-15[data-invalid] {
+      .emotion-17[aria-invalid=true],
+      .emotion-17[data-invalid] {
         border-color: #E53E3E;
         box-shadow: 0 0 0 1px #E53E3E;
       }
 
-      .emotion-15:focus-visible,
-      .emotion-15[data-focus-visible] {
+      .emotion-17:focus-visible,
+      .emotion-17[data-focus-visible] {
         z-index: 1;
         border-color: #3182ce;
         box-shadow: 0 0 0 1px #3182ce;
       }
 
-      .emotion-15:focus,
-      .emotion-15[data-focus] {
+      .emotion-17:focus,
+      .emotion-17[data-focus] {
         border-color: var(--chakra-colors-brand-500);
         box-shadow: 0px 0px 0px 1px rgba(49, 130, 206, 1);
       }
 
-      .emotion-18 {
+      .emotion-20 {
         width: 100%;
         display: -webkit-box;
         display: -webkit-flex;
@@ -356,7 +356,7 @@ describe('it renders', () => {
         position: relative;
       }
 
-      .emotion-19 {
+      .emotion-21 {
         right: 0;
         width: var(--chakra-sizes-10);
         height: var(--chakra-sizes-10);
@@ -378,7 +378,7 @@ describe('it renders', () => {
         z-index: 2;
       }
 
-      .emotion-20 {
+      .emotion-22 {
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
@@ -420,50 +420,50 @@ describe('it renders', () => {
         color: var(--chakra-colors-muted);
       }
 
-      .emotion-20:focus-visible,
-      .emotion-20[data-focus-visible] {
+      .emotion-22:focus-visible,
+      .emotion-22[data-focus-visible] {
         box-shadow: var(--chakra-shadows-outline);
       }
 
-      .emotion-20:disabled,
-      .emotion-20[disabled],
-      .emotion-20[aria-disabled=true],
-      .emotion-20[data-disabled] {
+      .emotion-22:disabled,
+      .emotion-22[disabled],
+      .emotion-22[aria-disabled=true],
+      .emotion-22[data-disabled] {
         opacity: 0.4;
         cursor: not-allowed;
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .emotion-20:hover,
-      .emotion-20[data-hover] {
+      .emotion-22:hover,
+      .emotion-22[data-hover] {
         -webkit-text-decoration: none;
         text-decoration: none;
         color: var(--chakra-colors-default);
       }
 
-      .emotion-20:hover:disabled,
-      .emotion-20[data-hover]:disabled,
-      .emotion-20:hover[disabled],
-      .emotion-20[data-hover][disabled],
-      .emotion-20:hover[aria-disabled=true],
-      .emotion-20[data-hover][aria-disabled=true],
-      .emotion-20:hover[data-disabled],
-      .emotion-20[data-hover][data-disabled] {
+      .emotion-22:hover:disabled,
+      .emotion-22[data-hover]:disabled,
+      .emotion-22:hover[disabled],
+      .emotion-22[data-hover][disabled],
+      .emotion-22:hover[aria-disabled=true],
+      .emotion-22[data-hover][aria-disabled=true],
+      .emotion-22:hover[data-disabled],
+      .emotion-22[data-hover][data-disabled] {
         background: initial;
         -webkit-text-decoration: none;
         text-decoration: none;
       }
 
-      .emotion-20:focus:not(:focus-visible) {
+      .emotion-22:focus:not(:focus-visible) {
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .emotion-20:active,
-      .emotion-20[data-active] {
+      .emotion-22:active,
+      .emotion-22[data-active] {
         color: var(--chakra-colors-default);
       }
 
-      .emotion-21 {
+      .emotion-23 {
         width: 100%;
         min-width: 0px;
         outline: 2px solid transparent;
@@ -487,22 +487,22 @@ describe('it renders', () => {
         background: var(--chakra-colors-white);
       }
 
-      .emotion-21:disabled,
-      .emotion-21[disabled],
-      .emotion-21[aria-disabled=true],
-      .emotion-21[data-disabled] {
+      .emotion-23:disabled,
+      .emotion-23[disabled],
+      .emotion-23[aria-disabled=true],
+      .emotion-23[data-disabled] {
         opacity: 0.4;
         cursor: not-allowed;
       }
 
-      .emotion-21:hover,
-      .emotion-21[data-hover] {
+      .emotion-23:hover,
+      .emotion-23[data-hover] {
         border-color: var(--chakra-colors-gray-300);
       }
 
-      .emotion-21[aria-readonly=true],
-      .emotion-21[readonly],
-      .emotion-21[data-readonly] {
+      .emotion-23[aria-readonly=true],
+      .emotion-23[readonly],
+      .emotion-23[data-readonly] {
         box-shadow: var(--chakra-shadows-none)!important;
         -webkit-user-select: all;
         -moz-user-select: all;
@@ -510,26 +510,26 @@ describe('it renders', () => {
         user-select: all;
       }
 
-      .emotion-21[aria-invalid=true],
-      .emotion-21[data-invalid] {
+      .emotion-23[aria-invalid=true],
+      .emotion-23[data-invalid] {
         border-color: #E53E3E;
         box-shadow: 0 0 0 1px #E53E3E;
       }
 
-      .emotion-21:focus-visible,
-      .emotion-21[data-focus-visible] {
+      .emotion-23:focus-visible,
+      .emotion-23[data-focus-visible] {
         z-index: 1;
         border-color: #3182ce;
         box-shadow: 0 0 0 1px #3182ce;
       }
 
-      .emotion-21:focus,
-      .emotion-21[data-focus] {
+      .emotion-23:focus,
+      .emotion-23[data-focus] {
         border-color: var(--chakra-colors-brand-500);
         box-shadow: 0px 0px 0px 1px rgba(49, 130, 206, 1);
       }
 
-      .emotion-22 {
+      .emotion-24 {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -546,7 +546,7 @@ describe('it renders', () => {
         flex-direction: row;
       }
 
-      .emotion-22>*:not(style)~*:not(style) {
+      .emotion-24>*:not(style)~*:not(style) {
         margin-top: 0px;
         -webkit-margin-end: 0px;
         margin-inline-end: 0px;
@@ -555,7 +555,7 @@ describe('it renders', () => {
         margin-inline-start: 0.5rem;
       }
 
-      .emotion-23 {
+      .emotion-25 {
         cursor: pointer;
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
@@ -569,14 +569,14 @@ describe('it renders', () => {
         position: relative;
       }
 
-      .emotion-23:disabled,
-      .emotion-23[disabled],
-      .emotion-23[aria-disabled=true],
-      .emotion-23[data-disabled] {
+      .emotion-25:disabled,
+      .emotion-25[disabled],
+      .emotion-25[aria-disabled=true],
+      .emotion-25[data-disabled] {
         cursor: not-allowed;
       }
 
-      .emotion-24 {
+      .emotion-26 {
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
@@ -609,61 +609,61 @@ describe('it renders', () => {
         --checkbox-size: var(--chakra-sizes-4);
       }
 
-      .emotion-24[aria-checked=true],
-      .emotion-24[data-checked] {
+      .emotion-26[aria-checked=true],
+      .emotion-26[data-checked] {
         background: var(--chakra-colors-brand-500);
         border-color: var(--chakra-colors-brand-500);
         color: var(--chakra-colors-white);
       }
 
-      .emotion-24[aria-checked=true]:hover,
-      .emotion-24[data-checked]:hover,
-      .emotion-24[aria-checked=true][data-hover],
-      .emotion-24[data-checked][data-hover] {
+      .emotion-26[aria-checked=true]:hover,
+      .emotion-26[data-checked]:hover,
+      .emotion-26[aria-checked=true][data-hover],
+      .emotion-26[data-checked][data-hover] {
         background: var(--chakra-colors-brand-600);
         border-color: var(--chakra-colors-brand-600);
       }
 
-      .emotion-24[aria-checked=true]:disabled,
-      .emotion-24[data-checked]:disabled,
-      .emotion-24[aria-checked=true][disabled],
-      .emotion-24[data-checked][disabled],
-      .emotion-24[aria-checked=true][aria-disabled=true],
-      .emotion-24[data-checked][aria-disabled=true],
-      .emotion-24[aria-checked=true][data-disabled],
-      .emotion-24[data-checked][data-disabled] {
+      .emotion-26[aria-checked=true]:disabled,
+      .emotion-26[data-checked]:disabled,
+      .emotion-26[aria-checked=true][disabled],
+      .emotion-26[data-checked][disabled],
+      .emotion-26[aria-checked=true][aria-disabled=true],
+      .emotion-26[data-checked][aria-disabled=true],
+      .emotion-26[aria-checked=true][data-disabled],
+      .emotion-26[data-checked][data-disabled] {
         border-color: var(--chakra-colors-gray-200);
         background: var(--chakra-colors-gray-200);
         color: var(--chakra-colors-gray-500);
       }
 
-      .emotion-24:indeterminate,
-      .emotion-24[aria-checked=mixed],
-      .emotion-24[data-indeterminate] {
+      .emotion-26:indeterminate,
+      .emotion-26[aria-checked=mixed],
+      .emotion-26[data-indeterminate] {
         background: var(--chakra-colors-brand-500);
         border-color: var(--chakra-colors-brand-500);
         color: var(--chakra-colors-white);
       }
 
-      .emotion-24:disabled,
-      .emotion-24[disabled],
-      .emotion-24[aria-disabled=true],
-      .emotion-24[data-disabled] {
+      .emotion-26:disabled,
+      .emotion-26[disabled],
+      .emotion-26[aria-disabled=true],
+      .emotion-26[data-disabled] {
         background: var(--chakra-colors-gray-100);
         border-color: var(--chakra-colors-gray-100);
       }
 
-      .emotion-24:focus-visible,
-      .emotion-24[data-focus-visible] {
+      .emotion-26:focus-visible,
+      .emotion-26[data-focus-visible] {
         box-shadow: var(--chakra-shadows-outline);
       }
 
-      .emotion-24[aria-invalid=true],
-      .emotion-24[data-invalid] {
+      .emotion-26[aria-invalid=true],
+      .emotion-26[data-invalid] {
         border-color: var(--chakra-colors-red-500);
       }
 
-      .emotion-26 {
+      .emotion-28 {
         -webkit-animation: animation-0 200ms linear;
         animation: animation-0 200ms linear;
         font-size: var(--chakra-fontSizes-2xs);
@@ -672,7 +672,7 @@ describe('it renders', () => {
         width: 1.2em;
       }
 
-      .emotion-27 {
+      .emotion-29 {
         -webkit-margin-start: 0.5rem;
         margin-inline-start: 0.5rem;
         -webkit-user-select: none;
@@ -684,14 +684,14 @@ describe('it renders', () => {
         font-size: var(--chakra-fontSizes-sm);
       }
 
-      .emotion-27:disabled,
-      .emotion-27[disabled],
-      .emotion-27[aria-disabled=true],
-      .emotion-27[data-disabled] {
+      .emotion-29:disabled,
+      .emotion-29[disabled],
+      .emotion-29[aria-disabled=true],
+      .emotion-29[data-disabled] {
         opacity: 0.4;
       }
 
-      .emotion-28 {
+      .emotion-30 {
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
@@ -733,50 +733,50 @@ describe('it renders', () => {
         color: var(--chakra-colors-blue-600);
       }
 
-      .emotion-28:focus-visible,
-      .emotion-28[data-focus-visible] {
+      .emotion-30:focus-visible,
+      .emotion-30[data-focus-visible] {
         box-shadow: var(--chakra-shadows-outline);
       }
 
-      .emotion-28:disabled,
-      .emotion-28[disabled],
-      .emotion-28[aria-disabled=true],
-      .emotion-28[data-disabled] {
+      .emotion-30:disabled,
+      .emotion-30[disabled],
+      .emotion-30[aria-disabled=true],
+      .emotion-30[data-disabled] {
         opacity: 0.4;
         cursor: not-allowed;
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .emotion-28:hover,
-      .emotion-28[data-hover] {
+      .emotion-30:hover,
+      .emotion-30[data-hover] {
         -webkit-text-decoration: none;
         text-decoration: none;
         color: var(--chakra-colors-blue-700);
       }
 
-      .emotion-28:hover:disabled,
-      .emotion-28[data-hover]:disabled,
-      .emotion-28:hover[disabled],
-      .emotion-28[data-hover][disabled],
-      .emotion-28:hover[aria-disabled=true],
-      .emotion-28[data-hover][aria-disabled=true],
-      .emotion-28:hover[data-disabled],
-      .emotion-28[data-hover][data-disabled] {
+      .emotion-30:hover:disabled,
+      .emotion-30[data-hover]:disabled,
+      .emotion-30:hover[disabled],
+      .emotion-30[data-hover][disabled],
+      .emotion-30:hover[aria-disabled=true],
+      .emotion-30[data-hover][aria-disabled=true],
+      .emotion-30:hover[data-disabled],
+      .emotion-30[data-hover][data-disabled] {
         background: initial;
         -webkit-text-decoration: none;
         text-decoration: none;
       }
 
-      .emotion-28:focus:not(:focus-visible) {
+      .emotion-30:focus:not(:focus-visible) {
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .emotion-28:active,
-      .emotion-28[data-active] {
+      .emotion-30:active,
+      .emotion-30[data-active] {
         color: var(--chakra-colors-blue-700);
       }
 
-      .emotion-30 {
+      .emotion-32 {
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
@@ -818,46 +818,46 @@ describe('it renders', () => {
         color: var(--chakra-colors-white);
       }
 
-      .emotion-30:focus-visible,
-      .emotion-30[data-focus-visible] {
+      .emotion-32:focus-visible,
+      .emotion-32[data-focus-visible] {
         box-shadow: var(--chakra-shadows-outline);
       }
 
-      .emotion-30:disabled,
-      .emotion-30[disabled],
-      .emotion-30[aria-disabled=true],
-      .emotion-30[data-disabled] {
+      .emotion-32:disabled,
+      .emotion-32[disabled],
+      .emotion-32[aria-disabled=true],
+      .emotion-32[data-disabled] {
         opacity: 0.4;
         cursor: not-allowed;
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .emotion-30:hover,
-      .emotion-30[data-hover] {
+      .emotion-32:hover,
+      .emotion-32[data-hover] {
         background: var(--chakra-colors-brand-600);
       }
 
-      .emotion-30:hover:disabled,
-      .emotion-30[data-hover]:disabled,
-      .emotion-30:hover[disabled],
-      .emotion-30[data-hover][disabled],
-      .emotion-30:hover[aria-disabled=true],
-      .emotion-30[data-hover][aria-disabled=true],
-      .emotion-30:hover[data-disabled],
-      .emotion-30[data-hover][data-disabled] {
+      .emotion-32:hover:disabled,
+      .emotion-32[data-hover]:disabled,
+      .emotion-32:hover[disabled],
+      .emotion-32[data-hover][disabled],
+      .emotion-32:hover[aria-disabled=true],
+      .emotion-32[data-hover][aria-disabled=true],
+      .emotion-32:hover[data-disabled],
+      .emotion-32[data-hover][data-disabled] {
         background: var(--chakra-colors-brand-500);
       }
 
-      .emotion-30:focus:not(:focus-visible) {
+      .emotion-32:focus:not(:focus-visible) {
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .emotion-30:active,
-      .emotion-30[data-active] {
+      .emotion-32:active,
+      .emotion-32[data-active] {
         background: var(--chakra-colors-brand-700);
       }
 
-      .emotion-31 {
+      .emotion-33 {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -871,7 +871,7 @@ describe('it renders', () => {
         flex-direction: row;
       }
 
-      .emotion-31>*:not(style)~*:not(style) {
+      .emotion-33>*:not(style)~*:not(style) {
         margin-top: 0px;
         -webkit-margin-end: 0px;
         margin-inline-end: 0px;
@@ -880,7 +880,7 @@ describe('it renders', () => {
         margin-inline-start: 0.5rem;
       }
 
-      .emotion-32 {
+      .emotion-34 {
         opacity: 1;
         border: 0;
         border-color: inherit;
@@ -889,13 +889,13 @@ describe('it renders', () => {
         width: 100%;
       }
 
-      .emotion-33 {
+      .emotion-35 {
         font-size: var(--chakra-fontSizes-sm);
         white-space: nowrap;
         color: var(--chakra-colors-muted);
       }
 
-      .emotion-35 {
+      .emotion-37 {
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
@@ -904,12 +904,12 @@ describe('it renders', () => {
         margin-top: var(--chakra-space-4);
       }
 
-      .emotion-35>*:not(style)~*:not(style) {
+      .emotion-37>*:not(style)~*:not(style) {
         -webkit-margin-start: var(--chakra-space-4);
         margin-inline-start: var(--chakra-space-4);
       }
 
-      .emotion-36 {
+      .emotion-38 {
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
@@ -954,65 +954,65 @@ describe('it renders', () => {
         width: var(--chakra-sizes-full);
       }
 
-      .emotion-36:focus-visible,
-      .emotion-36[data-focus-visible] {
+      .emotion-38:focus-visible,
+      .emotion-38[data-focus-visible] {
         box-shadow: var(--chakra-shadows-outline);
       }
 
-      .emotion-36:disabled,
-      .emotion-36[disabled],
-      .emotion-36[aria-disabled=true],
-      .emotion-36[data-disabled] {
+      .emotion-38:disabled,
+      .emotion-38[disabled],
+      .emotion-38[aria-disabled=true],
+      .emotion-38[data-disabled] {
         opacity: 0.4;
         cursor: not-allowed;
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .emotion-36:hover,
-      .emotion-36[data-hover] {
+      .emotion-38:hover,
+      .emotion-38[data-hover] {
         background: #000000;
       }
 
-      .emotion-36:hover:disabled,
-      .emotion-36[data-hover]:disabled,
-      .emotion-36:hover[disabled],
-      .emotion-36[data-hover][disabled],
-      .emotion-36:hover[aria-disabled=true],
-      .emotion-36[data-hover][aria-disabled=true],
-      .emotion-36:hover[data-disabled],
-      .emotion-36[data-hover][data-disabled] {
+      .emotion-38:hover:disabled,
+      .emotion-38[data-hover]:disabled,
+      .emotion-38:hover[disabled],
+      .emotion-38[data-hover][disabled],
+      .emotion-38:hover[aria-disabled=true],
+      .emotion-38[data-hover][aria-disabled=true],
+      .emotion-38:hover[data-disabled],
+      .emotion-38[data-hover][data-disabled] {
         background: initial;
       }
 
-      .emotion-36:focus:not(:focus-visible) {
+      .emotion-38:focus:not(:focus-visible) {
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .chakra-button__group[data-attached][data-orientation=horizontal]>.emotion-36:not(:last-of-type) {
+      .chakra-button__group[data-attached][data-orientation=horizontal]>.emotion-38:not(:last-of-type) {
         -webkit-margin-end: -1px;
         margin-inline-end: -1px;
       }
 
-      .chakra-button__group[data-attached][data-orientation=vertical]>.emotion-36:not(:last-of-type) {
+      .chakra-button__group[data-attached][data-orientation=vertical]>.emotion-38:not(:last-of-type) {
         margin-bottom: -1px;
       }
 
-      .emotion-36:active,
-      .emotion-36[data-active] {
+      .emotion-38:active,
+      .emotion-38[data-active] {
         background: var(--chakra-colors-gray-100);
       }
 
-      .emotion-36[aria-checked=true],
-      .emotion-36[data-checked] {
+      .emotion-38[aria-checked=true],
+      .emotion-38[data-checked] {
         background: var(--chakra-colors-gray-100);
       }
 
-      .emotion-36:focus,
-      .emotion-36[data-focus] {
+      .emotion-38:focus,
+      .emotion-38[data-focus] {
         z-index: 1;
       }
 
-      .emotion-37 {
+      .emotion-39 {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -1032,7 +1032,7 @@ describe('it renders', () => {
         gap: var(--chakra-space-3);
       }
 
-      .emotion-37>*:not(style)~*:not(style) {
+      .emotion-39>*:not(style)~*:not(style) {
         margin-top: 0px;
         -webkit-margin-end: 0px;
         margin-inline-end: 0px;
@@ -1041,7 +1041,7 @@ describe('it renders', () => {
         margin-inline-start: 0.5rem;
       }
 
-      .emotion-38 {
+      .emotion-40 {
         width: 1em;
         height: 1em;
         display: inline-block;
@@ -1099,24 +1099,34 @@ describe('it renders', () => {
                 <div
                   class="chakra-stack emotion-11"
                 >
-                  <input
+                  <span
                     class="emotion-12"
-                    name="csrfToken"
-                    value="bd7939faf92607b83464e234a233121011659849469dd6c5c314f326511fca8e"
-                  />
+                  >
+                    <label
+                      class="chakra-form__label emotion-13"
+                      for="csrfToken"
+                    >
+                      csrfToken
+                    </label>
+                    <input
+                      class="emotion-12"
+                      name="csrfToken"
+                      value="bd7939faf92607b83464e234a233121011659849469dd6c5c314f326511fca8e"
+                    />
+                  </span>
                   <div
-                    class="chakra-form-control emotion-13"
+                    class="chakra-form-control emotion-15"
                     role="group"
                   >
                     <label
-                      class="chakra-form__label emotion-14"
+                      class="chakra-form__label emotion-13"
                       for="email"
                       id="field-:r5:-label"
                     >
                       Email
                     </label>
                     <input
-                      class="chakra-input emotion-15"
+                      class="chakra-input emotion-17"
                       id="email"
                       name="email"
                       placeholder="you@youremail.com"
@@ -1125,25 +1135,25 @@ describe('it renders', () => {
                     />
                   </div>
                   <div
-                    class="chakra-form-control emotion-13"
+                    class="chakra-form-control emotion-15"
                     role="group"
                   >
                     <label
-                      class="chakra-form__label emotion-14"
+                      class="chakra-form__label emotion-13"
                       for="password"
                       id="field-:r7:-label"
                     >
                       Password
                     </label>
                     <div
-                      class="chakra-input__group emotion-18"
+                      class="chakra-input__group emotion-20"
                     >
                       <div
-                        class="chakra-input__right-element emotion-19"
+                        class="chakra-input__right-element emotion-21"
                       >
                         <button
                           aria-label="Reveal password"
-                          class="chakra-button emotion-20"
+                          class="chakra-button emotion-22"
                           type="button"
                         >
                           🟢
@@ -1152,7 +1162,7 @@ describe('it renders', () => {
                       <input
                         aria-required="true"
                         autocomplete="current-password"
-                        class="chakra-input emotion-21"
+                        class="chakra-input emotion-23"
                         id="password"
                         name="password"
                         placeholder="***********"
@@ -1164,10 +1174,10 @@ describe('it renders', () => {
                   </div>
                 </div>
                 <div
-                  class="chakra-stack emotion-22"
+                  class="chakra-stack emotion-24"
                 >
                   <label
-                    class="chakra-checkbox emotion-23"
+                    class="chakra-checkbox emotion-25"
                     data-checked=""
                   >
                     <input
@@ -1179,7 +1189,7 @@ describe('it renders', () => {
                     />
                     <span
                       aria-hidden="true"
-                      class="chakra-checkbox__control emotion-24"
+                      class="chakra-checkbox__control emotion-26"
                       data-checked=""
                     >
                       <div
@@ -1187,7 +1197,7 @@ describe('it renders', () => {
                         style="display: flex; align-items: center; justify-content: center; height: 100%;"
                       >
                         <svg
-                          class="emotion-26"
+                          class="emotion-28"
                           style="fill: none; stroke-width: 2; stroke: currentColor; stroke-dasharray: 16;"
                           viewBox="0 0 12 10"
                         >
@@ -1198,14 +1208,14 @@ describe('it renders', () => {
                       </div>
                     </span>
                     <span
-                      class="chakra-checkbox__label emotion-27"
+                      class="chakra-checkbox__label emotion-29"
                       data-checked=""
                     >
                       Remember me
                     </span>
                   </label>
                   <button
-                    class="chakra-button emotion-28"
+                    class="chakra-button emotion-30"
                     type="button"
                   >
                     Forgot password?
@@ -1215,44 +1225,44 @@ describe('it renders', () => {
                   class="chakra-stack emotion-3"
                 >
                   <button
-                    class="chakra-button emotion-30"
+                    class="chakra-button emotion-32"
                     type="submit"
                   >
-                    Sign in
+                    Sign in Now
                   </button>
                 </div>
               </form>
               <div
-                class="chakra-stack emotion-31"
+                class="chakra-stack emotion-33"
               >
                 <hr
                   aria-orientation="horizontal"
-                  class="chakra-divider emotion-32"
+                  class="chakra-divider emotion-34"
                 />
                 <p
-                  class="chakra-text emotion-33"
+                  class="chakra-text emotion-35"
                 >
                   or continue with
                 </p>
                 <hr
                   aria-orientation="horizontal"
-                  class="chakra-divider emotion-32"
+                  class="chakra-divider emotion-34"
                 />
               </div>
               <div
-                class="chakra-button__group emotion-35"
+                class="chakra-button__group emotion-37"
                 data-orientation="horizontal"
                 role="group"
               >
                 <button
-                  class="chakra-button emotion-36"
+                  class="chakra-button emotion-38"
                   type="button"
                 >
                   <div
-                    class="chakra-stack emotion-37"
+                    class="chakra-stack emotion-39"
                   >
                     <svg
-                      class="chakra-icon emotion-38"
+                      class="chakra-icon emotion-40"
                       focusable="false"
                       viewBox="0 0 24 24"
                     >

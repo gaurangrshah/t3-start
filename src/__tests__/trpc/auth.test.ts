@@ -1,10 +1,6 @@
 import { createSession, trpcRequest } from '@/utils/test';
 import { TRPCError } from '@trpc/server';
 import { Session } from 'next-auth';
-import * as nextAuthReact from 'next-auth/react';
-
-jest.mock('next-auth/react');
-const nextAuthReactMocked = nextAuthReact as jest.Mocked<typeof nextAuthReact>;
 
 describe('auth/user router suite', () => {
   let session: Session;
