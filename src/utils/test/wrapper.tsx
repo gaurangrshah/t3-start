@@ -21,7 +21,6 @@ type RenderOptions = DefaultParams[1] & {
   session?: Session | null;
 };
 
-
 const logger = {
   log: process.env.NEXT_PUBLIC_APP_ENV === 'test' ? () => {} : console.log,
   warn: process.env.NEXT_PUBLIC_APP_ENV === 'test' ? () => {} : console.warn,
@@ -53,7 +52,15 @@ export function wrapper(options: RenderOptions = {}) {
               return false; // disable auto logging for tests
             },
           }),
-          httpBatchLink({ url: `http://localhost:3000/api/trpc`, fetch }),
+          httpBatchLink({
+            url: `http://localhost:3000/api/trpc`,
+            fetch(url, options) {
+              return fetch(url, {
+                ...options,
+                credentials: 'include',
+              });
+            },
+          }),
         ],
       })
     );

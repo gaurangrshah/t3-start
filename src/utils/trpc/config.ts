@@ -10,7 +10,15 @@ export const links = [
       process.env.NODE_ENV === 'development' ||
       (opts.direction === 'down' && opts.result instanceof Error),
   }),
-  httpBatchLink({ url: `${getBaseUrl()}/api/trpc`, fetch }),
+  httpBatchLink({
+    url: `${getBaseUrl()}/api/trpc`,
+    fetch(url, options) {
+      return fetch(url, {
+        ...options,
+        credentials: 'include',
+      });
+    },
+  }),
 ];
 
 export const queryClientConfig = {
