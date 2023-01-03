@@ -2,9 +2,9 @@ import { type NextPageWithAuth } from '@/types';
 
 // @TODO: build out admin dashboard
 
-const AdminDashboard: NextPageWithAuth & { auth: boolean } = () => {
+const AdminPage: NextPageWithAuth = () => {
   return <>Admin</>;
 };
 
-export default AdminDashboard;
-AdminDashboard.auth = true;
+export default AdminPage;
+AdminPage.auth = true;
