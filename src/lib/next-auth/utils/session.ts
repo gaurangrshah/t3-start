@@ -2,7 +2,7 @@ import { randomBytes } from 'crypto';
 
 import type { Session, User } from 'next-auth';
 
-import { prisma } from '../../server/db/client';
+import { prisma } from '../../../server/db/client';
 
 /**
  ** Use by test factory

@@ -9,7 +9,7 @@ import { prisma } from '@/server/db/client';
 // import EmailProvider from 'next-auth/providers/email';
 // import { ONE_DAY } from '@/utils';
 import { TEST_ENV } from '@/utils';
-import { comparePasswords } from './services';
+import { comparePasswords } from '../services';
 
 const google = GoogleProvider({
   clientId: env.GOOGLE_CLIENT_ID,
