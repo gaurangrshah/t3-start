@@ -11,14 +11,16 @@ import type { AppRouter } from '@/server/trpc/router/_app';
 import type { Session } from 'next-auth';
 import type { NextRouter } from 'next/router';
 
+import { AuthGate } from '@/components';
 import { theme } from '@/theme';
 import { mockRouter } from '@/__tests__/fixtures/mocks';
 
-type DefaultParams = Parameters<typeof defaultRender>;
-type RenderUI = DefaultParams[0];
-type RenderOptions = DefaultParams[1] & {
+export type DefaultParams = Parameters<typeof defaultRender>;
+export type RenderUI = DefaultParams[0];
+export type RenderOptions = DefaultParams[1] & {
   router?: Partial<NextRouter>;
   session?: Session | null;
+  auth?: boolean;
 };
 
 const logger = {
@@ -68,7 +70,10 @@ export function wrapper(options: RenderOptions = {}) {
     const ProviderPageProps = {
       cookies: 'string',
       session: null,
+      auth: false,
     };
+
+    const auth = options?.auth ?? ProviderPageProps.auth;
 
     return (
       <RouterContext.Provider value={{ ...mockRouter, ...options.router }}>
@@ -78,7 +83,9 @@ export function wrapper(options: RenderOptions = {}) {
               session={options?.session ?? ProviderPageProps.session}
               refetchInterval={5 * 1000}
             >
-              <ChakraProvider theme={theme}>{children}</ChakraProvider>
+              <ChakraProvider theme={theme}>
+                {auth ? <AuthGate>{children}</AuthGate> : children}
+              </ChakraProvider>
             </SessionProvider>
           </QueryClientProvider>
         </trpc.Provider>
