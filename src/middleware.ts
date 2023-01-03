@@ -8,11 +8,10 @@ export async function middleware(req: NextRequest) {
   console.log('middleware running...', { start });
   //token will exist if user is logged in
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  console.log('token at middleware', token);
 
   const { pathname } = req.nextUrl;
 
-  const whitelist = ['api/auth', '/'];
+  const whitelist: string[] = ['api/auth', '/'];
 
   if (whitelist.includes(pathname) || token) {
     console.log('response.next at middleware', null);
