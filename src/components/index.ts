@@ -1,3 +1,4 @@
+export * from './auto-toast';
 export * from './auth';
 export * from './bar';
 export * from './drawer';

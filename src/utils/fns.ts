@@ -1,12 +1,27 @@
+import type { Obj } from '@/types';
 import type { SyntheticEvent } from 'react';
-
-import { isClient,PORT } from './constants';
+import { isClient, PORT } from './constants';
 
 export const getBaseUrl = () => {
   if (typeof window !== 'undefined') return ''; // browser should use relative url
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`; // SSR should use vercel url
   return `http://localhost:${(PORT || process.env.SERVER_PORT) ?? 3000}`; // dev SSR should use localhost
 };
+
+/**
+ *
+ *
+ * @export
+ * @param {string[]} paramKeys
+ * @param {string} asPath
+ * @return {*}  {Obj}
+ */
+export function getParams(paramKeys: string[], asPath: string): Obj {
+  const params = new URLSearchParams(`${asPath}`);
+  return paramKeys.reduce((obj, curr) => {
+    return Object.assign({ ...obj, [curr]: params.get(curr) });
+  }, {});
+}
 
 /**
  *

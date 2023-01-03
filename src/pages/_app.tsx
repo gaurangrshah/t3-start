@@ -6,8 +6,14 @@ import Head from 'next/head';
 import type { NextComponentTypeWithAuth } from '@/types';
 import type { AppType } from 'next/app';
 
-import { AuthGate, ErrorBoundary } from '@/components';
+import {
+  AuthGate,
+  AutoToast,
+  ErrorBoundary,
+  type ToastStatusOptions,
+} from '@/components';
 import { theme } from '@/theme';
+import { getParams } from '@/utils';
 import { trpc } from '@/utils/trpc';
 
 const MyApp: AppType<{ session: Session | null }> = ({
@@ -17,6 +23,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
   router,
 }) => {
   const { auth } = Component as NextComponentTypeWithAuth;
+
+  const { success, error } = getParams(['error', 'success'], router.asPath);
+
+  let status: ToastStatusOptions;
+  if (error) status = 'error';
+  if (success) status = 'success';
+
   return (
     <>
       <Head>
@@ -25,9 +38,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
       </Head>
-      <SessionProvider session={session}>
-        <ErrorBoundary>
+      <ErrorBoundary>
+        <SessionProvider session={session}>
           <ChakraProvider theme={theme}>
+            <AutoToast
+              status={status}
+              message={String(error) ?? String(success)}
+            />
             {auth ? (
               <AuthGate>
                 <Component {...pageProps} />
@@ -36,8 +53,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
               <Component {...pageProps} />
             )}
           </ChakraProvider>
-        </ErrorBoundary>
-      </SessionProvider>
+        </SessionProvider>
+      </ErrorBoundary>
     </>
   );
 };
