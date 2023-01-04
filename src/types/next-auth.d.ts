@@ -11,11 +11,13 @@ declare module 'next-auth' {
     image: string;
     emailVerified?: string;
     accessToken?: string | unknown;
+    role?: string;
     user?: {
       id: string | unknown;
       email?: string;
       picture?: string;
       image?: string;
+      role?: string;
     } & DefaultSession['user'];
   }
 }
