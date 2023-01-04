@@ -131,3 +131,8 @@ export function dateToSeconds(datestamp: Date): number {
 export function secondsToDate(seconds: number) {
   return new Date(seconds * 1000);
 }
+
+export function isEmpty(obj: any) {
+  if (!obj) return true;
+  return Object.keys(obj).length === 0 && obj.constructor === Object;
+}

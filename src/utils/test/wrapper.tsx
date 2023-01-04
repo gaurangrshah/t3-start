@@ -1,6 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render as defaultRender } from '@testing-library/react';
 import { createTRPCReact, httpBatchLink, loggerLink } from '@trpc/react-query';
 import fetch from 'cross-fetch';
 import { SessionProvider } from 'next-auth/react';
@@ -8,20 +7,12 @@ import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { useState } from 'react';
 
 import type { AppRouter } from '@/server/trpc/router/_app';
-import type { Session } from 'next-auth';
-import type { NextRouter } from 'next/router';
 
 import { AuthGate } from '@/components';
 import { theme } from '@/theme';
+import { isEmpty } from '@/utils';
 import { mockRouter } from '@/__tests__/fixtures/mocks';
-
-export type DefaultParams = Parameters<typeof defaultRender>;
-export type RenderUI = DefaultParams[0];
-export type RenderOptions = DefaultParams[1] & {
-  router?: Partial<NextRouter>;
-  session?: Session | null;
-  auth?: boolean;
-};
+import { RenderOptions } from './render';
 
 const logger = {
   log: process.env.NEXT_PUBLIC_APP_ENV === 'test' ? () => {} : console.log,
@@ -30,50 +21,73 @@ const logger = {
   error: process.env.NEXT_PUBLIC_APP_ENV === 'test' ? () => {} : console.error,
 };
 
-export const trpc = createTRPCReact<AppRouter>();
+const trpc = createTRPCReact<AppRouter>();
+
+export function useClients() {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        logger,
+        defaultOptions: {
+          queries: {
+            retry: false,
+          },
+        },
+      })
+  );
+
+  const [trpcClient] = useState(() =>
+    trpc.createClient({
+      links: [
+        loggerLink({
+          enabled(opts) {
+            return false; // disable auto logging for tests
+          },
+        }),
+        httpBatchLink({
+          url: `http://localhost:3000/api/trpc`,
+          fetch(url, opts) {
+            return fetch(url, {
+              ...opts,
+              credentials: 'include',
+            });
+          },
+        }),
+      ],
+    })
+  );
+
+  return { trpcClient, queryClient };
+}
+
+const ProviderPageProps = {
+  cookies: 'string',
+  session: null,
+};
 
 export function wrapper(options: RenderOptions = {}) {
   return function Wrapper({ children }: { children: React.ReactNode }) {
-    const [queryClient] = useState(
-      () =>
-        new QueryClient({
-          logger,
-          defaultOptions: {
-            queries: {
-              retry: false,
-            },
-          },
-        })
+    const { trpcClient, queryClient } = useClients();
+    return (
+      <RouterContext.Provider value={{ ...mockRouter, ...options.router }}>
+        <trpc.Provider client={trpcClient} queryClient={queryClient}>
+          <QueryClientProvider client={queryClient}>
+            <SessionProvider
+              session={options?.session ?? ProviderPageProps.session}
+              refetchInterval={5 * 1000}
+            >
+              <ChakraProvider theme={theme}>{children}</ChakraProvider>
+            </SessionProvider>
+          </QueryClientProvider>
+        </trpc.Provider>
+      </RouterContext.Provider>
     );
+  };
+}
 
-    const [trpcClient] = useState(() =>
-      trpc.createClient({
-        links: [
-          loggerLink({
-            enabled(opts) {
-              return false; // disable auto logging for tests
-            },
-          }),
-          httpBatchLink({
-            url: `http://localhost:3000/api/trpc`,
-            fetch(url, options) {
-              return fetch(url, {
-                ...options,
-                credentials: 'include',
-              });
-            },
-          }),
-        ],
-      })
-    );
-
-    const ProviderPageProps = {
-      cookies: 'string',
-      session: null,
-      auth: false,
-    };
-
-    const auth = options?.auth ?? ProviderPageProps.auth;
+export function authWrapper(options: RenderOptions = {}) {
+  return function Wrapper({ children }: { children: React.ReactNode }) {
+    const { trpcClient, queryClient } = useClients();
 
     return (
       <RouterContext.Provider value={{ ...mockRouter, ...options.router }}>
@@ -84,7 +98,7 @@ export function wrapper(options: RenderOptions = {}) {
               refetchInterval={5 * 1000}
             >
               <ChakraProvider theme={theme}>
-                {auth ? <AuthGate>{children}</AuthGate> : children}
+                <AuthGate>{children}</AuthGate>
               </ChakraProvider>
             </SessionProvider>
           </QueryClientProvider>
