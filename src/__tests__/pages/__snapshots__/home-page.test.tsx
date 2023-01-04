@@ -1,9 +1,16 @@
 import Home from '@/pages/index';
 import { render, screen } from '@/utils/test';
 
+const homeRouter = {
+  route: '/',
+  pathname: '/',
+  query: { callbackUrl: 'http://localhost:3000/' },
+  asPath: '/?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F',
+};
+
 describe('it renders', () => {
   test('home', async () => {
-    render(<Home />);
+    render(<Home />, { router: homeRouter });
 
     const main = await screen.getByRole('main');
 

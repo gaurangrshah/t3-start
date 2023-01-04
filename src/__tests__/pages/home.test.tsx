@@ -1,16 +1,23 @@
 import Home from '@/pages/index';
 import {
-  mockSession,
-  render,
-  screen,
-  userEvent,
-  waitFor,
-  waitForElementToBeRemoved,
+mockSession,
+render,
+screen,
+userEvent,
+waitFor,
+waitForElementToBeRemoved
 } from '@/utils/test';
+
+const homeRouter = {
+  route: '/',
+  pathname: '/',
+  query: { callbackUrl: 'http://localhost:3000/' },
+  asPath: '/?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F',
+};
 
 describe('ensures tests are run against test env', () => {
   test('should run tests in the test environment', () => {
-    render(<Home />);
+    render(<Home />, { router: homeRouter });
     expect(screen.queryByText('TEST_ENV')).toBeInTheDocument();
   });
 });
@@ -18,12 +25,12 @@ describe('ensures tests are run against test env', () => {
 describe('homepage unauthenticated', () => {
   test('renders with no errors', async () => {
     expect(async () => {
-      await render(<Home />);
+      await render(<Home />, { router: homeRouter });
     }).not.toThrowError();
   });
 
   test('initial loading state', async () => {
-    render(<Home />);
+    render(<Home />, { router: homeRouter });
 
     const heading = screen.getByRole('heading', {
       level: 1,
@@ -40,7 +47,7 @@ describe('homepage unauthenticated', () => {
 
   test('signin clicks', async () => {
     const user = userEvent.setup();
-    render(<Home />);
+    render(<Home />, { router: homeRouter });
 
     const btn = await screen.getByRole('button', { name: /sign in/i });
     expect(btn).toBeInTheDocument();
@@ -51,12 +58,12 @@ describe('homepage unauthenticated', () => {
 describe('homepage authenticated', () => {
   test('renders with no errors', async () => {
     expect(async () => {
-      await render(<Home />, { session: mockSession });
+      await render(<Home />, { router: homeRouter, session: mockSession });
     }).not.toThrowError();
   });
 
   test('initial loading state', async () => {
-    await render(<Home />, { session: mockSession });
+    await render(<Home />, { router: homeRouter, session: mockSession });
 
     const heading = await screen.getByRole('heading', {
       level: 1,
@@ -78,7 +85,7 @@ describe('homepage authenticated', () => {
 
   test('signout it clicks', async () => {
     const user = userEvent.setup();
-    render(<Home />, { session: mockSession });
+    render(<Home />, { router:homeRouter, session: mockSession });
 
     const btn = await screen.getByRole('button', { name: /sign out/i });
     expect(btn).toBeInTheDocument();
