@@ -1,11 +1,15 @@
 import type { UserEvent } from '@testing-library/user-event/dist/types/setup/setup';
 
 import SignupPage from '@/pages/auth/register';
-import { mockCsrf, render, screen, userEvent } from '@/utils/test';
+import { cleanEvents, mockCsrf, render, screen, userEvent } from '@/utils/test';
 
 let user: UserEvent;
 beforeAll(() => {
   user = userEvent.setup();
+});
+
+beforeEach(() => {
+  cleanEvents();
 });
 
 describe('pages/auth/signin | test suite', () => {
@@ -35,7 +39,6 @@ describe('pages/auth/signin | test suite', () => {
   test('should be able to complete signin form', async () => {
     await render(<SignupPage csrf={mockCsrf} />);
 
-    // expect(screen.getByLabelText(/csrftoken/i)).not.toBeVisible();
     const nameInput = screen.getByLabelText(/name/i);
     expect(nameInput).toBeInTheDocument();
     user.clear(nameInput);
@@ -48,7 +51,7 @@ describe('pages/auth/signin | test suite', () => {
 
     const inputs = screen.getAllByRole('textbox');
     expect(inputs).toHaveLength(3);
-    // const passwordInput = inputs[1] as Element;
+
     const passwordInput = screen.getAllByLabelText(/password/i)[0] as Element;
     expect(passwordInput).toBeInTheDocument();
     user.clear(passwordInput);
@@ -58,8 +61,5 @@ describe('pages/auth/signin | test suite', () => {
     expect(submitBtn).toBeInTheDocument();
 
     user.click(submitBtn);
-
-    // await expect(signInMock).toHaveBeenCalledTimes(1);
-    // signInMock.mockRestore();
   });
 });
