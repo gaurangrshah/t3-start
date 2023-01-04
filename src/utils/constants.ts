@@ -34,3 +34,5 @@ export const PLACEHOLDER_DIR = '/images/placeholder';
 export const SERVICES_DIR = '/images/services';
 
 export const TEST_ENV = process.env.NEXT_PUBLIC_APP_ENV === 'test';
+
+export const IS_TEST = TEST_ENV || process.env.NODE_ENV === 'test';

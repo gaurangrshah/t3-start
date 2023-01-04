@@ -53,7 +53,7 @@ describe('it renders', () => {
         font-size: var(--chakra-fontSizes-2xl);
       }
 
-      .emotion-6 {
+      .emotion-7 {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -72,7 +72,7 @@ describe('it renders', () => {
         gap: var(--chakra-space-4);
       }
 
-      .emotion-8 {
+      .emotion-9 {
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
@@ -115,36 +115,36 @@ describe('it renders', () => {
         padding: 0.75rem 2.5rem;
       }
 
-      .emotion-8:focus-visible,
-      .emotion-8[data-focus-visible] {
+      .emotion-9:focus-visible,
+      .emotion-9[data-focus-visible] {
         box-shadow: var(--chakra-shadows-outline);
       }
 
-      .emotion-8:disabled,
-      .emotion-8[disabled],
-      .emotion-8[aria-disabled=true],
-      .emotion-8[data-disabled] {
+      .emotion-9:disabled,
+      .emotion-9[disabled],
+      .emotion-9[aria-disabled=true],
+      .emotion-9[data-disabled] {
         opacity: 0.4;
         cursor: not-allowed;
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .emotion-8:hover,
-      .emotion-8[data-hover] {
+      .emotion-9:hover,
+      .emotion-9[data-hover] {
         background: rgba(255, 255, 255, 0.2);
       }
 
-      .emotion-8:focus:not(:focus-visible) {
+      .emotion-9:focus:not(:focus-visible) {
         box-shadow: var(--chakra-shadows-none);
       }
 
-      .emotion-8[aria-checked=true],
-      .emotion-8[data-checked] {
+      .emotion-9[aria-checked=true],
+      .emotion-9[data-checked] {
         background: var(--chakra-colors-gray-100);
       }
 
-      .emotion-8:active,
-      .emotion-8[data-active] {
+      .emotion-9:active,
+      .emotion-9[data-active] {
         background: var(--chakra-colors-gray-100);
       }
 
@@ -173,14 +173,19 @@ describe('it renders', () => {
             >
               Loading tRPC query...
             </p>
-            <div
+            <p
               class="emotion-6"
+            >
+              TEST_ENV
+            </p>
+            <div
+              class="emotion-7"
             >
               <p
                 class="emotion-5"
               />
               <button
-                class="chakra-button emotion-8"
+                class="chakra-button emotion-9"
                 type="button"
               >
                 Sign in

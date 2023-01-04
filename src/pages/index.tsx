@@ -6,6 +6,7 @@ import type { NextPage } from 'next';
 import type { FC } from 'react';
 
 import { DefaultLayout } from '@/components';
+import { IS_TEST } from '@/utils';
 import { trpc } from '@/utils/trpc';
 
 const Home: NextPage = () => {
@@ -25,6 +26,7 @@ const Home: NextPage = () => {
           <chakra.p color="white" fontSize="2xl">
             {hello.data ? hello.data.greeting : 'Loading tRPC query...'}
           </chakra.p>
+          {IS_TEST ? <chakra.p>TEST_ENV</chakra.p> : null}
           <AuthShowcase />
         </Flex>
       </chakra.div>

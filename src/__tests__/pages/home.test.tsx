@@ -8,6 +8,13 @@ import {
   waitForElementToBeRemoved,
 } from '@/utils/test';
 
+describe('ensures tests are run against test env', () => {
+  test('should run tests in the test environment', () => {
+    render(<Home />);
+    expect(screen.queryByText('TEST_ENV')).toBeInTheDocument();
+  });
+});
+
 describe('homepage unauthenticated', () => {
   test('renders with no errors', async () => {
     expect(async () => {
@@ -16,7 +23,7 @@ describe('homepage unauthenticated', () => {
   });
 
   test('initial loading state', async () => {
-    const { debug } = render(<Home />);
+    render(<Home />);
 
     const heading = screen.getByRole('heading', {
       level: 1,
