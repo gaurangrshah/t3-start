@@ -4,7 +4,7 @@
 import EventEmitter from 'events';
 import type { NextRouter } from 'next/router';
 
-jest.mock('next/router', () => ({
+export const nextRouterMocked = jest.mock('next/router', () => ({
   __esModule: true,
   // ...jest.requireActual('next/router'),
   useRouter() {
@@ -44,5 +44,7 @@ export function createMockRouter(router: Partial<NextRouter>) {
     ...router,
   };
 }
+
+
 
 export const cleanEvents = () => emitter.removeAllListeners();
