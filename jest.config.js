@@ -26,6 +26,7 @@ const customJestConfig = {
   //   prefix: '<rootDir>/src/',
   // }),
   testEnvironment: 'jsdom',
+  // testURL: 'http://localhost:3000',
   resetMocks: true,
   globals: {
     'ts-jest': {
