@@ -1,14 +1,16 @@
 /**
  * @ SEE: https://tinyurl.com/2j29z5mb
  */
+
 import EventEmitter from 'events';
-import type { NextRouter } from 'next/router';
+
+import singletonRouter, { type NextRouter } from 'next/router';
 
 export const nextRouterMocked = jest.mock('next/router', () => ({
   __esModule: true,
-  // ...jest.requireActual('next/router'),
+  // ...jest.requireActal('next/router'),
   useRouter() {
-    return mockRouter;
+    return createMockRouter(mockRouter);
   },
 }));
 
@@ -35,6 +37,8 @@ export const mockRouter: NextRouter = {
   isFallback: false,
   isLocaleDomain: false,
   isReady: false,
+  defaultLocale: 'en',
+  domainLocales: [],
   isPreview: false,
 };
 
@@ -44,7 +48,5 @@ export function createMockRouter(router: Partial<NextRouter>) {
     ...router,
   };
 }
-
-
 
 export const cleanEvents = () => emitter.removeAllListeners();

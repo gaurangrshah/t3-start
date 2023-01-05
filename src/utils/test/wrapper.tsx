@@ -11,7 +11,7 @@ import type { AppRouter } from '@/server/trpc/router/_app';
 import { AuthGate } from '@/components';
 import { theme } from '@/theme';
 import { isEmpty } from '@/utils';
-import { mockRouter } from '@/__tests__/fixtures/mocks';
+import { createMockRouter, mockRouter } from '@/__tests__/fixtures/mocks';
 import { RenderOptions } from './render';
 
 const logger = {
@@ -90,7 +90,11 @@ export function authWrapper(options: RenderOptions = {}) {
     const { trpcClient, queryClient } = useClients();
 
     return (
-      <RouterContext.Provider value={{ ...mockRouter, ...options.router }}>
+      <RouterContext.Provider
+        value={
+          options?.router ? createMockRouter(options.router) : { ...mockRouter }
+        }
+      >
         <trpc.Provider client={trpcClient} queryClient={queryClient}>
           <QueryClientProvider client={queryClient}>
             <SessionProvider
