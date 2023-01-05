@@ -1,7 +1,7 @@
-import { httpBatchLink, loggerLink } from '@trpc/client';
+import { httpBatchLink,loggerLink } from '@trpc/client';
 import fetch from 'cross-fetch';
 import { NextPageContext } from 'next';
-import { DEFAULT_STALE_TIME } from '../constants';
+import { DEFAULT_STALE_TIME, ONE_DAY } from '../constants';
 import { getBaseUrl } from '../fns';
 
 export const links = [
@@ -35,4 +35,9 @@ export const getHeaders = (ctx: NextPageContext | undefined) => {
     };
   }
   return {};
+};
+
+export const headers = {
+  // unused
+  'cache-control': `s-maxage=1, stale-while-revalidate=${ONE_DAY}`,
 };
