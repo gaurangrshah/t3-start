@@ -1,37 +1,59 @@
 import type { UserEvent } from '@testing-library/user-event/dist/types/setup/setup';
-import type { NextRouter } from 'next/router';
 
 import SigninPage from '@/pages/auth/signin';
 import {
   cleanEvents,
-  createMockRouter,
   mockCsrf,
   mockProviders,
-  mockRouter,
   render,
   screen,
   userEvent,
 } from '@/utils/test';
+
+const originalLocation = window.location;
+const signinRouter = {
+  route: '/auth/signin',
+  pathname: '/auth/signin',
+  query: { callbackUrl: 'http://localhost:3000/' },
+  asPath: '/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F',
+};
 
 let user: UserEvent;
 beforeAll(() => {
   user = userEvent.setup();
 });
 
-beforeEach(() => {
-  cleanEvents();
+afterAll(() => {
+  Object.defineProperty(window, 'location', originalLocation);
 });
+describe('auth/signin | test suite', () => {
+  beforeEach(() => {
+    global.window = Object.create(window);
+    Object.defineProperty(window, 'location', {
+      value: {
+        pathname: signinRouter.pathname,
+      },
+      writable: true,
+    });
+    cleanEvents();
+  });
 
-describe('pages/auth/signin | test suite', () => {
   test('should render signin page with no errors', () => {
     expect(async () => {
-      await render(<SigninPage csrf={mockCsrf} providers={mockProviders} />);
+      await render(<SigninPage csrf={mockCsrf} providers={mockProviders} />, {
+        session: null,
+        router: signinRouter,
+      });
     }).not.toThrowError();
   });
 
   test('should render auth signin header', async () => {
-    render(<SigninPage csrf={mockCsrf} providers={mockProviders} />);
+    render(<SigninPage csrf={mockCsrf} providers={mockProviders} />, {
+      session: null,
+      router: signinRouter,
+    });
 
+    expect(window.location.pathname).toBe('/auth/signin');
     expect(
       screen.getByRole('heading', { level: 2, name: /log in to your account/i })
     ).toBeInTheDocument();
@@ -44,7 +66,10 @@ describe('pages/auth/signin | test suite', () => {
   });
 
   test('should be able to complete signin form', async () => {
-    render(<SigninPage csrf={mockCsrf} providers={mockProviders} />);
+    render(<SigninPage csrf={mockCsrf} providers={mockProviders} />, {
+      session: null,
+      router: signinRouter,
+    });
 
     const emailInput = screen.getByLabelText(/email/i);
     expect(emailInput).toBeInTheDocument();

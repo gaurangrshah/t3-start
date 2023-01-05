@@ -1,11 +1,42 @@
 import SigninPage from '@/pages/auth/signin';
-import { mockCsrf, mockProviders, render, screen } from '@/utils/test';
+import {
+  cleanEvents,
+  mockCsrf,
+  mockProviders,
+  render,
+  screen,
+} from '@/utils/test';
+
+const originalLocation = window.location;
+const signinRouter = {
+  route: '/auth/signin',
+  pathname: '/auth/signin',
+  query: { callbackUrl: 'http://localhost:3000/' },
+  asPath: '/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F',
+};
+afterAll(() => {
+  Object.defineProperty(window, 'location', originalLocation);
+});
 
 describe('it renders', () => {
-  test('home', async () => {
-    render(<SigninPage csrf={mockCsrf} providers={mockProviders} />);
+  beforeEach(() => {
+    global.window = Object.create(window);
+    Object.defineProperty(window, 'location', {
+      value: {
+        pathname: signinRouter.pathname,
+      },
+      writable: true,
+    });
+    cleanEvents();
+  });
 
-    const main = await screen.getByRole('main');
+  test('home', () => {
+    render(<SigninPage csrf={mockCsrf} providers={mockProviders} />, {
+      session: null,
+      router: signinRouter,
+    });
+
+    const main = screen.getByRole('main');
 
     expect(main).toMatchInlineSnapshot(`
       @keyframes animation-0 {

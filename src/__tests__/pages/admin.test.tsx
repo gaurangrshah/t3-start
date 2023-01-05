@@ -17,9 +17,6 @@ const adminRouter = createMockRouter({
 
 describe('AdminPage authenticated', () => {
   beforeEach(() => {
-    // @NOTE: the below overwrites window pathname which fixes the following error:
-    // Error: Not implemented: navigation (except hash changes)
-    // @SEE: https://github.com/facebook/jest/issues/890#issuecomment-765809133
     global.window = Object.create(window);
     Object.defineProperty(window, 'location', {
       value: {

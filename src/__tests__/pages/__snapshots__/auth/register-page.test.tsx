@@ -1,9 +1,31 @@
-import SignupPage from '@/pages/auth/register';
-import { mockCsrf, render, screen } from '@/utils/test';
-
+import RegisterPage from '@/pages/auth/register';
+import { cleanEvents, mockCsrf, render, screen } from '@/utils/test';
+const originalLocation = window.location;
+const registerRouter = {
+  route: '/auth/register',
+  pathname: '/auth/register',
+  asPath: '/auth/register',
+};
+afterAll(() => {
+  Object.defineProperty(window, 'location', originalLocation);
+});
 describe('it renders', () => {
+  beforeEach(() => {
+    global.window = Object.create(window);
+    Object.defineProperty(window, 'location', {
+      value: {
+        pathname: registerRouter.pathname,
+      },
+      writable: true,
+    });
+    cleanEvents();
+  });
+
   test('home', async () => {
-    render(<SignupPage csrf={mockCsrf} />);
+    render(<RegisterPage csrf={mockCsrf} />, {
+      session: null,
+      router: registerRouter,
+    });
 
     const main = await screen.getByRole('main');
 
