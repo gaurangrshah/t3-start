@@ -1,7 +1,8 @@
+import { TRPCError } from '@trpc/server';
+
 import { hashPassword } from '@/lib/next-auth/services';
 import { userInputSchema } from '@/server/schema';
 import { trpcPrismaErrorHandler } from '@/utils/error';
-import { TRPCError } from '@trpc/server';
 import { adminProcedure, protectedProcedure, router } from '../trpc';
 
 export const userRouter = router({
@@ -27,7 +28,9 @@ export const userRouter = router({
           user,
           isSuccess: true,
         };
-      } catch (error) {}
+      } catch (error) {
+        trpcPrismaErrorHandler(error);
+      }
     }),
   getUserByEmail: protectedProcedure
     .input(userInputSchema.pick({ email: true }))
