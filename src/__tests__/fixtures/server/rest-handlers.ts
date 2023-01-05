@@ -3,7 +3,7 @@
  */
 import { rest } from 'msw';
 
-import { mockSession } from '@/utils/test';
+import { sessions } from '@/utils/test';
 
 export const MOCK_CACHE = 'mock cache';
 export const MOCK_PAGE_ID = 'mock-page-id';
@@ -15,7 +15,7 @@ afterEach(() => {
 });
 
 export const restHandlers = [
-  rest.get('*/api/trpc/example.hello', (req, res, ctx) => {
+  rest.get('http://localhost:3000/api/trpc/example.hello', (req, res, ctx) => {
     return res(
       // ctx.delay(100),
       ctx.status(200),
@@ -23,19 +23,16 @@ export const restHandlers = [
         input: {},
         result: {
           data: {
-            json: JSON.stringify({ greeting: 'Hello from tRPC' }),
+            json: JSON.stringify({ greeting: 'Hello from tRPC test' }),
           },
         },
       })
     );
   }),
-  rest.get('*/api/auth/session', (req, res, ctx) => {
+  rest.get('http://localhost:3000/api/auth/session', (req, res, ctx) => {
     return res(
       ctx.status(200),
-      ctx.json({
-        data: mockSession,
-        status: 'authenticated',
-      })
+      ctx.json(sessions.userAuthed?.session)
     );
   }),
   // rest.post('*/api/trpc/auth.register', (req, res, ctx) => {
