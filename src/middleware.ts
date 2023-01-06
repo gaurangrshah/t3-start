@@ -26,7 +26,10 @@ export async function middleware(req: NextRequest) {
 
   if (!token && isProtectedRoute) {
     console.log('redirect to login middleware', null);
-    return NextResponse.redirect(new URL('/auth/signin', req.url));
+    // add ?callbackUrl="req.url"
+    return NextResponse.redirect(
+      new URL(`/auth/signin/?callbackUrl=${req.url}`, req.url)
+    );
   }
 
   const end = Date.now();
