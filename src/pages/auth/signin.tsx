@@ -7,6 +7,7 @@ import {
   HStack,
   Stack,
   Text,
+  VStack,
 } from '@chakra-ui/react';
 import { getCsrfToken, getProviders, signIn } from 'next-auth/react';
 
@@ -29,10 +30,29 @@ const CredentialsForm: React.FC<{ csrf: string } & Visibility> = ({
 const GoogleOAuth: React.FC<Visibility> = ({ show }) => {
   const callbackUrl = '/'; // @TODO: redirect to profile?
   return show ? (
-    <Button w="full" onClick={() => signIn('google', { callbackUrl })}>
+    <Button
+      w="full"
+      onClick={() => signIn('google', { callbackUrl })}
+      variant="outline"
+    >
       <HStack w="full" justifyContent="center" gap={3}>
         <GoogleIcon />
         <Text>Sign in with Google</Text>
+      </HStack>
+    </Button>
+  ) : null;
+};
+const GithubOAuth: React.FC<Visibility> = ({ show }) => {
+  const callbackUrl = '/'; // @TODO: redirect to profile?
+  return show ? (
+    <Button
+      w="full"
+      onClick={() => signIn('github', { callbackUrl })}
+      variant="outline"
+    >
+      <HStack w="full" justifyContent="center" gap={3}>
+        {/* <GoogleIcon /> */}
+        <Text>Sign in with Github</Text>
       </HStack>
     </Button>
   ) : null;
@@ -70,9 +90,10 @@ const SigninPage: NextPage<{
           <Box layerStyle="panel">
             <CredentialsForm show={!!providers.credentials} csrf={csrf} />
             <AuthDivider show={providers?.google && providers?.credentials} />
-            <ButtonGroup variant="outline" spacing="4" width="full" mt={4}>
+            <VStack spacing="4" width="full" mt={4}>
               <GoogleOAuth show={!!providers.google} />
-            </ButtonGroup>
+              <GithubOAuth show={!!providers.github} />
+            </VStack>
           </Box>
         </Stack>
       </Container>

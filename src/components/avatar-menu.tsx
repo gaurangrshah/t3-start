@@ -15,7 +15,10 @@ import type { SyntheticEvent } from 'react';
 
 import { onPromise } from '@/utils/fns';
 
-const defaultLinks = [{ label: 'home', href: '/' }];
+const defaultLinks = [
+  { label: 'home', href: '/' },
+  { label: 'editor', href: '/editor' },
+];
 
 const ChNextLink = chakra(Link);
 
