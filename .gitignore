@@ -44,3 +44,6 @@ yarn-error.log*
 
 # sqlite
 prisma/test.db.sqlite
+
+#temporary
+__data
