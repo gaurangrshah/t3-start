@@ -19,7 +19,10 @@ export function parseFormData(input: HTMLInputElement) {
  * @param {HTMLInputElement[]} inputsElements
  * @return {*}
  */
-export function convertFormToObject(inputsElements: HTMLInputElement[]) {
+type AllInputsType = HTMLInputElement | HTMLTextAreaElement;
+export function convertFormToObject(
+  inputsElements: AllInputsType[]
+): Record<string, string> {
   return inputsElements.reduce((obj, item) => {
     if (item.name && item.value) {
       return {
