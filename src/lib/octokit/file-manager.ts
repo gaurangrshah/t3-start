@@ -1,14 +1,15 @@
 import { Octokit } from '@octokit/rest';
+import {
+  Endpoints,
+  GetResponseDataTypeFromEndpointMethod,
+  GetResponseTypeFromEndpointMethod,
+} from '@octokit/types';
+// import { Repository } from './types';
 
 export const octokit = new Octokit({
   // auth: `${nextAuth.providers[0].credentials.token}`,
   // auth: `client_id:${clientId}, client_secret:${clientSecret}`,
 });
-
-interface Repository {
-  name: string;
-  owner: string;
-}
 
 type GitOpsInput = {
   path: string;
@@ -17,12 +18,38 @@ type GitOpsInput = {
   sha: string;
 };
 
+type Repository = GetResponseDataTypeFromEndpointMethod<
+  typeof octokit.repos.createUsingTemplate
+>;
+
+type Author = {
+  name: string;
+  email: string;
+};
+
 class FileManager {
   repository: Repository;
   octokit: any;
-  constructor(repository: Repository, token: string) {
+  committer: Author;
+  author: Author;
+  token: string;
+  constructor(
+    repository: Repository,
+    committer: Author,
+    author: Author,
+    token: string
+  ) {
     this.repository = repository;
     this.octokit = octokit;
+    this.token = token;
+    this.committer = committer || {
+      name: 'Your Name',
+      email: 'your@email.com',
+    };
+    this.author = author || {
+      name: 'Your Name',
+      email: 'your@email.com',
+    };
   }
 
   async createFile({ path, content, message }: Omit<GitOpsInput, 'sha'>) {
@@ -32,14 +59,8 @@ class FileManager {
       path,
       content: Buffer.from(content).toString('base64'),
       message,
-      committer: {
-        name: 'Your Name',
-        email: 'your@email.com',
-      },
-      author: {
-        name: 'Your Name',
-        email: 'your@email.com',
-      },
+      committer: this.committer,
+      author: this.author,
     });
     return data;
   }
@@ -64,14 +85,8 @@ class FileManager {
       content: Buffer.from(content).toString('base64'),
       message,
       sha,
-      committer: {
-        name: 'Your Name',
-        email: 'your@email.com',
-      },
-      author: {
-        name: 'Your Name',
-        email: 'your@email.com',
-      },
+      committer: this.committer,
+      author: this.author,
     });
     return data;
   }
@@ -83,10 +98,7 @@ class FileManager {
       path,
       sha,
       message,
-      committer: {
-        name: 'Your Name',
-        email: 'your@email.com',
-      },
+      committer: this.committer,
     });
     return data;
   }
@@ -151,22 +163,35 @@ class FileManager {
       console.error(error);
     }
   }
+
+  async selectRepository(repositoryName: string) {
+    try {
+      const { data: repositories } =
+        await octokit.repos.listForAuthenticatedUser();
+      const selectedRepository = repositories.find(
+        (repo) => repo.name === repositoryName
+      );
+      if (!selectedRepository) {
+        throw new Error(`Repository ${repositoryName} not found`);
+      }
+      this.repository = selectedRepository;
+      return selectedRepository;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async createRepository(repositoryName: string) {
+    try {
+      const { data: repository } = await octokit.repos.createUsingTemplate({
+        template_owner: 'gaurangrshah',
+        template_repo: 'https://github.com/gaurangrshah/_fm_',
+        name: repositoryName,
+      });
+      return repository;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
 
 module.exports = FileManager;
-
-export async function selectRepository(repositoryName: string) {
-  try {
-    const { data: repositories } =
-      await octokit.repos.listForAuthenticatedUser();
-    const selectedRepository = repositories.find(
-      (repo) => repo.name === repositoryName
-    );
-    if (!selectedRepository) {
-      throw new Error(`Repository ${repositoryName} not found`);
-    }
-    return selectedRepository;
-  } catch (error) {
-    console.error(error);
-  }
-}

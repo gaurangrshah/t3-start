@@ -1,54 +1,84 @@
 import fs from 'fs/promises';
 
-type FsOps = {
+type FsOpsInput = {
   fileName: string;
-  fileContent: string;
+  data: string;
+};
+
+type DirOpsInput = {
+  dirName: string;
+};
+
+type RenameDirOpsInput = {
+  oldDirName: string;
+  newDirName: string;
 };
 
 class FileManager {
   fs: typeof fs;
+  dir: string;
   constructor() {
     this.fs = fs;
+    this.dir = '__data'; // root dir
   }
 
-  async createFile({ fileName, fileContent }: FsOps) {
+  setCWDir(dirPath: string): void {
+    this.dir = dirPath;
+  }
+
+  getCWPath(fileName: FsOpsInput['fileName']): string {
+    return this.dir + '/' + fileName;
+  }
+
+  async createFile({ fileName, data }: FsOpsInput): Promise<void> {
     try {
-      await this.fs.writeFile(fileName, fileContent);
+      if (!fileName) return console.log(`CreateFile: error`);
+      await this.fs.writeFile(this.getCWPath(fileName), data);
       console.log(`${fileName} has been created`);
     } catch (err) {
       throw err;
     }
   }
 
-  async readFile({ fileName }: Pick<FsOps, 'fileName'>) {
+  async readFile({
+    fileName,
+  }: Pick<FsOpsInput, 'fileName'>): Promise<string | void> {
     try {
-      const data = await this.fs.readFile(fileName, 'utf8');
-      console.log(data);
+      if (!fileName) {
+        console.log(`ReadFile: error`);
+        throw new Error('fileName must be provided');
+      }
+      const data = await this.fs.readFile(this.getCWPath(fileName), 'utf8');
+      console.log('createFile data', data);
+      return data;
     } catch (err) {
       throw err;
     }
   }
 
-  async updateFile({ fileName, fileContent }: FsOps) {
+  async updateFile({ fileName, data }: FsOpsInput): Promise<void> {
     try {
-      await this.fs.writeFile(fileName, fileContent);
+      if (!fileName) return console.log(`UpdateFile: error`);
+      await this.fs.writeFile(this.getCWPath(fileName), data);
       console.log(`${fileName} has been updated`);
     } catch (err) {
       throw err;
     }
   }
 
-  async deleteFile({ fileName }: Pick<FsOps, 'fileName'>) {
+  async deleteFile({ fileName }: Pick<FsOpsInput, 'fileName'>): Promise<void> {
     try {
-      await this.fs.unlink(fileName);
+      if (!fileName) return console.log(`DeleteFile: error`);
+      await this.fs.unlink(this.getCWPath(fileName));
       console.log(`${fileName} has been deleted`);
     } catch (err) {
       throw err;
     }
   }
 
-  async createDirectory({ dirName }: { dirName: string }) {
+  async createDirectory({ dirName }: DirOpsInput): Promise<void> {
     try {
+      if (!dirName) return console.log(`CreateDir: error`);
       await this.fs.mkdir(dirName);
       console.log(`${dirName} has been created`);
     } catch (err) {
@@ -59,11 +89,9 @@ class FileManager {
   async renameDirectory({
     oldDirName,
     newDirName,
-  }: {
-    oldDirName: string;
-    newDirName: string;
-  }) {
+  }: RenameDirOpsInput): Promise<void> {
     try {
+      if (!oldDirName || !newDirName) return console.log('RenameDir: error');
       await this.fs.rename(oldDirName, newDirName);
       console.log(`${oldDirName} has been renamed to ${newDirName}`);
     } catch (err) {
@@ -71,8 +99,9 @@ class FileManager {
     }
   }
 
-  async deleteDirectory({ dirName }: { dirName: string }) {
+  async deleteDirectory({ dirName }: DirOpsInput): Promise<void> {
     try {
+      if (!dirName) return console.log(`DeleteDir: error`);
       await this.fs.rmdir(dirName);
       console.log(`${dirName} has been deleted`);
     } catch (err) {
@@ -80,8 +109,12 @@ class FileManager {
     }
   }
 
-  async listDirectory({ dirName }: { dirName: string }) {
+  async listDirectory({
+    dirName = this.dir,
+  }: // make dirName optional
+  Omit<DirOpsInput, 'dirName'> & { dirName?: string }): Promise<void> {
     try {
+      if (!dirName) return console.log(`ListDir: error`);
       const files = await this.fs.readdir(dirName);
       console.log(files);
     } catch (err) {
@@ -90,4 +123,4 @@ class FileManager {
   }
 }
 
-export default FileManager;
+export const fsManager = new FileManager();
