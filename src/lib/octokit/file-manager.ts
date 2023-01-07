@@ -38,7 +38,6 @@ export class GitFileManager {
   octokit: any;
   committer: Author;
   author: Author;
-  // token: string | null;
   constructor(session: Session | null) {
     this.repository = null;
     this.octokit = new Octokit({ auth: session?.accessToken });
@@ -54,7 +53,7 @@ export class GitFileManager {
 
   async createFile({ path, content, message }: Omit<GitOpsInput, 'sha'>) {
     const { data } = await this.octokit.repos.createOrUpdateFile({
-      owner: this.repository?.owner,
+      owner: this.repository?.owner.name,
       repo: this.repository?.name,
       path,
       content: Buffer.from(content).toString('base64'),
@@ -180,6 +179,17 @@ export class GitFileManager {
     }
   }
 
+  async getSelectedRepository() {
+    try {
+      const { data: repository } = await this.octokit.repos.get({
+        owner: this.repository?.owner.name,
+        repo: this.repository?.name,
+      });
+
+      return repository ?? { message: 'something went wrong' };
+    } catch (error) {}
+  }
+
   async selectRepository(repositoryName: string) {
     try {
       const { data: repositories } =
@@ -199,13 +209,15 @@ export class GitFileManager {
   }
   async createRepository(repositoryName: string) {
     try {
-      const { data: repository } = await this.octokit.repos.createUsingTemplate(
-        {
-          template_owner: 'gaurangrshah',
-          template_repo: 'https://github.com/gaurangrshah/_fm_',
+      const { data: repository } =
+        await this.octokit.repos.createForAuthenticatedUser({
           name: repositoryName,
-        }
+        });
+      console.log(
+        '🚀 | file: file-manager.ts:219 | GitFileManager | repository',
+        repository
       );
+      this.repository = repository;
       return repository;
     } catch (error) {
       console.error(error);

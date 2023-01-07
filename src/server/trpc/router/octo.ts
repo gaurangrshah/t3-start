@@ -24,4 +24,15 @@ export const octoRouter = router({
         console.error(error);
       }
     }),
+  createTemplateRepo: protectedProcedure
+    .input(repoInputSchema)
+    .mutation(async ({ ctx, input }) => {
+      try {
+        const repo = await ctx.octo.createRepository(input.repositoryName);
+        console.log('🚀 | file: octo.ts:32 | repo', repo);
+        return repo ?? { message: 'could not create repository' };
+      } catch (error) {
+        console.error(error);
+      }
+    }),
 });

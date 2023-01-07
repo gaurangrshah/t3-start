@@ -1,27 +1,45 @@
+/**
+ * @TODO: Update Repo select UI add infinite query
+ * @SEE: https://stackoverflow.com/a/66853297/7061301
+ * @SEE: https://trpc.io/docs/useInfiniteQuery
+ *
+ * @TODO: Add selecto button and update onChange to local state
+ * @TODO: add option to create a new repo
+ *
+ */
 import {
-  Box,
   Button,
+  chakra,
   Container,
+  Divider,
   FormControl,
   FormLabel,
   HStack,
   Input,
+  InputGroup,
+  InputRightAddon,
+  InputRightElement,
   Select,
   Stack,
   Text,
-  Textarea,
+  VStack,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 
-import { CustomIcon, DefaultLayout, PageHeader } from '@/components';
 import type { Repository } from '@/lib/octokit';
 import type { NextPageWithAuth } from '@/types';
-import { trpc } from '@/utils/trpc';
 
-const IconLabel = () => {
+import { CustomIcon, DefaultLayout, PageHeader } from '@/components';
+import { useOctoManager } from '@/hooks';
+import { slugify } from '@/utils';
+
+const IconLabel = ({ repoName }: { repoName: string | undefined }) => {
   return (
     <HStack>
       <CustomIcon icon="github" size="1.25rem" />
-      <Text>Your base repo.</Text>
+      <Text>
+        Your base repo: {repoName ? <chakra.span>{repoName}</chakra.span> : ''}
+      </Text>
     </HStack>
   );
 };
@@ -34,10 +52,30 @@ const renderRepoList = (repo: Repository) =>
   ) : null;
 
 const FMPage: NextPageWithAuth = () => {
-  const { data: respositories, isLoading } =
-    trpc.octo.listRepos.useQuery(undefined);
+  const [repo, setRepo] = useState<Repository | null>(null);
 
-  const selectRepoMutation = trpc.octo.selectRepo.useMutation();
+  const { repos } = useOctoManager();
+  const { data: respositories, isLoading } = repos.list(undefined);
+  const selectRepoMutation = repos.select();
+  const createRepoMutation = repos.create();
+
+  const onCreate = (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    console.log(String(e.currentTarget.querySelector('input')?.value));
+    createRepoMutation.mutate(
+      {
+        repositoryName: slugify(
+          String(e.currentTarget.querySelector('input')?.value)
+        ),
+      },
+      {
+        onSuccess(data, variables, context) {
+          setRepo(data);
+          console.log('🚀 | file: index.tsx:66 | data', data);
+        },
+      }
+    );
+  };
 
   return (
     <DefaultLayout
@@ -50,13 +88,13 @@ const FMPage: NextPageWithAuth = () => {
         py={{ base: '12', md: '24' }}
         px={{ base: '0', sm: '8' }}
       >
-        <PageHeader title="Connect to a primary respository" subtitle="" />
+        <PageHeader title="Connect to a primary respository" subtitle={''} />
         <Stack spacing="8" align="flex-start">
           <Stack direction="column" layerStyle="panel" w="full">
-            <HStack justifyContent="center" w="full">
+            <HStack justifyContent="center" w="full" pb={3}>
               <FormControl>
                 <FormLabel htmlFor="title">
-                  <IconLabel />
+                  <IconLabel repoName={repo?.name} />
                 </FormLabel>
                 <Select
                   placeholder="Select a Repository"
@@ -68,7 +106,8 @@ const FMPage: NextPageWithAuth = () => {
                       },
                       {
                         onSuccess(data, variables, context) {
-                          console.log('🚀 | file: index.tsx:71 | data', data);
+                          setRepo(data);
+                          console.log('🚀 | file: index.tsx:79 | data', data);
                         },
                       }
                     )
@@ -86,6 +125,23 @@ const FMPage: NextPageWithAuth = () => {
                 </Select>
               </FormControl>
             </HStack>
+            <Divider border="1px solid" borderColor="gray.200" />
+            <VStack as="form" onSubmit={onCreate}>
+              <FormControl>
+                <FormLabel htmlFor="title">
+                  {/* <IconLabel repoName={repo?.name} /> */}
+                  Create a new repo (From Our Template)
+                </FormLabel>
+                <InputGroup>
+                  <Input type="text" name="repoName" />
+                  <InputRightElement width="4.5rem">
+                    <Button type="submit" h="1.75rem" size="sm">
+                      Create
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+            </VStack>
           </Stack>
         </Stack>
       </Container>
