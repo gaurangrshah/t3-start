@@ -3,12 +3,14 @@ import { type inferAsyncReturnType } from '@trpc/server';
 import { type CreateNextContextOptions } from '@trpc/server/adapters/next';
 import { type Session } from 'next-auth';
 
+import { GitFileManager } from '@/lib/octokit';
 import { getServerAuthSession } from '../common/get-server-auth-session';
 import { prisma } from '../db/client';
 
 type CreateContextOptions = {
   session: Session | null;
   prisma?: PrismaClient;
+  octo?: typeof GitFileManager;
 };
 
 /** Use this helper for:
@@ -17,9 +19,11 @@ type CreateContextOptions = {
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  **/
 export const createContextInner = async (opts: CreateContextOptions) => {
+  const octokit = new GitFileManager(opts?.session);
   return {
     session: opts.session,
     prisma,
+    octo: octokit,
   };
 };
 
