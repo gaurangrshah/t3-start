@@ -13,7 +13,7 @@ import { getCsrfToken, getProviders, signIn } from 'next-auth/react';
 
 import type { GetServerSidePropsContext, NextPage } from 'next';
 
-import { AuthPageHeader, GoogleIcon, Signin } from '@/components';
+import { AuthPageHeader, CustomIcon, GoogleIcon, Signin } from '@/components';
 import { DefaultLayout } from '@/components/layouts/default';
 
 type Visibility = {
@@ -52,6 +52,7 @@ const GithubOAuth: React.FC<Visibility> = ({ show }) => {
     >
       <HStack w="full" justifyContent="center" gap={3}>
         {/* <GoogleIcon /> */}
+        <CustomIcon icon="github" size={'1.25rem'} />
         <Text>Sign in with Github</Text>
       </HStack>
     </Button>
