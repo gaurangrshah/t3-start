@@ -12,9 +12,10 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 
-import type { NextPageWithAuth } from '@/types';
-
 import { CustomIcon, DefaultLayout, PageHeader } from '@/components';
+import type { Repository } from '@/lib/octokit';
+import type { NextPageWithAuth } from '@/types';
+import { trpc } from '@/utils/trpc';
 
 const IconLabel = () => {
   return (
@@ -25,7 +26,19 @@ const IconLabel = () => {
   );
 };
 
+const renderRepoList = (repo: Repository) =>
+  repo?.permissions?.admin ? (
+    <option value={repo.name} key={repo.id}>
+      {repo.name}- {repo.owner?.name}
+    </option>
+  ) : null;
+
 const FMPage: NextPageWithAuth = () => {
+  const { data: respositories, isLoading } =
+    trpc.octo.listRepos.useQuery(undefined);
+
+  const selectRepoMutation = trpc.octo.selectRepo.useMutation();
+
   return (
     <DefaultLayout
       title="Sign In"
@@ -39,24 +52,37 @@ const FMPage: NextPageWithAuth = () => {
       >
         <PageHeader title="Connect to a primary respository" subtitle="" />
         <Stack spacing="8" align="flex-start">
-          <Stack
-            as="form"
-            direction="column"
-            layerStyle="panel"
-            w="full"
-            // onSubmit={submitForm}
-          >
+          <Stack direction="column" layerStyle="panel" w="full">
             <HStack justifyContent="center" w="full">
               <FormControl>
                 <FormLabel htmlFor="title">
                   <IconLabel />
                 </FormLabel>
-                {/* <Input type="text" name="title" defaultValue="This is a title" /> */}
-                {/* <Select placeholder="Select a Repository"> */}
-                <Select placeholder="Select a Repository" size="lg">
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                <Select
+                  placeholder="Select a Repository"
+                  size="lg"
+                  onChange={(e) =>
+                    selectRepoMutation.mutate(
+                      {
+                        repositoryName: e.currentTarget.value,
+                      },
+                      {
+                        onSuccess(data, variables, context) {
+                          console.log('🚀 | file: index.tsx:71 | data', data);
+                        },
+                      }
+                    )
+                  }
+                >
+                  {respositories?.length ? (
+                    respositories.map(renderRepoList)
+                  ) : (
+                    <option
+                      value="no repository found"
+                      placeholder="no repository found"
+                      disabled
+                    />
+                  )}
                 </Select>
               </FormControl>
             </HStack>
