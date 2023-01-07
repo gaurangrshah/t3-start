@@ -10,7 +10,7 @@ import {
 
 import type { NextPageWithAuth } from '@/types';
 
-import { DefaultLayout } from '@/components';
+import { DefaultLayout, PageHeader } from '@/components';
 import { useFsManager } from '@/hooks';
 import { convertFormToObject, slugify } from '@/utils';
 
@@ -49,8 +49,11 @@ const EditorPage: NextPageWithAuth = () => {
         py={{ base: '12', md: '24' }}
         px={{ base: '0', sm: '8' }}
       >
+        <PageHeader
+          title="Proto-Editor"
+          subtitle=""
+        />
         <Stack spacing="8">
-          Editor
           <Stack
             as="form"
             direction="column"
@@ -58,7 +61,15 @@ const EditorPage: NextPageWithAuth = () => {
             onSubmit={submitForm}
           >
             <FormControl>
-              <FormLabel htmlFor="title">Title</FormLabel>
+              <FormLabel
+                htmlFor="title"
+                _after={{
+                  content: '" (slugified)"',
+                  position: 'relative',
+                }}
+              >
+                Title
+              </FormLabel>
               <Input type="text" name="title" defaultValue="This is a title" />
             </FormControl>
             <FormControl>
