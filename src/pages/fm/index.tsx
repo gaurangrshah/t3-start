@@ -17,11 +17,11 @@ import {
   HStack,
   Input,
   InputGroup,
-  InputRightAddon,
   InputRightElement,
   Select,
   Stack,
   Text,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -44,25 +44,18 @@ const IconLabel = ({ repoName }: { repoName: string | undefined }) => {
   );
 };
 
-const renderRepoList = (repo: Repository) =>
-  repo?.permissions?.admin ? (
-    <option value={repo.name} key={repo.id}>
-      {repo.name}- {repo.owner?.name}
-    </option>
-  ) : null;
-
 const FMPage: NextPageWithAuth = () => {
   const [repo, setRepo] = useState<Repository | null>(null);
 
   const { repos } = useOctoManager();
   const { data: respositories, isLoading } = repos.list(undefined);
   const selectRepoMutation = repos.select();
-  const createRepoMutation = repos.create();
+  const createTemplateRepoMutation = repos.createTemplate();
+  const toast = useToast();
 
   const onCreate = (e: React.SyntheticEvent) => {
-    e.preventDefault()
-    console.log(String(e.currentTarget.querySelector('input')?.value));
-    createRepoMutation.mutate(
+    e.preventDefault();
+    createTemplateRepoMutation.mutate(
       {
         repositoryName: slugify(
           String(e.currentTarget.querySelector('input')?.value)
@@ -71,7 +64,54 @@ const FMPage: NextPageWithAuth = () => {
       {
         onSuccess(data, variables, context) {
           setRepo(data);
-          console.log('🚀 | file: index.tsx:66 | data', data);
+          toast({
+            status: 'success',
+            title: 'New repository created from template',
+            description: `Successfully created: ${data.html_url}`,
+            duration: 20000,
+            isClosable: true,
+          });
+        },
+        onError(error, variables, context) {
+          setRepo(null);
+          toast({
+            status: 'error',
+            title: error.message,
+            description: JSON.stringify(error.data),
+            duration: 20000,
+            isClosable: true,
+          });
+        },
+      }
+    );
+  };
+
+  const onSelectChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+    e.preventDefault();
+    selectRepoMutation.mutate(
+      {
+        repositoryName: e.currentTarget?.value,
+      },
+      {
+        onSuccess(data, variables, context) {
+          setRepo(data);
+          toast({
+            status: 'success',
+            title: 'Selected Working Repository',
+            description: `selected repository: ${data.name}`,
+            duration: 20000,
+            isClosable: true,
+          });
+        },
+        onError(error, variables, context) {
+          setRepo(null);
+          toast({
+            status: 'error',
+            title: error.message,
+            description: `selected repository: ${JSON.stringify(error.data)}`,
+            duration: 20000,
+            isClosable: true,
+          });
         },
       }
     );
@@ -99,22 +139,21 @@ const FMPage: NextPageWithAuth = () => {
                 <Select
                   placeholder="Select a Repository"
                   size="lg"
-                  onChange={(e) =>
-                    selectRepoMutation.mutate(
-                      {
-                        repositoryName: e.currentTarget.value,
-                      },
-                      {
-                        onSuccess(data, variables, context) {
-                          setRepo(data);
-                          console.log('🚀 | file: index.tsx:79 | data', data);
-                        },
-                      }
-                    )
-                  }
+                  onChange={onSelectChange}
                 >
                   {respositories?.length ? (
-                    respositories.map(renderRepoList)
+                    // respositories.map(renderRepoList(repo))
+                    respositories.map((repository: Repository) => {
+                      return repository?.permissions?.admin ? (
+                        <option
+                          value={repository.name}
+                          key={repository.id}
+                          selected={repo?.name === repository?.name}
+                        >
+                          {repository.name}- {repository.owner?.name}
+                        </option>
+                      ) : null;
+                    })
                   ) : (
                     <option
                       value="no repository found"
@@ -129,7 +168,6 @@ const FMPage: NextPageWithAuth = () => {
             <VStack as="form" onSubmit={onCreate}>
               <FormControl>
                 <FormLabel htmlFor="title">
-                  {/* <IconLabel repoName={repo?.name} /> */}
                   Create a new repo (From Our Template)
                 </FormLabel>
                 <InputGroup>
