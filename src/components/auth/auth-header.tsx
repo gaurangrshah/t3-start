@@ -1,4 +1,4 @@
-import { Button, chakra, Heading, HStack, Stack, Text } from '@chakra-ui/react';
+import { chakra, Heading, HStack, Stack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 
 const ChLink = chakra(Link);
