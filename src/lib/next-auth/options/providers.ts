@@ -76,4 +76,8 @@ const credentials = CredentialsProvider({
   },
 });
 
-export const providers: NextAuthOptions['providers'] = [credentials, google, github];
+export const providers: NextAuthOptions['providers'] = [
+  github,
+  credentials,
+  google,
+];
