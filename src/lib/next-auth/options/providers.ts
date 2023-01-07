@@ -18,6 +18,11 @@ const google = GoogleProvider({
 const github = GithubProvider({
   clientId: env.GITHUB_CLIENT_ID,
   clientSecret: env.GITHUB_CLIENT_SECRET,
+  authorization: {
+    params: {
+      scope: 'public_repo',
+    },
+  },
 });
 
 // /**
