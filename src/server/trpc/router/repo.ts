@@ -1,12 +1,12 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-import { protectedProcedure, router } from '../trpc';
+import { protectedProcedure,router } from '../trpc';
 
 export const repoInputSchema = z.object({ repositoryName: z.string() });
 
-export const octoRouter = router({
-  listRepos: protectedProcedure.query(async ({ ctx }) => {
+export const repoRouter = router({
+  list: protectedProcedure.query(async ({ ctx }) => {
     try {
       const repositories = await ctx.octo.listPublicRepositories();
       if (!repositories) throw new Error('Could not find any repositories');
@@ -15,14 +15,14 @@ export const octoRouter = router({
       console.error(error);
     }
   }),
-  getSelectedRepo: protectedProcedure.query(async ({ ctx, input }) => {
+  getSelected: protectedProcedure.query(async ({ ctx, input }) => {
     try {
       const repository = await ctx.octo.getSelectedRepository();
       if (!repository) throw new Error('Could not find selected repositories');
       return repository;
     } catch (error) {}
   }),
-  selectRepo: protectedProcedure
+  select: protectedProcedure
     .input(repoInputSchema)
     .mutation(async ({ ctx, input }) => {
       try {
@@ -35,7 +35,7 @@ export const octoRouter = router({
         console.error(error);
       }
     }),
-  createTemplateRepo: protectedProcedure // default procedure used to create
+  createFromTemplate: protectedProcedure // default procedure used to create
     .input(repoInputSchema)
     .mutation(async ({ ctx, input }) => {
       try {
@@ -48,7 +48,7 @@ export const octoRouter = router({
         console.error(error);
       }
     }),
-  createRepo: protectedProcedure
+  create: protectedProcedure
     .input(repoInputSchema)
     .mutation(async ({ ctx, input }) => {
       try {

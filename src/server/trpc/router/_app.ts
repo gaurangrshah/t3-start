@@ -2,7 +2,7 @@ import { router } from '../trpc';
 import { authRouter } from './auth';
 import { exampleRouter } from './example';
 import { fsRouter } from './fs';
-import { octoRouter } from './octo';
+import { repoRouter } from './repo';
 import { userRouter } from './user';
 
 export const appRouter = router({
@@ -10,7 +10,7 @@ export const appRouter = router({
   auth: authRouter,
   user: userRouter,
   fs: fsRouter,
-  octo: octoRouter,
+  repo: repoRouter,
 });
 
 // export type definition of API

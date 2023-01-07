@@ -30,7 +30,7 @@ import type { Repository } from '@/lib/octokit';
 import type { NextPageWithAuth } from '@/types';
 
 import { CustomIcon, DefaultLayout, PageHeader } from '@/components';
-import { useOctoManager } from '@/hooks';
+import { useRepo } from '@/hooks';
 import { slugify } from '@/utils';
 
 const IconLabel = ({ repoName }: { repoName: string | undefined }) => {
@@ -47,7 +47,7 @@ const IconLabel = ({ repoName }: { repoName: string | undefined }) => {
 const FMPage: NextPageWithAuth = () => {
   const [repo, setRepo] = useState<Repository | null>(null);
 
-  const { repos } = useOctoManager();
+  const { repos } = useRepo();
   const { data: respositories, isLoading } = repos.list(undefined);
   const selectRepoMutation = repos.select();
   const createTemplateRepoMutation = repos.createTemplate();

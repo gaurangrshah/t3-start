@@ -2,16 +2,7 @@ import { Octokit } from '@octokit/rest';
 import { Session, User } from 'next-auth';
 
 import type { Maybe } from '@/types';
-import type {
-  GetResponseDataTypeFromEndpointMethod,
-  GetResponseTypeFromEndpointMethod,
-} from '@octokit/types';
-
-// export const octokitInit = new Octokit({
-//   // auth: `client_id:${clientId}, client_secret:${clientSecret}`,
-//   auth: `${process.env.GITHUB_CLIENT_ID}, ${process.env.GITHUB_CLIENT_SECRET}`,
-//   // scope: 'public_repo',
-// });
+import type { GetResponseDataTypeFromEndpointMethod } from '@octokit/types';
 
 export const octokit = Octokit.defaults({
   auth: `${process.env.GITHUB_CLIENT_ID}, ${process.env.GITHUB_CLIENT_SECRET}`,
@@ -27,6 +18,7 @@ type GitOpsInput = {
 };
 
 export type Repository = GetResponseDataTypeFromEndpointMethod<
+  // @ts-ignore @TODO: fix 'repos' does not exist on type
   typeof octokit.repos.createForAuthenticatedUser
 >;
 
