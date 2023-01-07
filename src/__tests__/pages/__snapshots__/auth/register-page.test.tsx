@@ -680,7 +680,7 @@ describe('it renders', () => {
                     <label
                       class="chakra-form__label emotion-13"
                       for="name"
-                      id="field-:r5:-label"
+                      id="field-:r6:-label"
                     >
                       Name
                     </label>
@@ -699,7 +699,7 @@ describe('it renders', () => {
                     <label
                       class="chakra-form__label emotion-13"
                       for="email"
-                      id="field-:r6:-label"
+                      id="field-:r7:-label"
                     >
                       Email
                     </label>
@@ -718,7 +718,7 @@ describe('it renders', () => {
                     <label
                       class="chakra-form__label emotion-13"
                       for="password"
-                      id="field-:r8:-label"
+                      id="field-:r9:-label"
                     >
                       Password
                     </label>
@@ -754,7 +754,7 @@ describe('it renders', () => {
                     <label
                       class="chakra-form__label emotion-13"
                       for="passwordConfirm"
-                      id="field-:ra:-label"
+                      id="field-:rb:-label"
                     >
                       Password
                     </label>

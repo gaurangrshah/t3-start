@@ -26,7 +26,7 @@ describe('AvatarMenu test suite', () => {
       const menu = screen.getByRole('menu');
       expect(menu).toBeInTheDocument();
       const menuitems = within(menu).getAllByRole('menuitem');
-      expect(menuitems).toHaveLength(3);
+      expect(menuitems).toHaveLength(4);
       expect(
         within(menu).getByRole('menuitem', { name: /sign in/i })
       ).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe('AvatarMenu test suite', () => {
       const menu = screen.getByRole('menu');
       expect(menu).toBeInTheDocument();
       const menuitems = within(menu).getAllByRole('menuitem');
-      expect(menuitems).toHaveLength(3);
+      expect(menuitems).toHaveLength(4);
       const signOutBtn = within(menu).getByRole('menuitem', {
         name: /sign out/i,
       });

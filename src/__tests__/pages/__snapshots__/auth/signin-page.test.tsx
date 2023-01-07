@@ -927,17 +927,28 @@ describe('it renders', () => {
       }
 
       .emotion-37 {
-        display: -webkit-inline-box;
-        display: -webkit-inline-flex;
-        display: -ms-inline-flexbox;
-        display: inline-flex;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
         width: var(--chakra-sizes-full);
         margin-top: var(--chakra-space-4);
       }
 
       .emotion-37>*:not(style)~*:not(style) {
-        -webkit-margin-start: var(--chakra-space-4);
-        margin-inline-start: var(--chakra-space-4);
+        margin-top: var(--chakra-space-4);
+        -webkit-margin-end: 0px;
+        margin-inline-end: 0px;
+        margin-bottom: 0px;
+        -webkit-margin-start: 0px;
+        margin-inline-start: 0px;
       }
 
       .emotion-38 {
@@ -1036,11 +1047,6 @@ describe('it renders', () => {
       .emotion-38[aria-checked=true],
       .emotion-38[data-checked] {
         background: var(--chakra-colors-gray-100);
-      }
-
-      .emotion-38:focus,
-      .emotion-38[data-focus] {
-        z-index: 1;
       }
 
       .emotion-39 {
@@ -1152,7 +1158,7 @@ describe('it renders', () => {
                     <label
                       class="chakra-form__label emotion-13"
                       for="email"
-                      id="field-:r5:-label"
+                      id="field-:r6:-label"
                     >
                       Email
                     </label>
@@ -1172,7 +1178,7 @@ describe('it renders', () => {
                     <label
                       class="chakra-form__label emotion-13"
                       for="password"
-                      id="field-:r7:-label"
+                      id="field-:r8:-label"
                     >
                       Password
                     </label>
@@ -1281,9 +1287,7 @@ describe('it renders', () => {
                 />
               </div>
               <div
-                class="chakra-button__group emotion-37"
-                data-orientation="horizontal"
-                role="group"
+                class="chakra-stack emotion-37"
               >
                 <button
                   class="chakra-button emotion-38"
