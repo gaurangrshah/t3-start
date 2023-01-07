@@ -9,28 +9,54 @@ export const octoRouter = router({
   listRepos: protectedProcedure.query(async ({ ctx }) => {
     try {
       const repositories = await ctx.octo.listPublicRepositories();
+      if (!repositories) throw new Error('Could not find any repositories');
       return repositories ?? [];
     } catch (error) {
       console.error(error);
     }
   }),
+  getSelectedRepo: protectedProcedure.query(async ({ ctx, input }) => {
+    try {
+      const repository = await ctx.octo.getSelectedRepository();
+      if (!repository) throw new Error('Could not find selected repositories');
+      return repository;
+    } catch (error) {}
+  }),
   selectRepo: protectedProcedure
     .input(repoInputSchema)
     .mutation(async ({ ctx, input }) => {
       try {
-        const result = await ctx.octo.selectRepository(input.repositoryName);
-        return result ?? { message: 'something went wrong' };
+        const repository = await ctx.octo.selectRepository(
+          input.repositoryName
+        );
+        if (!repository) throw new Error('Could not complete selection');
+        return repository;
       } catch (error) {
         console.error(error);
       }
     }),
-  createTemplateRepo: protectedProcedure
+  createTemplateRepo: protectedProcedure // default procedure used to create
     .input(repoInputSchema)
     .mutation(async ({ ctx, input }) => {
       try {
-        const repo = await ctx.octo.createRepository(input.repositoryName);
-        console.log('🚀 | file: octo.ts:32 | repo', repo);
-        return repo ?? { message: 'could not create repository' };
+        const repository = await ctx.octo.createTemplateRepository(
+          input.repositoryName
+        );
+        if (!repository) throw new Error('Could not create Repository');
+        return repository;
+      } catch (error) {
+        console.error(error);
+      }
+    }),
+  createRepo: protectedProcedure
+    .input(repoInputSchema)
+    .mutation(async ({ ctx, input }) => {
+      try {
+        const repository = await ctx.octo.createRepository(
+          input.repositoryName
+        );
+        if (!repository) throw new Error('Could not create Repository');
+        return repository;
       } catch (error) {
         console.error(error);
       }

@@ -209,13 +209,32 @@ export class GitFileManager {
       console.error(error);
     }
   }
+
   async createRepository(repositoryName: string) {
+    // @TODO: CHECK IF A REPO WITH THIS NAME ALREADY EXISTS BEFORE CREATEING
     try {
       const { data: repository } =
         await this.octokit.repos.createForAuthenticatedUser({
           name: repositoryName,
           auto_init: true,
         });
+
+      this.repository = repository;
+      return repository;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async createTemplateRepository(repositoryName: string) {
+    // @TODO: CHECK IF A REPO WITH THIS NAME ALREADY EXISTS BEFORE CREATEING
+    try {
+      const { data: repository } = await this.octokit.repos.createUsingTemplate(
+        {
+          template_owner: 'gaurangrshah',
+          template_repo: 'fm',
+          name: repositoryName,
+        }
+      );
 
       this.repository = repository;
       return repository;

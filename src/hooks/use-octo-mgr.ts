@@ -5,7 +5,8 @@ export function useOctoManager() {
     repos: {
       list: trpc.octo.listRepos.useQuery,
       select: trpc.octo.selectRepo.useMutation,
-      create: trpc.octo.createTemplateRepo.useMutation,
+      create: trpc.octo.createRepo.useMutation,
+      createTemplate: trpc.octo.createTemplateRepo.useMutation,
     },
   };
 }
