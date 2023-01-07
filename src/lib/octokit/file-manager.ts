@@ -6,12 +6,14 @@ import type {
   GetResponseDataTypeFromEndpointMethod,
   GetResponseTypeFromEndpointMethod,
 } from '@octokit/types';
-import { getSession } from 'next-auth/react';
 
-// import { env } from '@/env/server.mjs';
+// export const octokitInit = new Octokit({
+//   // auth: `client_id:${clientId}, client_secret:${clientSecret}`,
+//   auth: `${process.env.GITHUB_CLIENT_ID}, ${process.env.GITHUB_CLIENT_SECRET}`,
+//   // scope: 'public_repo',
+// });
 
-export const octokitInit = new Octokit({
-  // auth: `client_id:${clientId}, client_secret:${clientSecret}`,
+export const octokit = Octokit.defaults({
   auth: `${process.env.GITHUB_CLIENT_ID}, ${process.env.GITHUB_CLIENT_SECRET}`,
 });
 
@@ -25,7 +27,7 @@ type GitOpsInput = {
 };
 
 export type Repository = GetResponseDataTypeFromEndpointMethod<
-  typeof octokitInit.repos.createUsingTemplate
+  typeof octokit.repos.createForAuthenticatedUser
 >;
 
 type Author = {
@@ -34,10 +36,10 @@ type Author = {
 };
 
 export class GitFileManager {
-  repository: Repository | null;
-  octokit: any;
-  committer: Author;
-  author: Author;
+  private octokit: any;
+  private repository: Repository | null;
+  private committer: Author;
+  private author: Author;
   constructor(session: Session | null) {
     this.repository = null;
     this.octokit = new Octokit({ auth: session?.accessToken });
@@ -212,11 +214,9 @@ export class GitFileManager {
       const { data: repository } =
         await this.octokit.repos.createForAuthenticatedUser({
           name: repositoryName,
+          auto_init: true,
         });
-      console.log(
-        '🚀 | file: file-manager.ts:219 | GitFileManager | repository',
-        repository
-      );
+
       this.repository = repository;
       return repository;
     } catch (error) {
