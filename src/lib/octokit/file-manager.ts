@@ -1,12 +1,12 @@
-import { Octokit } from '@octokit/rest';
+import { Octokit, RestEndpointMethodTypes } from '@octokit/rest';
 import { Session, User } from 'next-auth';
 
-import type { Maybe } from '@/types';
-import type { GetResponseDataTypeFromEndpointMethod } from '@octokit/types';
+import {
+  Endpoints,
+  GetResponseDataTypeFromEndpointMethod,
+} from '@octokit/types';
 
-export const octokit = Octokit.defaults({
-  auth: `${process.env.GITHUB_CLIENT_ID}, ${process.env.GITHUB_CLIENT_SECRET}`,
-});
+export const octokit = new Octokit(Octokit.defaults);
 
 export type Octo = typeof Octokit;
 
@@ -17,18 +17,43 @@ type GitOpsInput = {
   sha: string;
 };
 
-export type Repository = GetResponseDataTypeFromEndpointMethod<
-  // @ts-ignore @TODO: fix 'repos' does not exist on type
-  typeof octokit.repos.createForAuthenticatedUser
->;
-
-type Author = {
-  name: Maybe['string'];
-  email: Maybe['string'];
+type GHUser = {
+  name: string;
 };
 
+type Repository = {
+  name: string;
+  owner: GHUser;
+};
+
+// export type Repository = GetResponseDataTypeFromEndpointMethod<
+//   // @ts-ignore @TODO: fix 'repos' does not exist on type
+//   typeof octokit.repos.get
+// >;
+
+type Author = {
+  name: string;
+  email: string;
+};
+
+type createFileInput =
+  RestEndpointMethodTypes['repos']['createOrUpdateFileContents']['parameters'];
+type createFileOutput = GetResponseDataTypeFromEndpointMethod<
+  typeof octokit.repos.createOrUpdateFileContents
+>;
+
+// type readFileOutput = GetResponseDataTypeFromEndpointMethod<
+//   typeof octokit.repos.getContent
+// >;
+type readFileOutput =
+  Endpoints['GET /repos/{owner}/{repo}']['response']['data'];
+
+function bufferContent(content: any) {
+  return Buffer.from(content).toString('base64');
+}
+
 export class GitFileManager {
-  private octokit: any;
+  private octokit: Octokit;
   private repository: Repository | null;
   private committer: Author;
   private author: Author;
@@ -36,44 +61,61 @@ export class GitFileManager {
     this.repository = null;
     this.octokit = new Octokit({ auth: session?.accessToken });
     this.committer = {
-      name: session?.user?.name,
-      email: session?.user?.email,
+      name: String(session?.user?.name),
+      email: String(session?.user?.email),
     };
     this.author = {
-      name: session?.user?.name,
-      email: session?.user?.email,
+      name: String(session?.user?.name),
+      email: String(session?.user?.email),
     };
   }
 
-  async createFile({ path, content, message }: Omit<GitOpsInput, 'sha'>) {
-    const { data } = await this.octokit.repos.createOrUpdateFile({
-      owner: this.repository?.owner.name,
-      repo: this.repository?.name,
+  async createFile({
+    path,
+    content,
+    message,
+  }: createFileInput): Promise<createFileOutput> {
+    const { data: file } = await this.octokit.repos.createOrUpdateFileContents({
+      owner: String(this.repository?.owner.name),
+      repo: String(this.repository?.name),
       path,
-      content: Buffer.from(content).toString('base64'),
+      // content: Buffer.from(content).toString('base64'),
+      content: bufferContent(content),
       message,
       committer: this.committer,
       author: this.author,
     });
-    return data;
+    return file;
   }
 
-  async readFile({ path }: Pick<GitOpsInput, 'path'>) {
-    const { data } = await this.octokit.repos.getContent({
-      owner: this.repository?.owner,
-      repo: this.repository?.name,
+  async readFile({ path }: { path: string }) {
+    const file = await this.octokit.repos.getContent({
+      owner: 'gaurangrshah' || String(this.repository?.owner),
+      repo: 'boiler' || String(this.repository?.name),
       path,
     });
+
     return {
-      content: Buffer.from(data.content, 'base64').toString(),
-      sha: data.sha,
+      content: Buffer.from(
+        // @ts-ignore
+        file.data?.content,
+        // @ts-ignore
+        file.data.encoding || 'base64'
+      ).toString(),
+      // sha: data?.sha,
+      data: file,
     };
   }
 
-  async updateFile({ path, content, message, sha }: GitOpsInput) {
-    const { data } = await this.octokit.repos.createOrUpdateFile({
-      owner: this.repository?.owner,
-      repo: this.repository?.name,
+  async updateFile({ path, content, message, sha }: GitOpsInput): Promise<
+    GetResponseDataTypeFromEndpointMethod<
+      // @ts-ignore
+      typeof octokit.repos.createOrUpdateFile
+    >
+  > {
+    const { data } = await this.octokit.repos.createOrUpdateFileContents({
+      owner: String(this.repository?.owner),
+      repo: String(this.repository?.name),
       path,
       content: Buffer.from(content).toString('base64'),
       message,
@@ -84,10 +126,17 @@ export class GitFileManager {
     return data;
   }
 
-  async deleteFile({ path, sha, message }: Omit<GitOpsInput, 'content'>) {
+  async deleteFile({
+    path,
+    sha,
+    message,
+  }: Omit<GitOpsInput, 'content'>): Promise<
+    // @ts-ignore
+    GetResponseDataTypeFromEndpointMethod<typeof octokit.repos.deleteFile>
+  > {
     const { data } = await this.octokit.repos.deleteFile({
-      owner: this.repository?.owner,
-      repo: this.repository?.name,
+      owner: String(this.repository?.owner),
+      repo: String(this.repository?.name),
       path,
       sha,
       message,
@@ -103,11 +152,14 @@ export class GitFileManager {
     try {
       // To create a directory on GitHub, you need to create a file with a trailing slash in the name
       // This will create a file named `directory/` that represents the directory
-      const { data: directory } = await this.createFile({
-        path: `${path}/`,
-        content: '',
-        message,
-      });
+      const { data: directory } =
+        await this.octokit.repos.createOrUpdateFileContents({
+          path: `${path}/`,
+          content: '',
+          message,
+          owner: String(this.repository?.owner),
+          repo: String(this.repository?.name),
+        });
       return directory;
     } catch (error) {
       console.error(error);
@@ -131,12 +183,15 @@ export class GitFileManager {
     try {
       // To update a directory on GitHub, you need to update the file with a trailing slash in the name
       // that represents the directory
-      const { data: directory } = await this.updateFile({
-        path: `${path}/`,
-        content: '',
-        message,
-        sha,
-      });
+      const { data: directory } =
+        await this.octokit.repos.createOrUpdateFileContents({
+          path: `${path}/`,
+          content: '',
+          message,
+          sha,
+          owner: String(this.repository?.owner),
+          repo: String(this.repository?.name),
+        });
       return directory;
     } catch (error) {
       console.error(error);
@@ -147,10 +202,12 @@ export class GitFileManager {
     try {
       // To delete a directory on GitHub, you need to delete the file with a trailing slash in the name
       // that represents the directory
-      await this.deleteFile({
+      await this.octokit.repos.deleteFile({
         path: `${path}/`,
         sha,
         message: 'deleting directory',
+        owner: String(this.repository?.owner),
+        repo: String(this.repository?.name),
       });
     } catch (error) {
       console.error(error);
@@ -176,8 +233,8 @@ export class GitFileManager {
   async getSelectedRepository() {
     try {
       const { data: repository } = await this.octokit.repos.get({
-        owner: this.repository?.owner.name,
-        repo: this.repository?.name,
+        owner: String(this.repository?.owner.name),
+        repo: String(this.repository?.name),
       });
 
       return repository ?? { message: 'something went wrong' };
@@ -189,13 +246,13 @@ export class GitFileManager {
       const { data: repositories } =
         await this.octokit.repos.listForAuthenticatedUser();
       const selectedRepository = repositories.find(
-        (repo: Repository) => repo.name === repositoryName
+        (repo: any) => repo.name === repositoryName
       );
 
       if (!selectedRepository) {
         throw new Error(`Repository ${repositoryName} not found`);
       }
-      this.repository = selectedRepository;
+      // this.repository = selectedRepository; // @TODO: @FIXME:
       return selectedRepository ?? { message: 'could not select repository' };
     } catch (error) {
       console.error(error);
@@ -211,7 +268,7 @@ export class GitFileManager {
           auto_init: true,
         });
 
-      this.repository = repository;
+      // this.repository = selectedRepository; // @TODO: @FIXME:
       return repository;
     } catch (error) {
       console.error(error);
@@ -228,7 +285,7 @@ export class GitFileManager {
         }
       );
 
-      this.repository = repository;
+      // this.repository = selectedRepository; // @TODO: @FIXME:
       return repository;
     } catch (error) {
       console.error(error);
