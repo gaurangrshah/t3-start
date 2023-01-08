@@ -3,15 +3,12 @@ import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
 
+import type { ToastStatusOptions } from '@/components';
 import type { NextComponentTypeWithAuth } from '@/types';
 import type { AppType } from 'next/app';
 
-import {
-  AuthGate,
-  AutoToast,
-  ErrorBoundary,
-  type ToastStatusOptions,
-} from '@/components';
+import { AuthGate, AutoToast, ErrorBoundary } from '@/components';
+
 import { theme } from '@/theme';
 import { getParams } from '@/utils';
 import { trpc } from '@/utils/trpc';

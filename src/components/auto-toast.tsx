@@ -1,4 +1,5 @@
 import { Obj } from '@/types';
+import { subscribe, unsubscribe } from '@/utils';
 import { useToast } from '@chakra-ui/react';
 import { FC, ReactNode, useEffect } from 'react';
 
@@ -23,9 +24,29 @@ export const AutoToast: FC<{
 }> = (props): null => {
   const toast = useToast();
 
-  const message = props.message !== 'null';
+  // falsy values get stringified so we have to check for an actual message
+  const falsyStrings = ['null', 'false', 'undefined', ''];
+  const hasMessage = falsyStrings.every((str) => str !== props.message);
+
   useEffect(() => {
-    if (!message) return;
+    subscribe('show-toast', ({ detail }: any) => {
+      toast({
+        status: detail?.status,
+        title: detail?.title || '',
+        description: detail?.description || '',
+        duration: 6000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    });
+
+    return () => {
+      unsubscribe('show-toast', () => {});
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!hasMessage) return;
     toast({
       status: props.status,
       title: props.status,
@@ -35,7 +56,7 @@ export const AutoToast: FC<{
       position: 'top-right',
     });
     () => null;
-  }, [message]);
+  }, [hasMessage]);
 
   return null;
 };

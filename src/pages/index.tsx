@@ -1,16 +1,25 @@
 import { Button, chakra, Flex } from '@chakra-ui/react';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 
 import type { ButtonProps } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import type { FC } from 'react';
 
 import { DefaultLayout } from '@/components';
-import { IS_TEST } from '@/utils';
+import { IS_TEST, publish } from '@/utils';
 import { trpc } from '@/utils/trpc';
 
 const Home: NextPage = () => {
   const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
+
+  useEffect(() => {
+    publish('show-toast', {
+      status: 'info',
+      title: 'test',
+      description: 'Testing',
+    });
+  }, []);
 
   return (
     <DefaultLayout
