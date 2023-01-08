@@ -5,3 +5,9 @@ export interface Obj {
     [p: string]: string;
   };
 }
+
+export type Maybe = {
+  string: string | null | undefined,
+  number: number | null | undefined,
+  object: Record<string, any> | null | undefined,
+}
