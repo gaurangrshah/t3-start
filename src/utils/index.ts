@@ -1,4 +1,5 @@
 export * from './consent';
+export * from './client-events';
 export * from './constants';
 export * from './conversions';
 export * from './css';
