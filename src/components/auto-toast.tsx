@@ -1,6 +1,6 @@
 import { Obj } from '@/types';
 import { useToast } from '@chakra-ui/react';
-import { FC, ReactNode, useEffect } from 'react';
+import { FC,ReactNode,useEffect } from 'react';
 
 export type ToastStatusOptions =
   | 'info'
@@ -23,9 +23,11 @@ export const AutoToast: FC<{
 }> = (props): null => {
   const toast = useToast();
 
-  const message = props.message !== 'null';
+  // falsy values get stringified so we have to check for an actual message
+  const falsyStrings = ['null', 'false', 'undefined', ''];
+  const hasMessage = falsyStrings.every((str) => str !== props.message);
   useEffect(() => {
-    if (!message) return;
+    if (!hasMessage) return;
     toast({
       status: props.status,
       title: props.status,
@@ -35,7 +37,7 @@ export const AutoToast: FC<{
       position: 'top-right',
     });
     () => null;
-  }, [message]);
+  }, [hasMessage]);
 
   return null;
 };
