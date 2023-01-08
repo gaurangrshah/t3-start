@@ -1,1 +1,2 @@
-export * from "./password-field"
+export * from './custom-form-label';
+export * from './password-field';
