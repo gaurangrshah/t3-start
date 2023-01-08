@@ -1,5 +1,4 @@
-import { DefaultLayout } from '@/components';
-import { FileInput } from '@/components/features';
+import { DefaultLayout, FileInput } from '@/components';
 import { Container } from '@chakra-ui/react';
 import { NextPage } from 'next';
 
