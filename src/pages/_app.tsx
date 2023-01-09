@@ -1,9 +1,8 @@
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, ToastProps } from '@chakra-ui/react';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
 
-import type { ToastStatusOptions } from '@/components';
 import type { NextComponentTypeWithAuth } from '@/types';
 import type { AppType } from 'next/app';
 
@@ -23,7 +22,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
   const { success, error } = getParams(['error', 'success'], router.asPath);
 
-  let status: ToastStatusOptions;
+  let status: ToastProps['status'];
   if (error) status = 'error';
   if (success) status = 'success';
 

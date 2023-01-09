@@ -9,15 +9,22 @@ import type { FC } from 'react';
 import { DefaultLayout } from '@/components';
 import { IS_TEST, publish } from '@/utils';
 import { trpc } from '@/utils/trpc';
+import { toastEventChannel } from '../utils/events/event-bus';
 
 const Home: NextPage = () => {
   const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
 
   useEffect(() => {
-    publish('show-toast', {
+    // publish('show-toast', {
+    //   status: 'info',
+    //   title: 'test',
+    //   description: 'Testing',
+    // });
+
+    toastEventChannel.emit('success', {
       status: 'info',
       title: 'test',
-      description: 'Testing',
+      description: 'This is the test',
     });
   }, []);
 
