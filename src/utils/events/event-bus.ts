@@ -2,6 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // @linkL https://dawchihliou.github.io/articles/event-bus-for-react
 
+import type { ToastProps } from '@chakra-ui/react';
+
 type EventKey = string | symbol;
 type EventHandler<T = any> = (payload: T) => void;
 type EventMap = Record<EventKey, EventHandler>;
@@ -65,4 +67,9 @@ export function eventbus<E extends EventMap>(
 export const authEventChannel = eventbus<{
   'on-sign-in': () => void;
   'on-sign-out': () => void;
+}>();
+
+export const toastEventChannel = eventbus<{
+  'success': (payload: Partial<ToastProps>) => void;
+  'error': (payload: Partial<ToastProps>) => void;
 }>();
